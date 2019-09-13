@@ -6,8 +6,8 @@ Course information (in polish) / Informacje o zajęciach (po polsku)
 
 ## Laboratoria
 
-    - Termin: TBA
-    - Miejsce: TBA
+    - Termin: Poniedziałki 12:15 — 14:00
+    - Miejsce: s. 411, Instytut Matematyczny UWr
     
 ## Program zajęć    
 
@@ -46,6 +46,7 @@ Bardziej zaawansowane funkcjonalności R.
     - Laboratorium 14: Wydajne programowanie w R i połączenie z innymi językami programowania.
     
     - Laboratorium 15: Prezentacja projektów.
+    
     
 ## Zasady zaliczenia
 
