@@ -1,6 +1,6 @@
-# Wprowadzenie_do_R_2019 / Introduction to R
+# Programowanie i analiza danych w R / Programming and data analysis with R
 
-Materials for the "Introduction to R" course at Mathematical Institute, University of Wrocław (2019/2020)
+Materials for the "Programming and data analysis with R" course at Mathematical Institute, University of Wrocław (2019/2020)
 
 Course information (in polish) / Informacje o zajęciach (po polsku)
 
