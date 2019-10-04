@@ -1,6 +1,10 @@
 # Useful links
 
-# General programming
+## General programming
+
+- [Clean code](https://www.oreilly.com/library/view/clean-code/9780136083238/)
+
+- [Clean architecture](https://www.oreilly.com/library/view/clean-architecture-a/9780134494272/)
 
 ## General R
 
@@ -41,4 +45,5 @@
 - [parsnip](https://cran.r-project.org/web/packages/parsnip/vignettes/parsnip_Intro.html)
 
 # Lab Notes
+
 
