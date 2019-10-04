@@ -16,6 +16,8 @@
 
 - [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html)
 
+- [The R Book](https://www.cs.upc.edu/~robert/teaching/estadistica/TheRBook.pdf)
+
 - [Advanced R](http://adv-r.had.co.nz/)
 
 ## Data wrangling
