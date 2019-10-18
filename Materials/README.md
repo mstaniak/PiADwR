@@ -22,6 +22,12 @@
 
 - [Advanced R](http://adv-r.had.co.nz/)
 
+### Code style
+
+- [Google style](https://web.stanford.edu/class/cs109l/unrestricted/resources/google-style.html)
+
+- [Tidyverse style](https://style.tidyverse.org/)
+
 ## Data wrangling
 
 - [R Data Import/Export](https://cran.r-project.org/doc/manuals/r-release/R-data.html)
