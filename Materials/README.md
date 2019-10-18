@@ -10,6 +10,8 @@
 
 - [An Introduction to R](https://cran.r-project.org/doc/manuals/r-release/R-intro.html)
 
+- [simpleR - John Verzani](https://www.math.csi.cuny.edu/Statistics/R/simpleR/)
+
 - [Pogromcy danych](http://pogromcydanych.icm.edu.pl/)
 
 - [R Inferno](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf)
@@ -45,7 +47,4 @@
 - [caret](https://topepo.github.io/caret/index.html)
 
 - [parsnip](https://cran.r-project.org/web/packages/parsnip/vignettes/parsnip_Intro.html)
-
-# Lab Notes
-
 
