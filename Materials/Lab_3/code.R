@@ -58,7 +58,7 @@ listings_rds <- readRDS("./data/native/listings.RDS")
 ## download.file(,
 ##     destfile = "../json/weather.json")
 json <- httr::GET(
-    "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=b000a3dfcbce0384e11e0762d6e79030", 
+    "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=...", 
     accept_json())#, 
 ##add_headers('Authorization' = 'Bearer 31232187asdsadh23187'))
 (content(json))
