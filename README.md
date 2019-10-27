@@ -13,37 +13,37 @@ Course information (in polish) / Informacje o zajęciach (po polsku)
 
 Wprowadzenie do R.
 
-    - Laboratorium 1: R jako język programowania. Cechy funkcjonalne i obiektowe. Bazowy R. Dobre praktyki i narzędzia programistyczne (GitHub, TravisCI, CodeCov).
+    - Laboratorium 1: R jako język programowania. Cechy funkcjonalne i obiektowe. Bazowy R. Dobre praktyki programistyczne. Wektory w R.
     
-    - Laboratorium 2: Programowanie w R: funkcje i pakiety.
+    - Laboratorium 2: Programowanie w R: podstawowe typy danych, operacje i indeksowanie.
     
-    - Laboratorium 3: Więcej o tworzeniu pakietów w R. Omówienie tematu projektu zaliczeniowego. 
+    - Laboratorium 3: Podstawy gita. Formaty danych, wczytywanie i zapisywanie danych z R. 
     
 Podstawy analizy danych w R.
     
-    - Laboratorium 4: Analiza danych w R: przetwarzanie danych (typy danych, wczytywanie i zapisywanie danych).
+    - Laboratorium 4: Analiza danych w R: eksploracja danych - podstawy. Przekształcanie zmiennych, grupowanie i podsumowywanie danych.
     
-    - Laboratorium 5: Analiza danych w R: eksploracja danych.
+    - Laboratorium 5: Analiza danych w R: czyszczenie i eksploracja danych I. 
     
-    - Laboratorium 6: Analiza danych w R: wizualizacja danych I.
+    - Laboratorium 6: Analiza danych w R: czyszczenie i eksploracja danych II.
     
-    - Laboratorium 7: Analiza danych w R: wizualizacja danych II.
+    - Laboratorium 7: Analiza danych w R: wizualizacja danych I.
     
-    - Laboratorium 8: Analiza danych w R: raportowanie (knitr).
+    - Laboratorium 8: Analiza danych w R: wizualizacja danych II.
     
     - Laboratorium 9: Konsultacja projektów i prezentacja wstępnych wyników.
     
 Bardziej zaawansowane funkcjonalności R.
     
-    - Laboratorium 10: Reprodukowalny kod w R (knitr, archivist, drake). Symulacje w R i powiązane tematy.
+    - Laboratorium 10: Budowa interaktywnych aplikacji z pakietem Shiny I
     
-    - Laboratorium 11: Budowa interaktywnych aplikacji z pakietem Shiny.  
+    - Laboratorium 11: Budowa interaktywnych aplikacji z pakietem Shiny II.  
     
-    - Laboratorium 12: Narzędzia do zautomatyzowanej eksploracji danych.
+    - Laboratorium 12: Podstawy tworzenia pakietów w R.
     
-    - Laboratorium 13: Narzędzia do budowy modeli predykcyjnych (caret, mlr, parsnip).
+    - Laboratorium 13: Tworzenie pakietów R: dalsze tematy..
     
-    - Laboratorium 14: Wydajne programowanie w R i połączenie z innymi językami programowania.
+    - Laboratorium 14: Reprodukowalny kod w R (knitr, archivist, drake). Symulacje w R i powiązane tematy. Wydajne programowanie w R.
     
     - Laboratorium 15: Prezentacja projektów.
     
