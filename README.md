@@ -27,21 +27,21 @@ Podstawy analizy danych w R.
      
     - Laboratorium 6: Analiza danych w R: czyszczenie i eksploracja danych II. (18 XI 2019 - e-Learning)
     
-    - Laboratorium 7: Analiza danych w R: wizualizacja danych I. (25 XI 2019)
+    - Laboratorium 7: Analiza danych w R: czyszczenie danych III: operacje na napisach i powtórzenie (25 XI 2019).
     
-    - Laboratorium 8: Analiza danych w R: wizualizacja danych II. (2 XII 2019)
+    - Laboratorium 8: Analiza danych w R: wizualizacja danych I. (2 XII 2019)
     
-    - Laboratorium 9: Konsultacja projektów i prezentacja wstępnych wyników. (9 XII 2019)
+    - Laboratorium 9: Analiza danych w R: wizualizacja danych II. (9 XII 2019)
+    
+    - Laboratorium 10: Konsultacja projektów i prezentacja wstępnych wyników. (16 XII 2019)
     
 Bardziej zaawansowane funkcjonalności R.
     
-    - Laboratorium 10: Budowa interaktywnych aplikacji z pakietem Shiny I (16 XII 2019)
+    - Laboratorium 11: Budowa interaktywnych aplikacji z pakietem Shiny I (7 I 2019)
     
-    - Laboratorium 11: Budowa interaktywnych aplikacji z pakietem Shiny II.  (7 I 2020)
+    - Laboratorium 12: Budowa interaktywnych aplikacji z pakietem Shiny II.  (13 I 2020)
     
-    - Laboratorium 12: Podstawy tworzenia pakietów w R. (13 I 2020)
-    
-    - Laboratorium 13: Tworzenie pakietów R: dalsze tematy. (20 I 2020)
+    - Laboratorium 13: Tworzenie dobrego kodu w R. (20 I 2020)
     
     - Laboratorium 14: Reprodukowalny kod w R (knitr, archivist, drake). Symulacje w R i powiązane tematy. Wydajne programowanie w R. (27 I 2020)
     
