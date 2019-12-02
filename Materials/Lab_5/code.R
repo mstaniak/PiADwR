@@ -41,3 +41,64 @@ means_by_month <- pollution %>%
 
 pollution %>%
     summarise_each(list(column_class = function(column) class(column)[1]))
+
+library(ggplot2)
+head(pollution)
+
+just_carbon <- filter(pollution, pollutant == "Carbon monoxide")
+
+ggplot(just_carbon, aes(x = measurement)) +
+    geom_histogram() +
+    # scale_x_sqrt() +
+    # scale_y_log10() +
+    theme_bw()
+
+ggplot(just_carbon, aes(x = measurement)) +
+    geom_histogram(binwidth = 0.1) +
+    # scale_x_sqrt() +
+    scale_y_log10() +
+    theme_bw()
+
+
+
+ggplot(just_carbon, aes(x = measurement)) +
+    geom_density() +
+    # scale_x_sqrt() +
+    # scale_y_log10() +
+    theme_bw()
+
+
+ggplot(just_carbon, aes(y = measurement, x = "measurement")) +
+    geom_violin() +
+    # scale_x_sqrt() +
+    # scale_y_log10() +
+    theme_bw()
+
+# 
+head(pollution)
+ggplot(pollution, aes(x = state)) +
+    geom_bar() +
+    theme_bw()
+
+pollution %>%
+    group_by(state) %>%
+    mutate(n_obs_by_state = n()) %>%
+    ggplot(aes(x = reorder(state, -n_obs_by_state))) +
+    geom_bar() +
+    theme_bw()
+
+pollution %>%
+    group_by(state) %>%
+    mutate(n_obs_by_state = n()) %>%
+    ggplot(aes(x = reorder(state, n_obs_by_state))) +
+    geom_bar() +
+    coord_flip() +
+    theme_bw() 
+    
+pollution %>%
+    group_by(state) %>%
+    mutate(n_obs_by_state = n()) %>%
+    ggplot(aes(x = reorder(state, n_obs_by_state))) +
+    geom_bar() +
+    theme_bw() +
+    theme(axis.text.x = element_text(angle = 270))
