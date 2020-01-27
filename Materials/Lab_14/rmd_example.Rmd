@@ -1,0 +1,37 @@
+---
+title: "Laboratorium 14"
+author: "Mateusz Staniak"
+date: "`r format(Sys.time(), '%d - %m - %Y')`"
+output:
+  html_document:
+    df_print: paged
+    toc: true
+    toc_float: true
+    code_folding: hide
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(ggplot2)
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+data("ChickWeight")
+```
+
+# Tabela
+
+```{r }
+kable(head(ChickWeight))    
+```
+
+Kolumny tej wspaniałej tabeli to `r paste(colnames(ChickWeight))`.
+
+# Wykres
+
+```{r }
+ggplot(ChickWeight, aes(x = Time, y = weight, group = Chick)) +
+    geom_line() +
+    theme_bw()
+```
