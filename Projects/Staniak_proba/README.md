@@ -1,10 +1,10 @@
 # Example project folder
 
 
-<project description>
+project description
 
 
-<functionalitites>
+functionalitites
 
 
-<link/examples>
+link/examples
