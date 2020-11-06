@@ -51,5 +51,6 @@ for (indeks in names(lista_indeksow)){
 }
 
 result
+names(result) = c('Indeks', 'Name', 'Ticker')
 
 write.csv(result, file = 'all_index_data.csv')
