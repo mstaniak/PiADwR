@@ -1,4 +1,5 @@
 library(Quandl)
+?quandl
 Quandl.api_key()
 tsgames = Quandl('WSE/TSGAMES')
 wirtualna = Quandl('WSE/WIRTUALNA')

@@ -1,0 +1,26 @@
+---
+title: "Wstępny plan"
+author: "ddd"
+date: "31 10 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Schemat działania aplikacji
+
+1. Wybór przez użytkownika interesujących go indeksów (regionu) (checkboxy?lista?)
+
+2. Pobranie danych (przycisk do pobrania) / załadowanie danych przez użytkownika 
+
+3. Wybór strategii (lista, zaimplementujemy tylko jedną chyba że będziemy mieli więcej czasu, jeśli nie to chciałbym dalej sam sobie później w tym grzebać jak nie będziecie mieli nic przeciwko)
+
+4. Parametry strategii
+
+5. Wyniki i podsumowanie symulacji (jakaś ładna tabelka, wykresik)
+
+6. ???
+
+7. ???
