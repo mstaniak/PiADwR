@@ -14,6 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 1. Wybór przez użytkownika interesujących go indeksów (regionu) (checkboxy?lista?)
 
 2. Pobranie danych (przycisk do pobrania) / załadowanie danych przez użytkownika
+    Obróbka (mało konkretne określenie) i uzupełnienie braków (jeśli danego dnia na danej spółce był zerowy obrót to brakuje wiersza z tą datą w danych dlatego myślałem o uzupełnianiu NOCB/LOCF)
+    
     
 3. Wybór strategii (lista, zaimplementujemy tylko jedną chyba że będziemy mieli
 więcej czasu, jeśli nie to chciałbym dalej sam sobie później w tym grzebać jak nie

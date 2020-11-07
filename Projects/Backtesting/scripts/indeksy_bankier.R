@@ -51,6 +51,6 @@ for (indeks in names(lista_indeksow)){
 }
 
 result
-names(result) = c('Indeks', 'Name', 'Ticker')
+names(result) = c('Index', 'Name', 'Ticker')
 
-write.csv(result, file = 'all_index_data.csv')
+write.csv(result, file = 'data/all_index_data.csv', row.names = F)
