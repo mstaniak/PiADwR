@@ -11,7 +11,7 @@ CSV (Comma Separated Values) to plik tekstowy, w którym wartości rozdzielane s
 
 CSV jest szczególnym przypadkiem formatu danych o nazwie Delimiter Seperated Values (DSV). Jest to plik tekstowy w którym pola w każdym wierszu oddzielone są dowolnym separatorem. Najczęściej spotykane separatory to: przecinek (CSV), tabulator (TSV), średnik.   
 
-### Przykładowy plik CSV
+**Przykładowy plik CSV**          
 
 ![](csv_example.gif)            
 
@@ -20,7 +20,7 @@ CSV jest szczególnym przypadkiem formatu danych o nazwie Delimiter Seperated Va
 ## XML
 XML to skrót od nazwy Extensible Markup Language. Dane przechowywane w tym formacie mają zagnieżdżoną strukturę: znaczniki oznaczają nazwy zmiennych, a wewnątrz przechowywane są ich wartości. XML swoją strukturą przypomina plik HTML.
 
-### Przykładowy plik XML     
+**Przykładowy plik XML**         
 
 ![](xml_example.gif)          
 
@@ -34,7 +34,7 @@ JSON - JavaScript Object Notation - to format przydatny w przypadku pracy z dany
 Struktura: w pliku JSON obserwacje przechowywane są w słownikach, w których nazwy zmiennych są kluczami, a wartości zmiennych - wartościami. Obserwacje oddzielane są przecinkami, a dodatkowo, wszystkie dane spięte są nawiasami klamrowymi.
            
            
-### Przykładowy plik JSON      
+**Przykładowy plik JSON**         
 
 ![](json_example.jpeg)
 
@@ -42,7 +42,7 @@ Struktura: w pliku JSON obserwacje przechowywane są w słownikach, w których n
 ## Excel (XLSX)
 XLSX to format danych oparty na XML. Pliki tego typu są domyślnymi dokumentami wyjściowymi arkuszy kalkulacyjnych programu Microsoft Excel. Przedstawiają one głównie dane liczbowe i tekstowe w postaci tabel dwuwymiarowych.
 
-### Przykładowy arkusz kalkulacyjny w Excelu       
+**Przykładowy arkusz kalkulacyjny w Excelu**                
 
 ![](excel_example.png){width=60%}
 
@@ -51,7 +51,7 @@ XLSX to format danych oparty na XML. Pliki tego typu są domyślnymi dokumentami
 Istnieją inne pakiety biurowe, np. LibreOffice, które - w przeciwieństwie do Excela - pozwalają na darmowe korzystanie z arkusza kalkulacyjnego. W przypadku LibreOffice, domyślnym formatem zapisu danych przez Calc (odpowiednik Excela) jest OpenDocument Format (.ods).        
 
 
-### Przykładowy arkusz kalkulacyjny w LibreOffice        
+**Przykładowy arkusz kalkulacyjny w LibreOffice**                  
 
 ![](libreoffice_example.png){width=60%}
 
