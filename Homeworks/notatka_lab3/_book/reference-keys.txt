@@ -1,14 +1,9 @@
 formaty-danych
 csvdsv
-przykładowy-plik-csv
 xml
-przykładowy-plik-xml
 json
-przykładowy-plik-json
 excel-xlsx
-przykładowy-arkusz-kalkulacyjny-w-excelu
 otwarte-wersje-programu-excel
-przykładowy-arkusz-kalkulacyjny-w-libreoffice
 locale
 ustawienie-locale-przez-użytkownika
 ustawienie-locale-poprzez-readr
