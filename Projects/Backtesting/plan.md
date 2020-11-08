@@ -1,10 +1,3 @@
----
-title: "Wstępny plan"
-author: "ddd"
-date: "31 10 2020"
-output: html_document
----
-
 ## Schemat działania aplikacji
 
 1. Wybór przez użytkownika interesujących go indeksów (regionu) (checkboxy?lista?)
