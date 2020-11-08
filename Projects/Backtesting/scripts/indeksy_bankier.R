@@ -2,6 +2,8 @@ library(rvest)
 library(stringr)
 library(stringi)
 
+dir.create(paste0(c(getwd(),'data'),collapse='/'))
+
 pages = c('akcje', 'indeksy-gpw', 'new-connect', 'futures', 'opcje', 'obligacje')
 url = 'https://www.bankier.pl/gielda/notowania/'
 

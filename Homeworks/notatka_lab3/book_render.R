@@ -1,3 +1,4 @@
 library(bookdown)
 # ?render_book
-render_book('bookdown::gitbook')
+render_book(input = c('formaty_danych.Rmd','wczytywanie_plikow.notatka.rmd',
+              'locales.RMD', 'rds_rda.rmd'), 'bookdown::gitbook')

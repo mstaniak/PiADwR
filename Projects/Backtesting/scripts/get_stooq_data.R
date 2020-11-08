@@ -1,5 +1,8 @@
 library(data.table)
 library(dplyr)
+
+dir.create(paste0(c(getwd(),'data'),collapse='/'))
+
 all_index_data = fread(file = 'data/all_index_data.csv', header = T)
 # indexes - wektor podawany w pierwszym punkcie planu
 indexes = c('WIG20')
