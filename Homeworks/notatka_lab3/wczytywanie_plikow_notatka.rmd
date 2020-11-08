@@ -8,17 +8,17 @@ output: pdf_document
 ## Pliki tekstowe
 
 
-Jednym z najczęściej występujących i najbardziej uniwersalnych formatów przechowujące dane (np. w postaci tabeli) są pliki tekstowe. Mają one najczęściej rozszerzenie ```txt``` lub ```csv``` ( *coma separeted value*).  
-Poniższą charakteryzacje różnych metod wczytywania przedstawiamy na podstawie pliku ```listings.csv```
+Jednym z najczęściej występujących i najbardziej uniwersalnych formatów przechowujących dane (np. w postaci tabeli) są pliki tekstowe. Mają one najczęściej rozszerzenie ```txt``` lub ```csv``` (*comma separated values*).  
+Poniższą charakteryzację różnych metod wczytywania przedstawiamy na podstawie pliku ```listings.csv```
 
 ### Base   
 
 
 Podstawową funkcją używaną do wczytywania tego typu plików w postaci tabeli jest funkcja ```read.table```. 
-Ze względu na specyfikację wewnętrzną plikóW, ```read.table``` posiada kilka wariantów, takie jak ```read.csv()```, ```read.csv2()``` czy ```read.delim()```.  
+Ze względu na specyfikację wewnętrzną plików, ```read.table``` posiada kilka wariantów, takie jak ```read.csv()```, ```read.csv2()``` czy ```read.delim()```.  
 
 ```read.csv()``` używana jest w przypadku, gdy domyślnym separatorem dziesiętnym jest ".", a wartości w wierszach oddzielone są poprzez ",";  
-```read.csv2()``` używana jest w przyoadku, gdy domyślnym separatorem dziesiętnym jest ",", a wartości w wierszach oddzielone są poprzez ";";  
+```read.csv2()``` używana jest w przypadku, gdy domyślnym separatorem dziesiętnym jest ",", a wartości w wierszach oddzielone są poprzez ";";  
 ```read.delim()``` używana jest w przypadku, gdy domyślnym separatorem dziesiętnym jest ".", a wartości w wierszach oddzielone są poprzez ```TAB```  
 
 
@@ -67,11 +67,11 @@ Najważniejsze różnice pomiędzy wymienionymi sposobami wczytywania plików ``
   
 2) *Postać wyświetlania* (co jest konsekwencją 1)
   - Base: Wyświetla 62 początkowe wiersze każdej kolumny, wyświetlając informacje o liczbie pozostałych; 
-  - readr: wyświetle 10 pierwszych wierszy z 10 pierwszych kolumn, z informacją o liczbie pozostałych wierszy i kolumn; automatycznie wyświetlane są też nazwy kolumn oraz skrót informujący o typie zmiennych
+  - readr: wyświetla 10 pierwszych wierszy z 10 pierwszych kolumn, z informacją o liczbie pozostałych wierszy i kolumn; automatycznie wyświetlane są też nazwy kolumn oraz skrót informujący o typie zmiennych
   - data.table: wyświetla 5 początkowych i 5 końcowych wartości z każdej kolumny
   
 3) *Czas i użycie pamięci przy dużych rozmiarach danych*  
-  Zarówno czas wczytania danych, jak i wykorzystanie pamięci najkorszytniejsze jest w przypadku funkcji ```fread```. Gdyby przez *time* oznaczyć czas potrzebny na wczytanie dużych plików, a przez *memory* zużycie pamięci, to *time*(fread) < *time*(read_csv) << *time*(read.csv) oraz *memory*(fread) < *memory*(read.csv) < *memory*(read_csv).      
+  Zarówno czas wczytania danych, jak i wykorzystanie pamięci najkorzystniejsze jest w przypadku funkcji ```fread```. Gdyby przez *time* oznaczyć czas potrzebny na wczytanie dużych plików, a przez *memory* zużycie pamięci, to *time*(fread) < *time*(read_csv) << *time*(read.csv) oraz *memory*(fread) < *memory*(read.csv) < *memory*(read_csv).      
 
 
 ## Arkusze kalkulacyjne i pliki JSON
@@ -83,7 +83,7 @@ read_excel('./data/excel/listings.xlsx')
 ```
 
 
-Oprócz tego, można także użyć pakietu funkcji `read.xlsx` z pakietu `xlsx`. Wymaga ona jednak instalacji javy.  
+Oprócz tego, można także użyć pakietu funkcji `read.xlsx` z pakietu `xlsx`. Wymaga ona jednak instalacji Javy.  
 
 
 Do zaimportowania plików JSON możemy użyć funkcji z pakietu ```jsonlite```
