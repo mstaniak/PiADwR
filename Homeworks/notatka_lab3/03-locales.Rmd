@@ -1,5 +1,5 @@
 ---
-title: "Locale"
+title: "Notatka Laboratorium 3"
 output:
   html_document: default
   pdf_document: default

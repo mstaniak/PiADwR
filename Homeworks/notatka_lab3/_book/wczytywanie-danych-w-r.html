@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Wczytywanie danych w R | Notatka Laboratorium 3</title>
-  <meta name="description" content="4 Wczytywanie danych w R | Notatka Laboratorium 3" />
+  <title>2 Wczytywanie danych w R | Notatka Laboratorium 3</title>
+  <meta name="description" content="2 Wczytywanie danych w R | Notatka Laboratorium 3" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Wczytywanie danych w R | Notatka Laboratorium 3" />
+  <meta property="og:title" content="2 Wczytywanie danych w R | Notatka Laboratorium 3" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Wczytywanie danych w R | Notatka Laboratorium 3" />
+  <meta name="twitter:title" content="2 Wczytywanie danych w R | Notatka Laboratorium 3" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="formaty-danych-w-r.html"/>
-
+<link rel="prev" href="formaty-danych.html"/>
+<link rel="next" href="locale.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -134,23 +134,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4" data-path="formaty-danych.html"><a href="formaty-danych.html#excel-xlsx"><i class="fa fa-check"></i><b>1.4</b> Excel (XLSX)</a></li>
 <li class="chapter" data-level="1.5" data-path="formaty-danych.html"><a href="formaty-danych.html#otwarte-wersje-programu-excel"><i class="fa fa-check"></i><b>1.5</b> Otwarte wersje programu Excel</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="locale.html"><a href="locale.html"><i class="fa fa-check"></i><b>2</b> Locale</a><ul>
-<li class="chapter" data-level="2.1" data-path="locale.html"><a href="locale.html#ustawienie-locale-przez-użytkownika"><i class="fa fa-check"></i><b>2.1</b> Ustawienie locale przez użytkownika</a></li>
-<li class="chapter" data-level="2.2" data-path="locale.html"><a href="locale.html#ustawienie-locale-poprzez-readr"><i class="fa fa-check"></i><b>2.2</b> Ustawienie locale poprzez readr</a></li>
+<li class="chapter" data-level="2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html"><i class="fa fa-check"></i><b>2</b> Wczytywanie danych w R</a><ul>
+<li class="chapter" data-level="2.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#pliki-tekstowe"><i class="fa fa-check"></i><b>2.1</b> Pliki tekstowe</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#base"><i class="fa fa-check"></i><b>2.1.1</b> Base</a></li>
+<li class="chapter" data-level="2.1.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#readr"><i class="fa fa-check"></i><b>2.1.2</b> readr</a></li>
+<li class="chapter" data-level="2.1.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#data.table"><i class="fa fa-check"></i><b>2.1.3</b> data.table</a></li>
+<li class="chapter" data-level="2.1.4" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#różnice"><i class="fa fa-check"></i><b>2.1.4</b> Różnice</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html"><i class="fa fa-check"></i><b>3</b> Formaty danych w R</a><ul>
-<li class="chapter" data-level="3.1" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#natywne-formaty-r"><i class="fa fa-check"></i><b>3.1</b> Natywne formaty R</a></li>
-<li class="chapter" data-level="3.2" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#rds"><i class="fa fa-check"></i><b>3.2</b> RDS</a></li>
-<li class="chapter" data-level="3.3" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#rda"><i class="fa fa-check"></i><b>3.3</b> RDA</a></li>
+<li class="chapter" data-level="2.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#arkusze-kalkulacyjne-i-pliki-json"><i class="fa fa-check"></i><b>2.2</b> Arkusze kalkulacyjne i pliki JSON</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html"><i class="fa fa-check"></i><b>4</b> Wczytywanie danych w R</a><ul>
-<li class="chapter" data-level="4.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#pliki-tekstowe"><i class="fa fa-check"></i><b>4.1</b> Pliki tekstowe</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#base"><i class="fa fa-check"></i><b>4.1.1</b> Base</a></li>
-<li class="chapter" data-level="4.1.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#readr"><i class="fa fa-check"></i><b>4.1.2</b> readr</a></li>
-<li class="chapter" data-level="4.1.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#data.table"><i class="fa fa-check"></i><b>4.1.3</b> data.table</a></li>
-<li class="chapter" data-level="4.1.4" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#różnice"><i class="fa fa-check"></i><b>4.1.4</b> Różnice</a></li>
+<li class="chapter" data-level="3" data-path="locale.html"><a href="locale.html"><i class="fa fa-check"></i><b>3</b> Locale</a><ul>
+<li class="chapter" data-level="3.1" data-path="locale.html"><a href="locale.html#ustawienie-locale-przez-użytkownika"><i class="fa fa-check"></i><b>3.1</b> Ustawienie locale przez użytkownika</a></li>
+<li class="chapter" data-level="3.2" data-path="locale.html"><a href="locale.html#ustawienie-locale-poprzez-readr"><i class="fa fa-check"></i><b>3.2</b> Ustawienie locale poprzez readr</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#arkusze-kalkulacyjne-i-pliki-json"><i class="fa fa-check"></i><b>4.2</b> Arkusze kalkulacyjne i pliki JSON</a></li>
+<li class="chapter" data-level="4" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html"><i class="fa fa-check"></i><b>4</b> Formaty danych w R</a><ul>
+<li class="chapter" data-level="4.1" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#natywne-formaty-r"><i class="fa fa-check"></i><b>4.1</b> Natywne formaty R</a></li>
+<li class="chapter" data-level="4.2" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#rds"><i class="fa fa-check"></i><b>4.2</b> RDS</a></li>
+<li class="chapter" data-level="4.3" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#rda"><i class="fa fa-check"></i><b>4.3</b> RDA</a></li>
 </ul></li>
 </ul>
 
@@ -170,39 +170,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="wczytywanie-danych-w-r" class="section level1">
-<h1><span class="header-section-number">4</span> Wczytywanie danych w R</h1>
+<h1><span class="header-section-number">2</span> Wczytywanie danych w R</h1>
 <div id="pliki-tekstowe" class="section level2">
-<h2><span class="header-section-number">4.1</span> Pliki tekstowe</h2>
+<h2><span class="header-section-number">2.1</span> Pliki tekstowe</h2>
 <p>Jednym z najczęściej występujących i najbardziej uniwersalnych formatów przechowujące dane (np. w postaci tabeli) są pliki tekstowe. Mają one najczęściej rozszerzenie <code>txt</code> lub <code>csv</code> ( <em>coma separeted value</em>).<br />
 Poniższą charakteryzacje różnych metod wczytywania przedstawiamy na podstawie pliku <code>listings.csv</code></p>
 <div id="base" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Base</h3>
+<h3><span class="header-section-number">2.1.1</span> Base</h3>
 <p>Podstawową funkcją używaną do wczytywania tego typu plików w postaci tabeli jest funkcja <code>read.table</code>.
 Ze względu na specyfikację wewnętrzną plikóW, <code>read.table</code> posiada kilka wariantów, takie jak <code>read.csv()</code>, <code>read.csv2()</code> czy <code>read.delim()</code>.</p>
 <p><code>read.csv()</code> używana jest w przypadku, gdy domyślnym separatorem dziesiętnym jest “.”, a wartości w wierszach oddzielone są poprzez “,”;<br />
 <code>read.csv2()</code> używana jest w przyoadku, gdy domyślnym separatorem dziesiętnym jest “,”, a wartości w wierszach oddzielone są poprzez “;”;<br />
 <code>read.delim()</code> używana jest w przypadku, gdy domyślnym separatorem dziesiętnym jest “.”, a wartości w wierszach oddzielone są poprzez <code>TAB</code></p>
 <p>Przykładowy sposób załadowania plików w formacie <code>csv</code></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">read.csv</span>(<span class="st">&#39;./data/csv/listings.csv&#39;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">read.csv</span>(<span class="st">&#39;./data/csv/listings.csv&#39;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>)</a></code></pre></div>
 <p>W przypadku <code>read.table()</code> dane zostają zaimportowane jako <em>data.frame</em>.</p>
 <p>Dla dużych plików wczytwanie za pomocą <code>read.table()</code> bywa jednak czasochłonne. Wówczas możemy użyć funkcji z paczki <code>data.table</code> lub <code>readr</code>.</p>
 </div>
 <div id="readr" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> readr</h3>
+<h3><span class="header-section-number">2.1.2</span> readr</h3>
 <p><code>readr</code> jest częścią pakietu <code>tidyverse</code>. W tym przypadku import odbywa się za pomocą funkcji o podobnej nazwie, jak w przypadku <code>read.table()</code>, a mianowicie <code>read_csv()</code>.<br />
 <code>read_csv</code> wczytuje dane oddzielone przecinkami, natomiast <code>read_csv2()</code> - dane oddzielone średnikami.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">read_csv</span>(<span class="st">&#39;./data/csv/listings.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">read_csv</span>(<span class="st">&#39;./data/csv/listings.csv&#39;</span>)</a></code></pre></div>
 <p>W przeciwieństwie do <code>read.csv</code>, funkcja <code>read_csv</code> na wyjściu daje dane w postaci tabeli w bardziej zwartej i przejrzystej formie. Oprócz tego podaje także specyfikację kolumn, tzn. informuje, jaka jest nazwa każdej kolumny oraz jej typ (np. <code>col_double</code> (<em><dbl></em>) oznaczają dane liczbowe).<br />
 Typ danych jaki dostajemy na wyjściu to <code>tbl_df</code> (tzw. <em>tibble</em>), który jest w pewnym sensie zmodyfikowaną wersją tradycyjnej ramki danych <em>data.frame</em>, pozwalającą na łatwiejszą pracę w obrębie <em>tidyverse</em>.</p>
 </div>
 <div id="data.table" class="section level3">
-<h3><span class="header-section-number">4.1.3</span> data.table</h3>
+<h3><span class="header-section-number">2.1.3</span> data.table</h3>
 <p>Do wczytywania danych z plików <code>csv</code> możemy także użyć funkcji <code>fread</code> z pakietu <code>data.table</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">fread</span>(<span class="st">&#39;./data/csv/listings.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">fread</span>(<span class="st">&#39;./data/csv/listings.csv&#39;</span>)</a></code></pre></div>
 <p>Na wyjściu otrzymujemy ramkę danych, jednak wyświetloną w inny sposób niż w przypadku użycia <code>read.csv</code>. Różnica jest widoczna, gdyż po użyciu funkcji <code>class()</code> na <code>fread()</code> jako typ danych otrzymujemy <code>"data.table"  "data.frame"</code>.</p>
 </div>
 <div id="różnice" class="section level3">
-<h3><span class="header-section-number">4.1.4</span> Różnice</h3>
+<h3><span class="header-section-number">2.1.4</span> Różnice</h3>
 <p>Najważniejsze różnice pomiędzy wymienionymi sposobami wczytywania plików <code>csv</code> to:</p>
 <ol style="list-style-type: decimal">
 <li><em>Typ danych</em></li>
@@ -227,14 +227,14 @@ Zarówno czas wczytania danych, jak i wykorzystanie pamięci najkorszytniejsze j
 </div>
 </div>
 <div id="arkusze-kalkulacyjne-i-pliki-json" class="section level2">
-<h2><span class="header-section-number">4.2</span> Arkusze kalkulacyjne i pliki JSON</h2>
+<h2><span class="header-section-number">2.2</span> Arkusze kalkulacyjne i pliki JSON</h2>
 <p>Do wczytywania arkusza kalkulacyjnego (np. pliku excela) używa się funkcji <code>read_excel</code> z pakietu <code>readxl</code> będącego częścią <code>tidyverse</code>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">read_excel</span>(<span class="st">&#39;./data/excel/listings.xlsx&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">read_excel</span>(<span class="st">&#39;./data/excel/listings.xlsx&#39;</span>)</a></code></pre></div>
 <p>Oprócz tego, można także użyć pakietu funkcji <code>read.xlsx</code> z pakietu <code>xlsx</code>. Wymaga ona jednak instalacji javy.</p>
 <p>Do zaimportowania plików JSON możemy użyć funkcji z pakietu <code>jsonlite</code></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">listings_js &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="st">&#39;./data/json/listings.json&#39;</span>)</a>
-<a class="sourceLine" id="cb16-2" title="2">listings_js &lt;-<span class="st"> </span><span class="kw">mutate</span>(listings_js, </a>
-<a class="sourceLine" id="cb16-3" title="3">                      <span class="dt">last_review =</span> <span class="kw">as_date</span>(last_review))</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">listings_js &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="st">&#39;./data/json/listings.json&#39;</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2">listings_js &lt;-<span class="st"> </span><span class="kw">mutate</span>(listings_js, </a>
+<a class="sourceLine" id="cb5-3" title="3">                      <span class="dt">last_review =</span> <span class="kw">as_date</span>(last_review))</a></code></pre></div>
 
 </div>
 </div>
@@ -243,8 +243,8 @@ Zarówno czas wczytania danych, jak i wykorzystanie pamięci najkorszytniejsze j
           </div>
         </div>
       </div>
-<a href="formaty-danych-w-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="formaty-danych.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="locale.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

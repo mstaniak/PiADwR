@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Formaty danych w R | Notatka Laboratorium 3</title>
-  <meta name="description" content="3 Formaty danych w R | Notatka Laboratorium 3" />
+  <title>4 Formaty danych w R | Notatka Laboratorium 3</title>
+  <meta name="description" content="4 Formaty danych w R | Notatka Laboratorium 3" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Formaty danych w R | Notatka Laboratorium 3" />
+  <meta property="og:title" content="4 Formaty danych w R | Notatka Laboratorium 3" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Formaty danych w R | Notatka Laboratorium 3" />
+  <meta name="twitter:title" content="4 Formaty danych w R | Notatka Laboratorium 3" />
   
   
   
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="locale.html"/>
-<link rel="next" href="wczytywanie-danych-w-r.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -134,23 +134,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4" data-path="formaty-danych.html"><a href="formaty-danych.html#excel-xlsx"><i class="fa fa-check"></i><b>1.4</b> Excel (XLSX)</a></li>
 <li class="chapter" data-level="1.5" data-path="formaty-danych.html"><a href="formaty-danych.html#otwarte-wersje-programu-excel"><i class="fa fa-check"></i><b>1.5</b> Otwarte wersje programu Excel</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="locale.html"><a href="locale.html"><i class="fa fa-check"></i><b>2</b> Locale</a><ul>
-<li class="chapter" data-level="2.1" data-path="locale.html"><a href="locale.html#ustawienie-locale-przez-użytkownika"><i class="fa fa-check"></i><b>2.1</b> Ustawienie locale przez użytkownika</a></li>
-<li class="chapter" data-level="2.2" data-path="locale.html"><a href="locale.html#ustawienie-locale-poprzez-readr"><i class="fa fa-check"></i><b>2.2</b> Ustawienie locale poprzez readr</a></li>
+<li class="chapter" data-level="2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html"><i class="fa fa-check"></i><b>2</b> Wczytywanie danych w R</a><ul>
+<li class="chapter" data-level="2.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#pliki-tekstowe"><i class="fa fa-check"></i><b>2.1</b> Pliki tekstowe</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#base"><i class="fa fa-check"></i><b>2.1.1</b> Base</a></li>
+<li class="chapter" data-level="2.1.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#readr"><i class="fa fa-check"></i><b>2.1.2</b> readr</a></li>
+<li class="chapter" data-level="2.1.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#data.table"><i class="fa fa-check"></i><b>2.1.3</b> data.table</a></li>
+<li class="chapter" data-level="2.1.4" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#różnice"><i class="fa fa-check"></i><b>2.1.4</b> Różnice</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html"><i class="fa fa-check"></i><b>3</b> Formaty danych w R</a><ul>
-<li class="chapter" data-level="3.1" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#natywne-formaty-r"><i class="fa fa-check"></i><b>3.1</b> Natywne formaty R</a></li>
-<li class="chapter" data-level="3.2" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#rds"><i class="fa fa-check"></i><b>3.2</b> RDS</a></li>
-<li class="chapter" data-level="3.3" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#rda"><i class="fa fa-check"></i><b>3.3</b> RDA</a></li>
+<li class="chapter" data-level="2.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#arkusze-kalkulacyjne-i-pliki-json"><i class="fa fa-check"></i><b>2.2</b> Arkusze kalkulacyjne i pliki JSON</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html"><i class="fa fa-check"></i><b>4</b> Wczytywanie danych w R</a><ul>
-<li class="chapter" data-level="4.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#pliki-tekstowe"><i class="fa fa-check"></i><b>4.1</b> Pliki tekstowe</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#base"><i class="fa fa-check"></i><b>4.1.1</b> Base</a></li>
-<li class="chapter" data-level="4.1.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#readr"><i class="fa fa-check"></i><b>4.1.2</b> readr</a></li>
-<li class="chapter" data-level="4.1.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#data.table"><i class="fa fa-check"></i><b>4.1.3</b> data.table</a></li>
-<li class="chapter" data-level="4.1.4" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#różnice"><i class="fa fa-check"></i><b>4.1.4</b> Różnice</a></li>
+<li class="chapter" data-level="3" data-path="locale.html"><a href="locale.html"><i class="fa fa-check"></i><b>3</b> Locale</a><ul>
+<li class="chapter" data-level="3.1" data-path="locale.html"><a href="locale.html#ustawienie-locale-przez-użytkownika"><i class="fa fa-check"></i><b>3.1</b> Ustawienie locale przez użytkownika</a></li>
+<li class="chapter" data-level="3.2" data-path="locale.html"><a href="locale.html#ustawienie-locale-poprzez-readr"><i class="fa fa-check"></i><b>3.2</b> Ustawienie locale poprzez readr</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#arkusze-kalkulacyjne-i-pliki-json"><i class="fa fa-check"></i><b>4.2</b> Arkusze kalkulacyjne i pliki JSON</a></li>
+<li class="chapter" data-level="4" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html"><i class="fa fa-check"></i><b>4</b> Formaty danych w R</a><ul>
+<li class="chapter" data-level="4.1" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#natywne-formaty-r"><i class="fa fa-check"></i><b>4.1</b> Natywne formaty R</a></li>
+<li class="chapter" data-level="4.2" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#rds"><i class="fa fa-check"></i><b>4.2</b> RDS</a></li>
+<li class="chapter" data-level="4.3" data-path="formaty-danych-w-r.html"><a href="formaty-danych-w-r.html#rda"><i class="fa fa-check"></i><b>4.3</b> RDA</a></li>
 </ul></li>
 </ul>
 
@@ -170,28 +170,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="formaty-danych-w-r" class="section level1">
-<h1><span class="header-section-number">3</span> Formaty danych w R</h1>
+<h1><span class="header-section-number">4</span> Formaty danych w R</h1>
 <div id="natywne-formaty-r" class="section level2">
-<h2><span class="header-section-number">3.1</span> Natywne formaty R</h2>
+<h2><span class="header-section-number">4.1</span> Natywne formaty R</h2>
 <p>R ma dwa natywne sposoby przechowywania danych, RDA(od RData) i RDS. Główną zaletą takiej obsługi danych jest szybkość przetwarzania ich. Zachowuje on także informacje z R o danych(np. typy zmiennych).</p>
 </div>
 <div id="rds" class="section level2">
-<h2><span class="header-section-number">3.2</span> RDS</h2>
+<h2><span class="header-section-number">4.2</span> RDS</h2>
 <p>W formacie RDS mogą być przechowywane jedynie pojedyncze pliki R. Mogą być one za to przypisywane do dowolnej nazwy.
 Aby załadować dane korzystamy z:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">listings_rds &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;./data/native/listings.rds&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">listings_rds &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;./data/native/listings.rds&quot;</span>)</a></code></pre></div>
 <p>Do zapisania danych używamy:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">saveRDS</span>(<span class="dt">object =</span> listings, <span class="dt">file =</span> <span class="st">&quot;listings.rds&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">saveRDS</span>(<span class="dt">object =</span> listings, <span class="dt">file =</span> <span class="st">&quot;listings.rds&quot;</span>)</a></code></pre></div>
 </div>
 <div id="rda" class="section level2">
-<h2><span class="header-section-number">3.3</span> RDA</h2>
+<h2><span class="header-section-number">4.3</span> RDA</h2>
 <p>W plikach formatu RDA wczytane dane nie są przypisywane do zmiennej, tylko wywołujemy te funkcje i w efekcie plik pojawia się w środowisku.</p>
 <p>W RDA do załadowania danych służy</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">load</span>(<span class="st">&quot;./data/native/listings.rda&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">load</span>(<span class="st">&quot;./data/native/listings.rda&quot;</span>)</a></code></pre></div>
 <p>Natomiast, aby zapisać dane używamy:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">save</span>(listings_rr, <span class="dt">file =</span> <span class="st">&quot;listings_rr.rda&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">save</span>(listings_rr, <span class="dt">file =</span> <span class="st">&quot;listings_rr.rda&quot;</span>)</a></code></pre></div>
 <p>Korzystając z formatu RDA możemy jednocześnie zapisywać większą ilość plików</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">save</span>(iris, cars, <span class="dt">file=</span><span class="st">&quot;data_frame.rda&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">save</span>(iris, cars, <span class="dt">file=</span><span class="st">&quot;data_frame.rda&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>
@@ -200,8 +200,8 @@ Aby załadować dane korzystamy z:</p>
           </div>
         </div>
       </div>
-<a href="locale.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="wczytywanie-danych-w-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="locale.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

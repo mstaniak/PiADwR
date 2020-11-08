@@ -4,13 +4,6 @@ xml
 json
 excel-xlsx
 otwarte-wersje-programu-excel
-locale
-ustawienie-locale-przez-użytkownika
-ustawienie-locale-poprzez-readr
-formaty-danych-w-r
-natywne-formaty-r
-rds
-rda
 wczytywanie-danych-w-r
 pliki-tekstowe
 base
@@ -18,3 +11,10 @@ readr
 data.table
 różnice
 arkusze-kalkulacyjne-i-pliki-json
+locale
+ustawienie-locale-przez-użytkownika
+ustawienie-locale-poprzez-readr
+formaty-danych-w-r
+natywne-formaty-r
+rds
+rda

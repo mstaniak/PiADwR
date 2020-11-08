@@ -1,5 +1,5 @@
 ---
-title: "Wczytywanie danych w R"
+title: "Notatka Laboratorium 3"
 output: pdf_document
 ---
 
