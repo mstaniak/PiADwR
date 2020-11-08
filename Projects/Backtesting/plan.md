@@ -5,10 +5,6 @@ date: "31 10 2020"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## Schemat działania aplikacji
 
 1. Wybór przez użytkownika interesujących go indeksów (regionu) (checkboxy?lista?)
