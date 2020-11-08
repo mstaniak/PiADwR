@@ -1,0 +1,48 @@
+---
+title: "Locale"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Locale
+
+Locale jest to *uniksowe narzędzie powłokowe* przechowujące ustawienia środowiskowe związane z ustawieniami regionalnymi.
+
+```{r test}
+Sys.getlocale()
+```
+
+LC_COLLATE - odpowiada za porządek znaków, ważny przy sortowaniu
+
+LC_CTYPE - odpowiada za kodowanie znaków
+
+LC_MONETARY - odpowiada za system monetarny: znak waluty, separator tysięcy, liczba cyfr po przecinku itd.
+
+LC_NUMERIC - określa separator ułamkowy, separator tysięcy, grupowanie cyfr
+
+LC_TIME - odpowiada za system wyświetlania daty
+
+```{r}
+Sys.localeconv()
+```
+
+Powyższa funkcja wyświetla szczegóły dotyczące systemu numerycznego i monetarnego. 
+
+## Ustawienie locale przez użytkownika
+
+```{r}
+Sys.setlocale(category = "LC_ALL", locale = "polish")
+```
+
+W celu ustawienia innego locale niż domyślne systemowe należy użyć powyższej funkcji, przyjmowane przez nią argumenty to *category* i *locale*.
+
+category - odpowiada za określenie, które zmienne środowiskowe chcemy zmienić, gdzie opcje: "LC_ALL", "LC_COLLATE", "LC_CTYPE", "LC_MONETARY", "LC_NUMERIC" oraz "LC_TIME" są wspierane na każdym systemie operacyjnym, niektóre systemy wspierają również: "LC_MESSAGES", "LC_PAPER" i "LC_MEASUREMENT"
+
+locale - odpowiada za region, który chcemy ustawić dla systemu windows podajemy angielską nazwę języka (regionu) np.: 'polish', w systemach UNIXowych podajemy np.: 'pl_PL' lub 'pl_PL.UTF-8'.
+
+
+
+## Ustawienie locale poprzez readr
+
+Pakiet *readr* oferuje więcej możliwości dostosowywania locale, więcej informacji na ten temat można znaleźć w tym [odnośniku](https://readr.tidyverse.org/articles/locales.html).
