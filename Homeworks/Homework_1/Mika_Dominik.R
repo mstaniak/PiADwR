@@ -3,7 +3,7 @@ il_NA <- function(x){
 }
 
 
-#Base R
+#Standartowy R
 prop_clas <- function(x){
   apply(x, 2, il_NA)
 }
@@ -24,3 +24,4 @@ prop_tv <- function(x){
   
   summarise_all(x, il_NA)
 }
+
