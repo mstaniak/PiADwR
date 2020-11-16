@@ -2,7 +2,7 @@
 
 1. Wybór przez użytkownika interesujących go indeksów (regionu) (checkboxy?lista?)
 
-2. Pobranie danych (przycisk do pobrania) / załadowanie danych przez użytkownika
+2. Pobranie danych (przycisk do pobrania) / załadowanie danych przez użytkownika / załadowanie z naszej bazy
 
     Obróbka (mało konkretne określenie) i uzupełnienie braków (jeśli danego dnia na danej spółce był zerowy obrót to brakuje wiersza z tą datą w danych dlatego myślałem o uzupełnianiu NOCB/LOCF)
     
@@ -40,6 +40,8 @@ będziecie mieli nic przeciwko)
     Prowizja od transakcji
     
     Inflacja???
+    
+    filtr płynności
 
 6. Wyniki i podsumowanie symulacji (jakaś ładna tabelka, wykresik)
     
