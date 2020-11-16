@@ -5,7 +5,7 @@ dir.create(paste0(c(getwd(),'data'),collapse='/'))
 
 all_index_data = fread(file = 'data/all_index_data.csv', header = T)
 # indexes - wektor podawany w pierwszym punkcie planu
-indexes = c('WIG20')
+indexes = c('WIG')
 tickers = all_index_data[Index %in% indexes]$Ticker
 
 get_stooq_data = function(tickers, interval){
@@ -28,9 +28,12 @@ read_all_stocks = function(interval){
   all_data = list()
   for (file in list.files("data/")){
     print(file)
-    if(substr(file,4,nchar(file)) == paste0("_", interval, ".csv")){
-      all_data[[substr(file,1,3)]] = fread(paste0("data/", file))
+    if(substr(file, 4, nchar(file)) == paste0("_", interval, ".csv")){
+      all_data[[substr(file, 1, 3)]] = fread(paste0("data/", file))
     }
   }
   return(rbindlist(all_data))
 }
+
+wig = read_all_stocks('d')
+indeksy = fread('data/all_index_data.csv')
