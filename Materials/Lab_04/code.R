@@ -1,12 +1,12 @@
 # Prerequsites ----
 # https://github.com/WhyR2019/presentations/blob/master/EDA/staniak_autoEDA.pdf
 # Download files from: https://aqs.epa.gov/aqsweb/airdata/download_files.html#Daily
-install.packages(c("dplyr",
-                   "lubridate",
-                   "readr",
-                   "data.table",
-                   "stringr",
-                   "tidyr"))
+# install.packages(c("dplyr",
+#                    "lubridate",
+#                    "readr",
+#                    "data.table",
+#                    "stringr",
+#                    "tidyr"))
 library(readr)
 library(dplyr)
 library(data.table)
@@ -189,13 +189,13 @@ head(gas_dt)
 unique(gas_base$SampleDuration)
 table(gas_base$SampleDuration)
 prop.table(table(gas_base$SampleDuration))
-### base
-gas_base <- gas_base[gas_base$SampleDuration == "1 HOUR", ]
-### tidyverse
-gas_tv <- gas_tv %>%
-    filter(SampleDuration == "1 HOUR")
-### data.table
-gas_dt <- gas_dt[SampleDuration == "1 HOUR"]
+# ### base
+# gas_base <- gas_base[gas_base$SampleDuration == "1 HOUR", ]
+# ### tidyverse
+# gas_tv <- gas_tv %>%
+#     filter(SampleDuration == "1 HOUR")
+# ### data.table
+# gas_dt <- gas_dt[SampleDuration == "1 HOUR"]
 ## Drop columns
 ### base
 gas_base = gas_base[, -7]
@@ -248,7 +248,6 @@ aggregate(MeasuredValue ~ State + County + City + Pollutant,
 aggregate(MeasuredValue ~ State + County + City + Pollutant,
           data = gas_base,
           FUN = mean, na.rm = TRUE)
-
 ### tidyverse
 gas_tv %>%
     group_by(State, County, City, Pollutant) %>%
@@ -258,3 +257,97 @@ gas_tv %>%
 gas_dt[, list(MeanMeasured = mean(MeasuredValue, na.rm = TRUE),
               MaxMeasured = max(MeasuredValue, na.rm = TRUE)),
        by = c("State", "County", "City", "Pollutant")]
+
+
+library(reshape2)
+library(tidyr)
+library(data.table)
+
+gas_tv
+
+
+unique(gas_tv$Pollutant)
+gas_tv
+gas_dt
+
+
+# gas_dt[, by='Pollutant']
+
+spread(data,pollutant,measured_value)
+
+
+# Wąska (long) -> szeroka (wide)
+# State | County | City | Site | Date | CO (MeasuredValue dla Pollutant == "Carbon monoxide") | Ozone (MeasuredValue dla Pollutantt == "Ozone")
+## tidyverse: tidyr
+gas_tv_before_spread <- gas_tv %>%
+    group_by(State, County, City, Site, Date, Pollutant) %>%
+    summarize(MeasuredValue = mean(MeasuredValue, na.rm = TRUE))
+gas_wide <- spread(gas_tv_before_spread, Pollutant, MeasuredValue)
+gas_wide2 <- spread(gas_tv_before_spread, Pollutant, MeasuredValue, fill = -1)
+filter(gas_wide2, is.na(`Carbon monoxide`))
+# gas_tv[c(1, 290), ]
+##
+# Szeroka -> wąska
+gas_long <- gather(gas_wide, "Pollutant", "MeasuredValue", `Carbon monoxide`, Ozone)
+filter(gas_long, !is.na(MeasuredValue))
+dim(gas_long)
+dim(gas_tv_before_spread)
+# data.table
+## Wąska -> szeroka
+gas_dt_wide <- dcast(gas_dt, State + County + City + Site + Date ~ Pollutant,
+                     value.var = "MeasuredValue", fill = NA_real_,
+                     fun.aggregate = function(x) mean(x, na.rm = TRUE))
+## Szeroka -> wąska
+gas_dt_long <- melt(gas_dt_wide,
+                    id.vars = setdiff(colnames(gas_dt_wide), c("Carbon monoxide", "Ozone")),
+                    measure.vars = c("Carbon monoxide", "Ozone"),
+                    variable.name = "Pollutant", value.name = "MeasuredValue",
+                    variable.factor = FALSE)
+gas_dt_long
+
+# Przykłady
+gas_dt[, NumPollutants := uniqueN(Pollutant),
+       by = c("State", "County", "City", "Site", "Date")]
+
+gas_two <- gas_dt[NumPollutants > 1]
+gas_two_wide <- dcast(gas_two, State + County + City + Site + Date ~ Pollutant,
+                     value.var = "MeasuredValue",
+                     fun.aggregate = function(x) mean(x, na.rm = TRUE))
+gas_two_wide
+setnames(gas_two_wide, "Carbon monoxide", "CO")
+
+# Zadanie domowe:
+# 1. Dla ramek danych gas_two_wide i gas_two
+# -> obliczyć znormalizowane wartości MeasuredValue (odjęcie średniej, podzielenie przed odch. std.)
+# (dla gas_two w postaci wąskiej, dla gas_two_wide w postaci szerokiej)
+# dla gas_two: przez referencję i bez referencji
+# dla gas_two_wide: przy użyciu lapply(), przy użyciu referencji i lapply(), lapply() bez referencji,
+# bez lapply - z referencją i bez
+# 2. Dla dowolnego miejsca:
+# - przekonwertować do wersji szerokiej ze względu na ROK
+# - wrócić do wersji wąskiej
+# - przekonwertować do wersji szerokiej ze względu na miasto (różne miasta w jednym stanie)
+# - znormalizować dla każdego miasta osobno
+# 3. Dla gas_dt, zrobić to co na zajęciach ze średnimi bez użycia merge/join.
+
+# gas_single <- gas_dt[State == "Alabama" & County == "Jefferson" &
+#                          City == "Birmingham" & Site == "North Birmingham" &
+#                          Pollutant == "Ozone"]
+# dcast()
+
+
+# tidyverse: left_join(), inner_join(), itd
+# data.table: merge(), rodzaj joina zależy od all.x, all.y
+gas_dt[, Year := year(Date)]
+averages <- gas_dt[, .(AverageVal = mean(MeasuredValue, na.rm = TRUE)),
+                   by = c("Pollutant", "State", "Year")]
+averages <- averages[!is.na(AverageVal)]
+averages
+gas_dt[averages, on = c("State", "Pollutant", "Year")]
+merge(gas_dt, averages,
+      by = c("State", "Pollutant", "Year"),
+      all.x = TRUE)
+# setkey()
+gas_dt[averages]
+
+
