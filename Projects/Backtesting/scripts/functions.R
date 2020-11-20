@@ -104,6 +104,8 @@ get_price_adjustments_info = function(ticker){
   return(tabela)
 }
 
+all_index_data = fread('data/all_index_data.csv')
+
 indeks = 'WIG20'
 wig20 = list()
 for (ticker in all_index_data[Index == indeks, Ticker]){
@@ -118,7 +120,7 @@ for (ticker in all_index_data[Index == indeks, Ticker]){
   mwig40[[ticker]] = get_price_adjustments_info(ticker)
 }
 mwig40_dt = rbindlist(mwig40)
-fwrite(mwig40_dt, paste0('data/', indeks, '_price_adjustment.csv', bom = TRUE))
+fwrite(mwig40_dt, paste0('data/', indeks, '_price_adjustment.csv'), bom = TRUE)
 
 
 indeks = 'SWIG80'
@@ -127,7 +129,7 @@ for (ticker in all_index_data[Index == indeks, Ticker]){
   swig80[[ticker]] = get_price_adjustments_info(ticker)
 }
 swig80_dt = rbindlist(swig80)
-fwrite(swig80_dt, paste0('data/', indeks, '_price_adjustment.csv', bom = TRUE))
+fwrite(swig80_dt, paste0('data/', indeks, '_price_adjustment.csv'), bom = TRUE)
 
 
 library(timeDate)
