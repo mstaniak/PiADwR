@@ -2,7 +2,7 @@ library(rvest)
 library(stringr)
 library(stringi)
 
-dir.create(paste0(c(getwd(),'data'),collapse='/'))
+dir.create(paste0(c(getwd(), 'data'), collapse='/'))
 
 pages = c('akcje', 'indeksy-gpw', 'new-connect', 'futures', 'opcje', 'obligacje')
 url = 'https://www.bankier.pl/gielda/notowania/'
@@ -19,7 +19,7 @@ for (page in pages){
     html_nodes(xpath = '//*[@id="boxQuotes"]/div[2]/table[1]') %>%
     html_table(fill=TRUE)
   tabela = tabela[[1]]
-  tabela = rbind(tabela[1:9,1:ncol(tabela)],tabela[11:nrow(tabela),1:ncol(tabela)])
+  tabela = rbind(tabela[1:9, 1:ncol(tabela)], tabela[11:nrow(tabela), 1:ncol(tabela)])
   lista_tabel[[page]] = tabela
 }
 
@@ -34,7 +34,7 @@ lista_indeksow = list()
 
 for (indeks in indeksy){
   print(indeks)
-  tmp_url = paste0(url,indeks,collapse = '')
+  tmp_url = paste0(url, indeks, collapse = '')
   
   tabela = read_html(tmp_url) %>%
     html_nodes(xpath = '//*[@id="boxProfil"]/div[2]/div[5]/div[2]/table[1]') %>%

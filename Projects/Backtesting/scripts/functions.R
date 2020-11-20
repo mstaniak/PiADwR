@@ -60,7 +60,7 @@ dividend_adjustment = function(stock_info_dt){
                         Close = as.numeric(Close),
                         Volume = as.numeric(Volume))]
   
-  url = paste0('https://stooq.pl/q/m/?s=', ticker, collapse = '')
+  url = paste0('https://stooq.pl/q/m/?s=', ticker)
   tabela = read_html(url) %>%
     html_nodes(xpath = '//*[@id="fth1"]') %>%
     html_table(fill=TRUE)
@@ -80,3 +80,64 @@ dividend_adjustment = function(stock_info_dt){
   return(stock_info_dt)
 }
 
+get_price_adjustments_info = function(ticker){
+  all_index_data = fread('data/all_index_data.csv', header = T)
+  name = all_index_data[Ticker == ticker, Name][1]
+  url = paste0('https://stooq.pl/q/m/?s=', ticker, collapse = '')
+  tabela = read_html(url) %>%
+    html_nodes(xpath = '//*[@id="fth1"]') %>%
+    html_table(fill=TRUE)
+  if (length(tabela) > 0){
+    tabela = tabela[[1]][, c(1, 2, 4)]
+    tabela = data.table(tabela)
+    setnames(tabela, names(tabela), c('Date', 'Zdarzenie', 'Dzielnik'))
+    print(tabela[, Zdarzenie])
+    if (grepl('Przekroczony', tabela[, Zdarzenie])){
+      stop()
+    }
+    tabela[, Date := dmy(tabela$Date)]
+    tabela[, `:=` (Ticker = ticker,
+                   Name = name)]
+    print(tabela)
+  }
+  Sys.sleep(120)
+  return(tabela)
+}
+
+indeks = 'WIG20'
+wig20 = list()
+for (ticker in all_index_data[Index == indeks, Ticker]){
+  wig20[[ticker]] = get_price_adjustments_info(ticker)
+}
+wig20_dt = rbindlist(wig20)
+fwrite(wig20_dt, paste0('data/', indeks, '_price_adjustment.csv'), bom = TRUE)
+
+indeks = 'MWIG40'
+mwig40 = list()
+for (ticker in all_index_data[Index == indeks, Ticker]){
+  mwig40[[ticker]] = get_price_adjustments_info(ticker)
+}
+mwig40_dt = rbindlist(mwig40)
+fwrite(mwig40_dt, paste0('data/', indeks, '_price_adjustment.csv', bom = TRUE))
+
+
+indeks = 'SWIG80'
+swig80 = list()
+for (ticker in all_index_data[Index == indeks, Ticker]){
+  swig80[[ticker]] = get_price_adjustments_info(ticker)
+}
+swig80_dt = rbindlist(swig80)
+fwrite(swig80_dt, paste0('data/', indeks, '_price_adjustment.csv', bom = TRUE))
+
+
+library(timeDate)
+
+## Example data
+dates <- as.Date("2013-01-01") + 0:364
+Dates <- as.timeDate(dates)
+
+## Extract the first business day of each month
+?isBizday
+bizDates <- dates[isBizday(Dates, holidays=holidayLONDON())]
+firsts <- tapply(bizDates, months(bizDates), min)
+sapply(firsts, function(X) as.character(as.Date(X)))
