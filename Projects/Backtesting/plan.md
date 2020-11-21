@@ -1,5 +1,8 @@
 ## Schemat działania aplikacji
 
+TEST Asia
+
+
 1. Wybór przez użytkownika interesujących go indeksów (regionu) (checkboxy?lista?)
 
 2. Pobranie danych (przycisk do pobrania) / załadowanie danych przez użytkownika / załadowanie z naszej bazy
