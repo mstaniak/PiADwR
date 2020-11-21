@@ -1,6 +1,7 @@
 ## Schemat działania aplikacji
 
 TEST Asia
+TEST Seba XD
 
 
 1. Wybór przez użytkownika interesujących go indeksów (regionu) (checkboxy?lista?)
