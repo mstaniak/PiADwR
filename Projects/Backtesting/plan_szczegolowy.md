@@ -1,11 +1,11 @@
 # Funkcje
 
 ## Funkcja pobierająca dane do aplikacji (Asia):
-
+INPUT: start_date, end_date, tickers
 * funkcja pobiera informacje o spółkach z indeksów, które zaznaczył użytkownik (I)
 * pobiera je z okresu (data_analizy - long_term, data_analizy) (I)
 * byłbym wniebowzięty gdyby udało się zrobić 'przycisk' który updateuje dane w bazie (bonus)
-
+OUTPUT:
 data.table(Date, Ticker, Open, High, Low, Close, Volume)
 
 ## Strategie i ich parametry:
