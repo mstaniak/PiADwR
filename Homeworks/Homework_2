@@ -1,0 +1,41 @@
+
+### 1.----
+
+## a) gas_two:
+
+# (i):
+gas_two[, Normalized := .(((MeasuredValue - mean(MeasuredValue, na.rm = TRUE)) / sd(MeasuredValue, na.rm = TRUE) )), by = .(Pollutant)]
+
+
+# (ii):
+gas_two[,  gas_two[, .(Normalized = ((MeasuredValue - mean(MeasuredValue, na.rm = TRUE)) / sd(MeasuredValue, na.rm = TRUE) )),
+                                      by = .(Pollutant)][, Normalized]
+
+
+## b) gas_two_wide:
+
+?dcast
+#(i):
+gas_two_wide_1 <- dcast(gas_two_wide, State + County + City + Site + Date ~ Pollutant,
+                        value.var = "MeasuredValue",
+                        fun.aggregate = function(x) lapply((x-mean(x))/sd(x)))
+#(ii):
+gas_two_wide_2 <- dcast(gas_two_wide, State + County + City + Site + Date ~ Pollutant,
+                         fun.aggregate = function(x) lapply(MeasuredValue := (x-mean(x))/sd(x)))
+#(iii):
+gas_two_wide_3 <- dcast(gas_two_wide, State + County + City + Site + Date ~ Pollutant,
+                          fun.aggregate = function(x) MeasuredValue := (x-mean(x))/sd(x))
+
+#(iv):
+gas_two_wide_4 <- dcast(gas_two_wide, State + County + City + Site + Date ~ Pollutant,
+                           value.var = "MeasuredValue",
+                           fun.aggregate = function(x) (x-mean(x)/sd(x)))
+
+
+### 2. ----
+
+
+
+### 3.---- 
+
+gas_dt[, AveM := mean(MeasuredValue, na.rm = TRUE), by = c("Pollutant", "State", "Year")]
