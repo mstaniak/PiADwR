@@ -42,12 +42,14 @@ gas_dt_long2 <- melt(gas_dt_wide2,
                      measure.vars = c("2020", "2019"),
                      variable.name = "Year", value.name = "MeasuredValue",
                      variable.factor = FALSE)
-# znormalizować dla każdego miasta osobno
-gas_dt_wide3 <- dcast(gas_dt_, State + County + Site + Date + Pollutant ~  City,
+# - przekonwertować do wersji szerokiej ze względu na miasto (różne miasta w jednym stanie)
+gas_dt_pl <- gas_dt[State == "Oklahoma",]
+gas_dt_wide3 <- dcast(gas_dt_pl, State + County + Site + Date + Pollutant ~  City,
                      value.var = "MeasuredValue", fill = NA_real_,
                      fun.aggregate = function(x) mean(x, na.rm = TRUE))
 
-
+# znormalizować dla każdego miasta osobno
+gas_dt_pl[,normalization := (MeasuredValue - mean(MeasuredValue))/sd(MeasuredValue)]
 
 # ZADANIE 3. Dla gas_dt, zrobić to co na zajęciach ze średnimi bez użycia merge/join.
 gas_dt[,Average_Val := mean(MeasuredValue, na.rm = TRUE), by = c("Pollutant", "State", "Year")]
