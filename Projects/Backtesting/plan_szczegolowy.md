@@ -29,7 +29,9 @@ INPUT:
 * min_momentum - minimalne momentum
     
 * max_gain - maksymalny wzrost w poniższym okresie
-    
+
+if (cena w dniu analizy)/(cena w dniu dzien analizy - period of max gain) > max_gain -> nie kupuj
+jeśli spółka ostatnio(period_of_max_gain) urosła za dużo to jej nie chcemy
 * period_of_max_gain - okres w którym jeśli spółka wzrośnie > max_gain to nie wybieramy jej do portfela
     
 * cash_value - gotówka przy rebalansacji

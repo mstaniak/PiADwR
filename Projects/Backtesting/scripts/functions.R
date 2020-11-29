@@ -26,8 +26,8 @@ read_all_stocks = function(interval){
   # Reading into the one data.table, all stocks from data folder for specified interval
   all_data = list()
   for (file in list.files("data/")){
-    print(file)
     if(substr(file, 4, nchar(file)) == paste0("_", interval, ".csv")){
+      print(file)
       all_data[[substr(file, 1, 3)]] = fread(paste0("data/", file))
     }
   }
@@ -100,46 +100,6 @@ get_price_adjustments_info = function(ticker){
                    Name = name)]
     print(tabela)
   }
-  Sys.sleep(120)
+  Sys.sleep(300)
   return(tabela)
 }
-
-all_index_data = fread('data/all_index_data.csv')
-
-indeks = 'WIG20'
-wig20 = list()
-for (ticker in all_index_data[Index == indeks, Ticker]){
-  wig20[[ticker]] = get_price_adjustments_info(ticker)
-}
-wig20_dt = rbindlist(wig20)
-fwrite(wig20_dt, paste0('data/', indeks, '_price_adjustment.csv'), bom = TRUE)
-
-indeks = 'MWIG40'
-mwig40 = list()
-for (ticker in all_index_data[Index == indeks, Ticker]){
-  mwig40[[ticker]] = get_price_adjustments_info(ticker)
-}
-mwig40_dt = rbindlist(mwig40)
-fwrite(mwig40_dt, paste0('data/', indeks, '_price_adjustment.csv'), bom = TRUE)
-
-
-indeks = 'SWIG80'
-swig80 = list()
-for (ticker in all_index_data[Index == indeks, Ticker]){
-  swig80[[ticker]] = get_price_adjustments_info(ticker)
-}
-swig80_dt = rbindlist(swig80)
-fwrite(swig80_dt, paste0('data/', indeks, '_price_adjustment.csv'), bom = TRUE)
-
-
-library(timeDate)
-
-## Example data
-dates <- as.Date("2013-01-01") + 0:364
-Dates <- as.timeDate(dates)
-
-## Extract the first business day of each month
-?isBizday
-bizDates <- dates[isBizday(Dates, holidays=holidayLONDON())]
-firsts <- tapply(bizDates, months(bizDates), min)
-sapply(firsts, function(X) as.character(as.Date(X)))
