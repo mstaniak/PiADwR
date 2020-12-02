@@ -8,6 +8,20 @@ sample_hour = function(date){
   strftime(date, format = '%Y-%m-%d %H:%M:%OS')
 }
 
+gas_dt[, Date := floor_date(Date, unit = 'month')]
+gas_dt[, .(Mean = mean(MeasuredValue), 
+           Median = median(MeasuredValue), 
+           Min = min(MeasuredValue), 
+           Max = max(MeasuredValue)), 
+       by = Date]
+
+gas_dt[, Date := floor_date(Date, unit = 'year')]
+gas_dt[, .(Mean = mean(MeasuredValue), 
+           Median = median(MeasuredValue), 
+           Min = min(MeasuredValue), 
+           Max = max(MeasuredValue)), 
+       by = Date]
+
 gas_dt[, 'Date Local' := lapply(gas_dt[, 'Date Local'], sample_hour)]
 dat_funct = function(chr){
   as.POSIXct(chr, format = '%Y-%m-%d %H:%M:%OS')
