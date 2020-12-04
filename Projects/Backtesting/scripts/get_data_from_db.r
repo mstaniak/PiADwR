@@ -9,8 +9,7 @@ get_data_from_db <- function(ticker, start_Date, end_Date){
   json <- httr::GET(url_code) 
   jsonString <- content(json, 'text', encoding = "UTF-8")
   frame <- fromJSON(jsonString)
-  print(frame)
-  if (frame == paste(c('No data for awmbetween dates:', start_Date, '-', end_Date), collapse = ' ')){
+  if (class(frame) == 'character'){
     return(data.table())
   } else{
     frame <- fromJSON(jsonString)
@@ -20,17 +19,17 @@ get_data_from_db <- function(ticker, start_Date, end_Date){
   }
 }
 
-
-all_data <- function(tickers, start_Date, end_Date){
+get_all_data <- function(tickers, start_Date, end_Date){
   prices <- lapply(tickers, get_data, start_Date, end_Date)
-  rbindlist(prices)
+  data.table::rbindlist(prices)
 }
 
 start_Date <- "2006-02-02"
 end_Date <- "2020-03-01"
 
-a <- get_data_from_db("awm", start_Date, '2006-02-06')
+a <- get_data_from_db("AGO", '2020-10-01', '2020-10-31')
 a
+all_index_data[Ticker == toupper('ago')]
 class(a)
 b <- get_data_from_db("abe", start_Date, end_Date)
 b

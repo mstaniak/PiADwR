@@ -7,6 +7,9 @@ library(lubridate)
 library(quantmod)
 library(RQuantLib)
 library(docstring)
+library(jsonlite)
+library(httr)
+library(dplyr)
 
 get_stooq_data = function(tickers, interval){
   # Downloading data for specified tickers and interval from stooq.pl and saving in
@@ -102,4 +105,25 @@ get_price_adjustments_info = function(ticker){
   }
   Sys.sleep(300)
   return(tabela)
+}
+
+get_data_from_db <- function(ticker, start_Date, end_Date){
+  url_code <- paste(c(Sys.getenv("DB_URL"),
+                      ticker,"&startDate=",start_Date, "&endDate=", end_Date), collapse = "")
+  json <- httr::GET(url_code) 
+  jsonString <- content(json, 'text', encoding = "UTF-8")
+  frame <- fromJSON(jsonString)
+  if (class(frame) == 'character'){
+    return(data.table())
+  } else{
+    frame <- fromJSON(jsonString)
+    result_dt = data.table(frame)
+    setnames(result_dt, 'hight', 'high')
+    return(result_dt)
+  }
+}
+
+get_all_data <- function(tickers, start_Date, end_Date){
+  prices <- lapply(tickers, get_data, start_Date, end_Date)
+  data.table::rbindlist(prices)
 }
