@@ -15,7 +15,7 @@ get_stooq_data = function(tickers, interval){
   # Downloading data for specified tickers and interval from stooq.pl and saving in
   # data folder
   # NIE PUSHOWAĆ DANYCH
-  for (ticker in tickers){
+  for (ticker in unique(tickers)){
     url = paste0("https://stooq.pl/q/d/l/?s=", ticker, "&i=", interval)
     print(url)
     data = fread(input = url, fill = TRUE)
