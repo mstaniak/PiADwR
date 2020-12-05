@@ -13,7 +13,7 @@ lista_tabel = list()
 
 for (page in pages){
   print(page)
-  tmp_url = paste0(url,page,collapse = '')
+  tmp_url = paste0(url, page)
   
   tabela = read_html(tmp_url) %>%
     html_nodes(xpath = '//*[@id="boxQuotes"]/div[2]/table[1]') %>%
@@ -34,7 +34,7 @@ lista_indeksow = list()
 
 for (indeks in indeksy){
   print(indeks)
-  tmp_url = paste0(url, indeks, collapse = '')
+  tmp_url = paste0(url, indeks)
   
   tabela = read_html(tmp_url) %>%
     html_nodes(xpath = '//*[@id="boxProfil"]/div[2]/div[5]/div[2]/table[1]') %>%
