@@ -119,6 +119,14 @@ get_data_from_db <- function(ticker, start_Date, end_Date){
     frame <- fromJSON(jsonString)
     result_dt = data.table(frame)
     setnames(result_dt, 'hight', 'high')
+    result_dt[, `:=` (date = ymd(date),
+                      open = as.numeric(open),
+                      high = as.numeric(high),
+                      low = as.numeric(low),
+                      close = as.numeric(close),
+                      volume = as.numeric(volume)
+      
+    )]
     return(result_dt)
   }
 }
