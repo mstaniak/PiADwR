@@ -124,6 +124,6 @@ get_data_from_db <- function(ticker, start_Date, end_Date){
 }
 
 get_all_data <- function(tickers, start_Date, end_Date){
-  prices <- lapply(tickers, get_data, start_Date, end_Date)
+  prices <- lapply(tickers, get_data_from_db, start_Date, end_Date)
   data.table::rbindlist(prices)
 }
