@@ -13,7 +13,7 @@ szachy <- szachy[szachy$Match_duration<150]
 szachy <- szachy[1300:1800]
 
 # args-in to pass: g_type, x_var, y_var, ...
-plot_with_ggplot2 <- function(dframe, g_type = 'blank', x_var = NA, y_var = NA, title = "", x_lab="", y_lab="", colr='victory_status', ...) {
+plot_with_ggplot2 <- function(dframe, g_type = 'blank', x_var = NA, y_var = NA, title = "", x_lab="", y_lab="", colr=NULL, ...) {
 
   if((is.na(x_var) == FALSE) & (is.na(y_var) == FALSE)) {
     #if two vars are passed
@@ -58,12 +58,12 @@ plot_with_ggplot2 <- function(dframe, g_type = 'blank', x_var = NA, y_var = NA, 
 
 
 plot_with_ggplot2(dframe = szachy, g_type = 'points',
-                  x_var = 'turns', y_var = 'Match_duration', title = "My chess plot", colr='',
+                  x_var = 'turns', y_var = 'Match_duration', title = "My chess plot",
                   y_lab="match duration", x_lab = "turns'")
 
-# Title manipulation with theme()
+#Title manipulation with theme()
 plot_with_ggplot2(dframe = szachy, g_type = 'points',
                   x_var = 'turns', y_var = 'Match_duration', title = "My chess plot",
-                  y_lab="match duration", x_lab = "turns", colr='victory_status',
+                  y_lab="match duration", x_lab = "turns", colr = 'victory_status',
                   plot.title = element_text(color="red", size=16, face="bold.italic"),
                   plot.title.position = 'plot')
