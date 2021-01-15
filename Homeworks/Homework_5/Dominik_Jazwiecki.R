@@ -1,7 +1,11 @@
+library(data.table)
+library(tidyverse)
+library(ggplot2)
+
+
 benchmark_show <- function(n, G)
 {
-  library(data.table)
-  library(tidyverse)
+  
   df <- data.frame(Y = sample(1:n, n), W = sample(1:n, n), Z = sample(1:n, n), X = sample(LETTERS[1:G], n, replace = T))
   tb <- as_tibble(df)
   dt <- as.data.table(df)
@@ -13,14 +17,11 @@ benchmark_show <- function(n, G)
   print(system.time(dt[,.(mean(Y), mean(W), mean(Z)), by = X]))
 }
 
-benchmark(1e7, 20)
+benchmark_show(1e7, 20)
 
 
 benchmark_plot <- function()
 {
-  library(data.table)
-  library(tidyverse)
-  library(ggplot2)
   #data <- data.frame(time = 0, n = rep(c(1e2, 1e3, 1e4, 1e5, 1e6, 1e7), 12), group = rep(c(3, 5, 10, 20), rep(18, 4)), typ = rep(c("base", "tidyverse", "data.table"), 72))
   data <- data.frame(time = 0, n = 0, group = 0, typ = "a")
   
@@ -29,7 +30,7 @@ benchmark_plot <- function()
     print(N)
     for(G in c(3, 5, 10, 20))
     {
-      df <- data.frame(Y = sample(1:n, n), W = sample(1:n, n), Z = sample(1:n, n), X = sample(LETTERS[1:G], n, replace = T))
+      df <- data.frame(Y = sample(1:N, N), W = sample(1:N, N), Z = sample(1:N, N), X = sample(LETTERS[1:G], N, replace = T))
       tb <- as_tibble(df)
       dt <- as.data.table(df)
       # data %>% 
@@ -54,7 +55,7 @@ data <- benchmark_plot()
 data <- data[-1,]
 row.names(data) <- NULL
 
-ggplot(data %>% filter(group == 3)) + geom_boxplot(aes(x=n, y=time, col=typ)) + ggtitle(paste0("Ilosc grup:", 3))
-ggplot(data %>% filter(group == 5)) + geom_boxplot(aes(x=n, y=time, col=typ)) + ggtitle(paste0("Ilosc grup:", 5))
-ggplot(data %>% filter(group == 10)) + geom_boxplot(aes(x=n, y=time, col=typ)) + ggtitle(paste0("Ilosc grup:", 10))
-ggplot(data %>% filter(group == 20)) + geom_boxplot(aes(x=n, y=time, col=typ)) + ggtitle(paste0("Ilosc grup:", 20))
+ggplot(data %>% filter(group == 3)) + geom_boxplot(aes(x=typ, y=time, col=typ)) + ggtitle(paste0("Ilosc grup:", 3))
+ggplot(data %>% filter(group == 5)) + geom_boxplot(aes(x=typ, y=time, col=typ)) + ggtitle(paste0("Ilosc grup:", 5))
+ggplot(data %>% filter(group == 10)) + geom_boxplot(aes(x=typ, y=time, col=typ)) + ggtitle(paste0("Ilosc grup:", 10))
+ggplot(data %>% filter(group == 20)) + geom_boxplot(aes(x=typ, y=time, col=typ)) + ggtitle(paste0("Ilosc grup:", 20))
