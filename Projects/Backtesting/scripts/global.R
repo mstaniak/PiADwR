@@ -44,8 +44,9 @@ get_all_data <- function(tickers, start_date, end_date){
 }
 
 get_rebalance_dates = function(start_date, end_date, rebalance_frequency, period){
-  rebalance_dates = seq(ymd(start_date), ymd(end_date), by = paste(rebalance_frequency, period))
-  rebalance_dates = unique(adjust('Poland', rebalance_dates, 0))
+  rebalance_dates = seq(ymd(start_date), ymd(end_date), 
+                        by = paste(rebalance_frequency, period))
+  rebalance_dates = unique(adjust('Poland', rebalance_dates, 0L))
   return(rebalance_dates)
 }
 
