@@ -15,12 +15,7 @@ benchmark_show <- function(n, G)
 
 benchmark(1e7, 20)
 
-n <- 1e6
-G <- 5
-df <- data.frame(Y = sample(1:n, n), W = sample(1:n, n), Z = sample(1:n, n), X = sample(LETTERS[1:G], n, replace = T))
-dt <- as.data.table(df)
 
-system.time(dt[,.(mean(Y), mean(W), mean(Z)), by = X])[3]
 benchmark_plot <- function()
 {
   library(data.table)
