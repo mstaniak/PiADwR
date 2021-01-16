@@ -10,7 +10,6 @@ start_date <- "2010-02-02"
 end_date <- "2020-12-20"
 full_data <- get_all_data(tickers, start_date, end_date)
 
-
 is_weekend <- function(date){
   ifelse(weekdays(date) %in% c("sobota", "niedziela"), TRUE, FALSE)
 }
@@ -43,8 +42,8 @@ score_function <- function(data, lst){
     }
   score <- ((exp(slopevec))^252 - 1) * 100 * rsqvec
   return (score)
-  
 }
+
 momentum_function <- function(data, date_of_analysis, number_of_days, 
                               cash, min_momentum, max_stocks, min_inv_vola, ...){
   if (weekdays(date_of_analysis) == "sobota"){

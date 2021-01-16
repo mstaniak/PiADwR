@@ -54,6 +54,7 @@ tickers = c('abe', 'acg', 'ago', 'alg', 'awm', 'aml', 'amb', 'apt', 'arh', 'atc'
             'ast', '1at', 'atg', 'apr', 'bio', 'lwb', 'bbt', 'brs', 'bos', 'cmp', 'cpg', 'dbc', 
             'eex', 'ent', 'fro', 'fte', 'gop', 'gtn', 'gnb', 'glc', 'grn', 'hrp', 'ida', 'inc', 
             'irl', 'kgn', 'ksw', 'ltx', 'lbw', 'mci', 'mdg', 'mnc', 'mrb', 'mlg', 'mls', 'net', 
-            'nwg', 'oat', 'opn', 'bkm', 'pcr', 'pxb', 'pep', 'psw', 'phn', 'pce', 'pxm', 'r22', 
+            'nwg', 'oat', 'opn', 'bkm', 'pcr', 'pep', 'psw', 'phn', 'pce', 'pxm', 'r22', 
             'rbw', 'rvu', 'snk', 'slv', 'ska', 'stx', 'stp', 'tim', 'tor', 'toa', 'trk', 'ulg', 
             'unt', 'vgo', 'vox', 'vrg', 'wwl', 'wlt', 'wse', 'zep', 'pbx')
+  
