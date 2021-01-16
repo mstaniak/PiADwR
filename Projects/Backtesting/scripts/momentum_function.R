@@ -8,8 +8,6 @@ library(data.table)
 
 start_date <- "2010-02-02"
 end_date <- "2020-12-20"
-tickers <- fread("tickers.txt")$V1
-tickers <- tolower(tickers)
 full_data <- get_all_data(tickers, start_date, end_date)
 
 
@@ -25,7 +23,6 @@ numdays <- function(num, date){
     }
     else{
       vec <- vec
-      
     }
     date = date - 1
   }
