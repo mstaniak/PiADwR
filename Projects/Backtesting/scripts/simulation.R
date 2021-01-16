@@ -58,7 +58,7 @@ backtest_simulation = function(commission_rate, rebalance_dates, ...){
                           cash = cash_history, 
                           stocks_value = stocks_value_history, 
                           total_value = total_value_history)
-  
+  return(history_dt)
 }
 
 equity_plot = function(history_dt, plot_type){
