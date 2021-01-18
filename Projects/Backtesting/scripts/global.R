@@ -171,10 +171,12 @@ backtest_simulation = function(commission_rate, rebalance_dates, ...){
 equity_plot = function(history_dt, plot_type){
   history_dt_long = pivot_longer(history_dt, cols = c('cash', 'stocks_value', 'total_value'))
   if (plot_type == 'point'){
-    ggplot(history_dt_long) + geom_point(aes(x = date, y = value, col = name))
+    return(ggplot(history_dt_long) + 
+             geom_point(aes(x = date, y = value, col = name)))
   }
   if (plot_type == 'col'){
-    ggplot(history_dt_long) + geom_col(aes(x = date, y = value, fill = name), position = 'dodge')
+    return(ggplot(history_dt_long) + 
+             geom_col(aes(x = date, y = value, fill = name), position = 'dodge'))
   }
 }
 
