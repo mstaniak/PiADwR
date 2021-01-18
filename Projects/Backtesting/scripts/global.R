@@ -143,8 +143,13 @@ fill_missing_prices = function(dates_dt, data){
   return(rbindlist(filled_data_list))
 }
 
-backtest_simulation = function(commission_rate, rebalance_dates, ...){
-  #' dddd
+backtest_simulation = function(dt_from_db, commission_rate, rebalance_dates, 
+                               number_of_days, min_momentum, 
+                               max_stocks, min_inv_vola, cash){
+  #' dt_from_db - result from get_all_data()
+  #' rest - strategy params
+  dates_dt = data.table(date = seq(min(rebalance_dates), max(rebalance_dates), 1))
+  dt_with_filled_missing_prices = fill_missing_prices(dates_dt, dt_from_db)
   momentum_tables_history = list()
   cash_history = c()
   stocks_value_history = c()
@@ -159,13 +164,13 @@ backtest_simulation = function(commission_rate, rebalance_dates, ...){
              "price", "quantity", "value", "date"))
   for (date_number in 1:length(rebalance_dates)){
     analysis_date = rebalance_dates[date_number]
-    current_prices = full_data[ticker %in% old_momentum_table[, ticker] &
+    current_prices = dt_with_filled_missing_prices[ticker %in% old_momentum_table[, ticker] &
                                  date == analysis_date][order(ticker), close]
     current_stocks_value = sum(current_prices * old_momentum_table[order(ticker), 
                                                                    quantity])
     commission = current_stocks_value * commission_rate
     cash = cash + current_stocks_value - commission
-    current_momentum_table = momentum_function(data = full_data, 
+    current_momentum_table = momentum_function(data = dt_from_db, 
                                                date_of_analysis = analysis_date, 
                                                number_of_days = number_of_days, 
                                                min_momentum = min_momentum, 
