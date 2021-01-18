@@ -1,7 +1,8 @@
 ### LIBRARIES
 libraries = c('data.table', 'tidyverse', 'rvest', 'stringr', 'stringi', 'lubridate',
               'docstring', 'jsonlite', 'httr', 'dplyr', 'RQuantLib',
-              'TTR', "PerformanceAnalytics", "shiny", "shinyWidgets")
+              'TTR', "PerformanceAnalytics", "shiny", "shinyWidgets", "waiter",
+              "shinycssloaders")
 load_libraries = function(packages_vec){
   for (package in packages_vec){
     if (package %in% rownames(installed.packages())){
@@ -126,8 +127,8 @@ momentum_function <- function(data, date_of_analysis, number_of_days,
 fill_missing_prices_for_ticker = function(dates_dt, single_stock_data){
   tkr = unique(single_stock_data[, ticker])
   merged_single_stock = merge(dates_dt, single_stock_data, all.x = TRUE)
-  min_non_na = which.min(is.na(merged_single_stock[, ticker]))
-  result = merged_single_stock[min_non_na:nrow(merged_single_stock), ]
+  first_non_na = which.min(is.na(merged_single_stock[, ticker]))
+  result = merged_single_stock[first_non_na:nrow(merged_single_stock), ]
   setnafill(result, 'nocb', cols = c('open', 'high', 'low', 'close', 'volume'))
   result[, ticker := tkr]
   return(result)

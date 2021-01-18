@@ -10,7 +10,7 @@ ui <- fluidPage(
                    inputId = 'start_date',
                    label = ('Data początkowa:'),
                    max = '2020-12-01',
-                   value = '2020-12-01',
+                   value = '2020-01-01',
                    language = 'pl',
                    weekstart = 1
                  ),
@@ -38,24 +38,24 @@ ui <- fluidPage(
                    multiple = TRUE
                  ),
                  
-                 # actionButton(
-                 #   inputId = "get_data_button",
-                 #   label = "Get data"
-                 #   ),
+                 actionButton(
+                   inputId = "get_data_button",
+                   label = "Get data"
+                   ),
         ),
         
         tabPanel("Parametry",
                  sliderInput(
                    inputId = "rebalance_frequency",
-                   label = "rebalance_frequency:",
+                   label = "Częstość rebalansacji portfela:",
                    min = 1,
-                   max = 4,
+                   max = 3,
                    value = 1,
                    step = 1
                  ),
                  radioButtons(
                    inputId = "period",
-                   label = "period:",
+                   label = "Częstość rebalansacji portfela cd.:",
                    choices = c("month", "week")
                  ),
                  numericInput(
@@ -75,17 +75,17 @@ ui <- fluidPage(
                  ),
                  numericInput(
                    inputId = "min_inv_vola",
-                   label = "Tolerancja na zmienność:",
+                   label = "Minimalna zmienność odwrócona:",
                    value = 30
                  ),
                  numericInput(
                    inputId = "cash",
-                   label = "Gotówka przy rebalansacji:",
+                   label = "Początkowa gotówka:",
                    value = 10000
                  ),
                  numericInput(
                    inputId = "comission_rate",
-                   label = "comission_rate:",
+                   label = "Prowizja brokerska:",
                    value = 0.0038
                  ),
                  actionButton(
