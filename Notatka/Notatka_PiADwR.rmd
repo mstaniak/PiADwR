@@ -1,0 +1,246 @@
+---
+title: "OPERACJE NA DANYCH W R"
+author: 
+  - Weronika Domaszewska
+  - Ewelina Grzmocińska
+  - Gracjan Hrynczyszyn
+  - Dominik Jaźwiecki
+  - Michał Ociepa
+date: ''
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Operacje na danych w R są związane głównie z filtrowaniem, dodawaniem i modyfikowaniem kolumn, grupowaniem oraz podsumowywaniem danych. Można je wykonywać za pomocą funkcji bazowego R lub narzędzi z zaimportowanych pakietów: tidyverse, data.table.
+
+Załóżmy, że ramka danych jest przypisana do zmiennej $dane$, a nazwy jej kolumn to: $kol.1,kol.2,kol.3,...$\ . 
+
+## WYBIERANIE KOLUMN 
+
+Poniżej przedstawione są instrukcje pozwalające na wybieranie konkretnych kolumn z ramki danych w~zależności od metody.
+Dla uproszczenia przyjmijmy, że wybieramy kolumny: $kol.1,kol.2,kol.3$.
+
+1. BASE 
+
+    * dane = dane[, c("kol.1","kol.2","kol.3")]
+
+2. TIDYVERSE
+
+    * dane = select(dane, `kol 1`, `kol 2`, `kol 3`)
+    * dane = dane %>% select(`kol 1`, `kol 2`, `kol 3`)
+
+3. DATA.TABLE
+
+    Nazwy kolumn ramki danych zawierą znak "." . Wprowadźmy zmienną pomocniczą $kolumny$. Będzie ona zawierać nazwy kolumn, ale zastępując znak "." znakiem " ".
+```r
+kolumny = c("kol 1","kol 2","kol 3")
+```
+
+    * dane = dane[, kolumny]
+    * dane = dane[, kolumny, with = FALSE] - dana metoda nie zadziała bez argumentu $with~=~FALSE$, ponieważ szuka w ramce danych kolumn o nazwach zawartych w obiekcie $kolumny$, a nie konkretnie podanych nazw
+    * dane = dane[, colnames(dane) %in% kolumny, with = FALSE]
+    * dane = dane[, ..kolumny]
+    * dane = dane[, list(`kol 1`, `kol 2`, `kol 3`)]
+    * dane = dane[, .(`kol 1`, `kol 2`, `kol 3`)]
+\newpage
+
+## ZMIANA NAZW KOLUMN
+
+Teraz zostaną zaprezentowane sposoby na zmianę nazw kolumn ramki danych. Przyjmijmy, że nowe nazwy kolumn są postaci $k1,k2,k3,...$\ .
+
+1. BASE
+
+    * colnames(dane) = c("k1", "k2", "k3")
+  
+2. TIDYVERSE
+  
+    * dane = dane %>% rename(k1 = `kol.1`, k2 = `kol.2`, k3 = `kol.3`)
+
+3. DATA.TABLE
+
+    * setnames(dane, c("kol.1","kol.2","kol.3"), c("k1", "k2", "k3")) - zaleta: nie kopiuje ramki danych
+
+## FILTROWANIE
+
+Dany rozdział skupia się na sposobach filtrowania danych. Przydatne funkcje:
+
+  * unique(dane$\$$k1) - zwraca unikalne wartości kolumny $k1$
+  * table(dane$\$$k1) - zlicza ilość wystąpienia każdej wartości w kolumnie $k1$
+  * prop.table(table(dane$\$$k1)) - pokazuje procentowo ilość wystąpienia każdej wartości w kolumnie $k1$ w$~$stosunku do wszystkich wartości
+
+Przyjmnijmy, że wybieramy z kolumny $k1$ określoną wartość $abc$.
+
+1. BASE
+
+    * dane[dane$\$$k1 == "abc", ]
+  
+2. TIDYVERSE
+
+    * dane %>% filter(k1 == "abc") 
+      - można podać kilka warunków (po przecinku), będą one domyślnie rozdzielone spójnikiem $i$
+      - aby połączyć warunki spójnikiem $i$ można również użyć operatora $\&$
+      - aby połączyć warunki spójnikiem $lub$ należy użyć operatora $|$  
+
+3. DATA.TABLE
+
+    * dane[k1 == "abc"]
+
+## USUWANIE KOLUMN
+
+Załóżmy, że usuwamy pierwszą kolumnę - $k1$.
+
+1. BASE
+
+    * dane = dane[, -1] - gdzie $1$ to numer usuwanej kolumny, a "-" oznacza usuwanie
+  
+\newpage
+
+2. TIDYVERSE
+
+    * dane = select(dane, -k1) - jak powyżej, "-" oznacza usuwanie, ale w tym przypadku stosujemy nazwę kolumny a nie jej numer
+
+3. DATA.TABLE
+
+    * dane[, k1 := NULL] - operator $:=$ (referencja) oznacza, że operacja jest wykonywana bez kopiowania ramki danych
+    * dane = dane[, -1, with = FALSE]  
+
+## MANIPULACJE NA KOLUMNACH
+
+Przyjmijmy, że kolumna $k2$ zawiera tylko liczby. Wartości ujemne zamieniamy na $0$. W tym celu posłużymy się funkcją $ifelse$:
+$$ ifelse(warunek \ logiczny,\ wartość \ jeśli \ spełniony, \ wartość \ jeśli\ niespełniony).$$
+
+1. BASE
+
+    * dane[["k2"]] = ifelse(dane[["k2"]] < 0, 0, dane[["k2"]])
+
+2. TIDYVERSE
+
+    * dane = dane %>% mutate(k2 = ifelse(k2 < 0, 0, k2))
+      - możemy modyfikować kilka kolumn jednocześnie, rozdzielając je przecinkiem
+      
+3. DATA.TABLE
+
+    * dane[, k2 := ifelse(k2 < 0, 0, k2)] - z użyciem referencji
+    * dane[["k2"]] = ifelse(dane[["k2"]] < 0, 0, dane[["k2"]]) - bez użycia referencji
+    
+## APLIKOWANIE TRANSFORMACJI DO KAŻDEJ KOLUMNY
+
+W tym rozdziale będziemy operować na wszystkich kolumnach ramki danych. Wartości w nich zawarte mogą być typu $factor$, które zamienimy na typ $character$.
+
+1. BASE
+
+    * poprzez pętlę
+```r
+      for (i in 1:ncol(dane))
+      {
+        if (is.factor(dane[, i]))
+        {
+          dane[, i] = as.character(dane[, i])
+        }
+      }
+```     
+
+    * poprzez funkcję $lapply$
+```r
+      lapply(dane, fun(x) 
+      {
+        if(is.factor(x))
+          x = as.character(x)
+      })
+```    
+\newpage
+  
+2. TIDYVERSE
+
+    * przy użyciu funkcji $mutate\_all$
+```r
+    dane = dane %>%
+      mutate_all(function(x) 
+      {
+        if (is.factor(x)) 
+        {
+          as.character(x)
+        } 
+        else 
+        {
+          x
+        }
+      })
+```
+
+3. DATA.TABLE
+
+    * przy użyciu funkcji lapply
+```r
+    dane = dane[, lapply(.SD, function(x) 
+    {
+      if (is.factor(x)) 
+      {
+        as.character(x)
+      } 
+      else 
+      {
+        x
+      } 
+    })]
+```  
+
+## GRUPOWANIE I PODSUMOWANIE
+
+Załóżmy, że do wyznaczenia wszystkich unkialnych wartości ramki danych potrzebne są kolumny $k1$, $k2$ i $k3$. Natomiast podsumowywana będzie kolumna $k4$ - zostanie wyliczona średnia dla każdej unikalnej wartości.
+
+1. BASE
+
+    * przy użyciu funkcji $aggregate$ - zastosowana zostanie formuła $k4$ ~ $k1 + k2 + k3$, która oznacza, że będzie podsumowywana zmienna $k4$ w zależności od unikalnych zestawów wartości zmiennych $k1$, $k2$, $k3$
+      - aggregate(k4 ~ k1 + k2 + k3,
+          data = dane,
+          FUN = function(x) mean(x, na.rm = TRUE)) - poprzez zastosowanie własnej funkcji
+          
+      - aggregate(k4 ~ k1 + k2 + k3,
+        data = dane,
+        FUN = mean, na.rm = TRUE) - poprzez zastosowanie istniejącej funkcji
+\newpage
+
+2. TIDYVERSE
+
+    * dane %>% \newline
+    group_by(k1, k2, k3) %>% \newline
+    summarize(srednia = mean(k4, na.rm = TRUE), maksimum = max(k4, na.rm = TRUE))
+      - $group\_by$ - grupuje po kolumnach $k1$, $k2$, $k3$
+      - $summarize$ - podsumowuje według podanych elementów (w tym przypadku wylicza średnią i maksimum z kolumny $k4$)
+
+3. DATA.TABLE
+
+    * dane[, list(średnia = mean(k4, na.rm = TRUE), \newline
+                  maksimum = max(k4, na.rm = TRUE)), \newline
+            by = c("k1", "k2", "k3")]
+
+## PODSUMOWYWANIE WSZYSTKICH KOLUMN
+
+W celu podsumowania kolumn zdefiniujemy poniższą funkcję, która zwróci ilość niepustych wartości.
+```r
+  num_unique_noNA = function(input_vector) 
+  {
+    sum(!is.na(unique(input_vector)))
+  }
+```
+
+1. BASE
+  
+    * apply(dane, 2, num_unique_noNA) - gdzie $2$ oznacza, że wywołujemy podaną funkcję $num\_unique\_noNA$ po kolumnach 
+    * lapply(dane, num_unique_noNA) 
+    * sapply(dane, num_unique_noNA)
+
+2. TIDYVERSE
+
+    * summarise_all(dane, num_unique_noNA)
+
+3. DATA.TABLE
+
+    * dane[, lapply(.SD, num_unique_noNA)]
