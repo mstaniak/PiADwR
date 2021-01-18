@@ -123,6 +123,25 @@ momentum_function <- function(data, date_of_analysis, number_of_days,
   return (momentum_tab)
 }
 
+fill_missing_prices_for_ticker = function(dates_dt, single_stock_data){
+  tkr = unique(single_stock_data[, ticker])
+  merged_single_stock = merge(dates_dt, single_stock_data, all.x = TRUE)
+  min_non_na = which.min(is.na(merged_single_stock[, ticker]))
+  result = merged_single_stock[min_non_na:nrow(merged_single_stock), ]
+  setnafill(result, 'nocb', cols = c('open', 'high', 'low', 'close', 'volume'))
+  result[, ticker := tkr]
+  return(result)
+}
+
+fill_missing_prices = function(dates_dt, data){
+  tickers = unique(data[, ticker])
+  filled_data_list = vector("list", length(tickers))
+  for (i in 1:length(tickers)){
+    filled_data_list[[i]] = fill_missing_prices_for_ticker(dates_dt, data[ticker == tickers[i]])
+  }
+  return(rbindlist(filled_data_list))
+}
+
 backtest_simulation = function(commission_rate, rebalance_dates, ...){
   #' dddd
   momentum_tables_history = list()
