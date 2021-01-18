@@ -5,6 +5,8 @@
 # Session Data files
 .RData
 
+.xml
+
 # Example code in package build process
 *-Ex.R
 
