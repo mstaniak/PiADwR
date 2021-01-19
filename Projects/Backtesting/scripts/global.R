@@ -2,7 +2,7 @@
 libraries = c('data.table', 'tidyverse', 'rvest', 'stringr', 'stringi', 'lubridate',
               'docstring', 'jsonlite', 'httr', 'dplyr', 'RQuantLib',
               'TTR', "PerformanceAnalytics", "shiny", "shinyWidgets", "waiter",
-              "shinycssloaders")
+              "shinycssloaders", "shinybusy")
 load_libraries = function(packages_vec){
   for (package in packages_vec){
     if (package %in% rownames(installed.packages())){
@@ -18,11 +18,13 @@ load_libraries(libraries)
 
 get_data_from_db <- function(ticker, start_date, end_date){
   url_code <- paste(c(Sys.getenv("DB_URL"),
-                      ticker,"&startDate=", start_date, "&endDate=", end_date), collapse = "")
+                      ticker,"&startDate=", as.character(start_date),
+                      "&endDate=", as.character(end_date)), collapse = "")
   json <- httr::GET(url_code) 
   json_string <- content(json, 'text', encoding = "UTF-8")
   frame <- fromJSON(json_string)
   if (class(frame) == 'character'){
+    # print(frame)
     return(data.table())
   } else{
     frame <- fromJSON(json_string)
@@ -41,7 +43,7 @@ get_data_from_db <- function(ticker, start_date, end_date){
 
 get_all_data <- function(tickers, start_date, end_date){
   prices <- lapply(tickers, get_data_from_db, start_date, end_date)
-  data.table::rbindlist(prices)
+  return(data.table::rbindlist(prices))
 }
 
 get_rebalance_dates = function(start_date, end_date, rebalance_frequency, period){
