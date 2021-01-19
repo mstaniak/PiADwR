@@ -9,8 +9,8 @@
 # Narysować wykres zależności czasu (box plot, wartość typowa + zmienność)
 # od N i G według implementacji.
 
-library(microbenchmark)
-library(pryr)
+library(microbenchmark) # for time measureing
+library(pryr) # For addrress checking
 library(profvis)
 
 library(cowplot)
@@ -92,6 +92,7 @@ for(i in 1:length(Nn)){
 }
 cowplot::plot_grid(lista_plotow22[[1]], lista_plotow22[[2]],
                    lista_plotow22[[3]], lista_plotow22[[4]], align = "v", ncol = 2, nrow = 2)
+
 
 ## all combined ----
 ggarrange(ggarrange(lista_plotow[[1]], lista_plotow[[2]], lista_plotow[[3]], lista_plotow[[4]],
