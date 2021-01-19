@@ -1,6 +1,9 @@
 ui <- fluidPage(
   titlePanel('Backtesting'),
-  
+  add_busy_gif(
+    src = "https://jeroen.github.io/images/banana.gif",
+    height = 70, width = 70, timeout = 1, position = 'full-page'
+  ),
   use_waiter(),
   sidebarLayout(
     sidebarPanel(

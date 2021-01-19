@@ -17,39 +17,33 @@ server <- function(input, output){
   })
   
   data_from_db <- reactiveValues(data = NULL)
-  
+
   observeEvent(input$get_data_button, {
     data_from_db$data <- get_all_data(input$tickers, input$start_date, input$end_date)
   })
-  
-  # get_data <- eventReactive(input$get_data_button, {
-  #   get_all_data(input$tickers, input$start_date, input$end_date)
-  # })
-  
+
   rebalance_dates <- reactive({
     get_rebalance_dates(input$start_date, input$end_date, input$rebalance_frequency, input$period)
   })
   
-  run_simulation <- eventReactive(input$run_simulation_button, {
-    backtest_simulation(input$comission_rate,
-                        rebalance_dates(),
-                        data = get_data(),
-                        number_of_days = input$number_of_days,
-                        min_momentum = input$min_momentum,
-                        max_stocks = input$max_stocks,
-                        min_inv_vola = input$min_inv_vola,
-                        cash = input$cash)
+  simulation <- reactiveValues()
+  
+  observeEvent(input$run_simulation_button, {
+    simulation$results <- backtest_simulation(dt_from_db = data_from_db$data,
+                                              commission_rate = input$comission_rate,
+                                              rebalance_dates = rebalance_dates(),
+                                              number_of_days = input$number_of_days,
+                                              min_momentum = input$min_momentum,
+                                              max_stocks = input$max_stocks,
+                                              min_inv_vola = input$min_inv_vola,
+                                              cash = input$cash)
   })
   
-  dt <- reactive(run_simulation())
-  
   output$equity_curve <- plotly::renderPlotly({
-    # dt <- run_simulation()
-    equity_plot(dt$equity_history, input$plot_type)
+    equity_plot(simulation$results$equity_history, input$plot_type)
   })
   
   output$summary_dt <- DT::renderDT({
-    # dt <- run_simulation()
-    strat_summary(dt$equity_history)
+    strat_summary(simulation$results$equity_history)
   })
 }
