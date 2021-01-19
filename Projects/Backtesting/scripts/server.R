@@ -45,6 +45,7 @@ server <- function(input, output){
   simulation <- reactiveValues()
   
   observeEvent(input$run_simulation_button, {
+    req(data_from_db$data)
     simulation$results <- backtest_simulation(dt_from_db = data_from_db$data,
                                               commission_rate = input$comission_rate,
                                               rebalance_dates = rebalance_dates(),
@@ -53,6 +54,7 @@ server <- function(input, output){
                                               max_stocks = input$max_stocks,
                                               min_inv_vola = input$min_inv_vola,
                                               cash = input$cash)
+    
   })
   
   output$equity_curve <- plotly::renderPlotly({

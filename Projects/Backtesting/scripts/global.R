@@ -1,6 +1,6 @@
 ### LIBRARIES
 libraries = c('data.table', 'tidyverse', 'rvest', 'stringr', 'stringi', 'lubridate',
-              'docstring', 'jsonlite', 'httr', 'dplyr', 'RQuantLib',
+              'docstring', 'jsonlite', 'httr', 'dplyr', 'RQuantLib', 'plotly',
               'TTR', "PerformanceAnalytics", "shiny", "shinyWidgets", "waiter",
               "shinycssloaders", "shinybusy")
 load_libraries = function(packages_vec){
