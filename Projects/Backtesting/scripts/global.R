@@ -120,9 +120,9 @@ momentum_function <- function(data, date_of_analysis, number_of_days,
   momentum_tab[, quantity := floor((cash * weight) / price)]
   momentum_tab[, value := quantity * price]
   momentum_tab[, date := date_of_analysis]
-  setcolorder(momentum_tab, c("ticker", "momentum", "volatility", 
+  setcolorder(momentum_tab, c("ticker", "date", "momentum", "volatility", 
                               "inv_volatility", "weight", "price", 
-                              "quantity", "value", "date"))
+                              "quantity", "value"))
   return (momentum_tab)
 }
 
@@ -159,12 +159,12 @@ backtest_simulation = function(dt_from_db, commission_rate, rebalance_dates,
   commissions = c()
   current_momentum_table = data.table(matrix(nrow=0, ncol=9))
   setnames(current_momentum_table, colnames(current_momentum_table),
-           c("ticker", "momentum", "volatility", "inv_volatility", "weight",
-             "price", "quantity", "value", "date"))
+           c("ticker", "date", "momentum", "volatility", "inv_volatility", "weight",
+             "price", "quantity", "value"))
   old_momentum_table = data.table(matrix(nrow = 0, ncol = 9))
   setnames(old_momentum_table, colnames(old_momentum_table),
-           c("ticker", "momentum", "volatility", "inv_volatility", "weight",
-             "price", "quantity", "value", "date"))
+           c("ticker", "date", "momentum", "volatility", "inv_volatility", "weight",
+             "price", "quantity", "value"))
   for (date_number in 1:length(rebalance_dates)){
     analysis_date = rebalance_dates[date_number]
     current_prices = dt_with_filled_missing_prices[ticker %in% old_momentum_table[, ticker] &

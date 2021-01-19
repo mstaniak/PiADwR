@@ -1,5 +1,6 @@
 ui <- fluidPage(
   titlePanel('Backtesting'),
+  # options(shiny.sanitize.errors = FALSE),
   add_busy_gif(
     src = "https://jeroen.github.io/images/banana.gif",
     height = 70, width = 70, timeout = 1, position = 'full-page'
@@ -119,7 +120,12 @@ ui <- fluidPage(
         tabPanel('Dane szczegółowe',
                  DT::DTOutput('summary_dt') %>% withSpinner(color = 'blue')),
         
-        tabPanel('Historia portfela')
+        tabPanel('Historia portfela',
+                 # useShinyjs(),
+                 DT::DTOutput('portfolio_dt') %>% withSpinner(color = 'blue'),
+                 # actionButton("prevBtn", "< Previous"),
+                 # actionButton("nextBtn", "Next >"),
+                 )
       )
     )
   )

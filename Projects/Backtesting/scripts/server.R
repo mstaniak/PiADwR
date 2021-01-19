@@ -16,6 +16,22 @@ server <- function(input, output){
                           ')))
   })
   
+  # rv <- reactiveValues(page = 1)
+  # 
+  # observe({
+  #   toggleState(id = "prevBtn", condition = rv$page > 1)
+  #   toggleState(id = "nextBtn", condition = rv$page < 10)
+  #   hide(selector = ".page")
+  #   show(paste0("step", rv$page))
+  # })
+  # 
+  # navPage <- function(direction) {
+  #   rv$page <- rv$page + direction
+  # }
+  # 
+  # observeEvent(input$prevBtn, navPage(-1))
+  # observeEvent(input$nextBtn, navPage(1))
+  
   data_from_db <- reactiveValues(data = NULL)
 
   observeEvent(input$get_data_button, {
@@ -40,10 +56,19 @@ server <- function(input, output){
   })
   
   output$equity_curve <- plotly::renderPlotly({
+    req(simulation$results)
     equity_plot(simulation$results$equity_history, input$plot_type)
   })
   
   output$summary_dt <- DT::renderDT({
-    strat_summary(simulation$results$equity_history)
+    req(simulation$results)
+    DT::datatable(strat_summary(simulation$results$equity_history),
+                  options = list(paging = FALSE, searching = FALSE))
+  })
+  
+  output$portfolio_dt <- DT::renderDT({
+    req(simulation$results)
+    DT::datatable(rbindlist(simulation$results$portfolio_history),
+                  options = list(paging = FALSE))
   })
 }
