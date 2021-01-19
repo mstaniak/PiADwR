@@ -156,6 +156,7 @@ backtest_simulation = function(dt_from_db, commission_rate, rebalance_dates,
   cash_history = c()
   stocks_value_history = c()
   total_value_history = c()
+  commissions = c()
   current_momentum_table = data.table(matrix(nrow=0, ncol=9))
   setnames(current_momentum_table, colnames(current_momentum_table),
            c("ticker", "momentum", "volatility", "inv_volatility", "weight",
@@ -170,8 +171,8 @@ backtest_simulation = function(dt_from_db, commission_rate, rebalance_dates,
                                  date == analysis_date][order(ticker), close]
     current_stocks_value = sum(current_prices * old_momentum_table[order(ticker), 
                                                                    quantity])
-    commission = current_stocks_value * commission_rate
-    cash = cash + current_stocks_value - commission
+    commission_sell = current_stocks_value * commission_rate
+    cash = cash + current_stocks_value - commission_sell
     current_momentum_table = momentum_function(data = dt_from_db, 
                                                date_of_analysis = analysis_date, 
                                                number_of_days = number_of_days, 
@@ -181,17 +182,19 @@ backtest_simulation = function(dt_from_db, commission_rate, rebalance_dates,
                                                cash = cash)
     stocks_value = sum(current_momentum_table[, value])
     momentum_tables_history[[as.character(analysis_date)]] = current_momentum_table
-    commission = commission_rate * stocks_value
-    cash = cash - stocks_value - commission
+    commission_buy = commission_rate * stocks_value
+    cash = cash - stocks_value - commission_buy
     old_momentum_table = current_momentum_table
     cash_history = c(cash_history, cash)
     stocks_value_history = c(stocks_value_history, stocks_value)
     total_value_history = c(total_value_history, cash + stocks_value)
+    commissions = c(commissions, commission_buy + commission_sell)
   }
   history_dt = data.table(date = rebalance_dates, 
                           cash = cash_history, 
                           stocks_value = stocks_value_history, 
-                          total_value = total_value_history)
+                          total_value = total_value_history,
+                          commissions = commissions)
   return(list(equity_history = history_dt, portfolio_history = momentum_tables_history))
 }
 
@@ -211,15 +214,22 @@ strat_summary = function(history_dt){
   returns = CalculateReturns(history_dt[, c("date", "total_value")])
   start = as.Date(history_dt[, date][1])
   end = as.Date(history_dt[, date][nrow(history_dt)])
+  start_value = round(history_dt[, total_value][1], 2)
+  end_value = round(history_dt[, total_value][nrow(history_dt)], 2)
+  commissions_value = round(sum(history_dt[, commissions]))
   cagr = round(Return.annualized(returns)[1], 3)
   sortino = round(SortinoRatio(returns)[1], 3)
   std_dev = round(StdDev(returns)[1], 3)
   max_dd = round(maxDrawdown(returns), 3)
   profitable_rebablances = sum(returns$total_value > 0, na.rm = TRUE)
   loss_rebalances = sum(returns$total_value < 0, na.rm = TRUE)
-  summary_dt = data.table(list("start", "end", "cagr", "sortino", "std_dev", "max_dd", 
-                               "profitable_rebalances", "loss_rebalances"), 
-                          list(start, end, cagr, sortino, std_dev, max_dd, 
+  summary_dt = data.table(list("Początek symulacji", "Koniec symulacji", "Początkowa wartość porfela",
+                               "Końcowa wartość portfela", "Suma prowizji", "CAGR",
+                               "Wskaźnik Sortino", "Odchylenie standardowe portfela",
+                               "Maksymalne obsunięcie kapitału", "Zyskowne rebalansacje",
+                               "Stratne rebalansacje"), 
+                          list(start, end, start_value, end_value, commissions_value,
+                               cagr, sortino, std_dev, max_dd, 
                                profitable_rebablances, loss_rebalances)
   )
   setnames(summary_dt, colnames(summary_dt), c("Nazwa", "Wartość"))
