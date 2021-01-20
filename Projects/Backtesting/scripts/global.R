@@ -18,7 +18,7 @@ load_libraries(libraries)
 
 get_data_from_db <- function(ticker, start_date, end_date){
   url_code <- paste(c(Sys.getenv("DB_URL"),
-                      ticker,"&startDate=", as.character(start_date),
+                      ticker,"&startDate=", as.character(start_date - 365),
                       "&endDate=", as.character(end_date)), collapse = "")
   json <- httr::GET(url_code) 
   json_string <- content(json, 'text', encoding = "UTF-8")
@@ -61,7 +61,7 @@ numdays <- function(num, date){
   vec <- vector()
   while (length(vec) < num){
     if (is_weekend(as.Date(date)) == FALSE){
-      vec <- c(as.Date(vec),as.Date(date))
+      vec <- c(as.Date(vec), as.Date(date))
     }
     else{
       vec <- vec
@@ -150,7 +150,8 @@ backtest_simulation = function(dt_from_db, commission_rate, rebalance_dates,
                                max_stocks, min_inv_vola, cash){
   #' dt_from_db - result from get_all_data()
   #' rest - strategy params
-  dates_dt = data.table(date = seq(min(rebalance_dates), max(rebalance_dates), 1))
+  date_tmp = seq(min(rebalance_dates) - 365, max(rebalance_dates), 1)
+  dates_dt = data.table(date = date_tmp[isBusinessDay("Poland", date_tmp)])
   dt_with_filled_missing_prices = fill_missing_prices(dates_dt, dt_from_db)
   momentum_tables_history = list()
   cash_history = c()
@@ -173,7 +174,7 @@ backtest_simulation = function(dt_from_db, commission_rate, rebalance_dates,
                                                                    quantity])
     commission_sell = current_stocks_value * commission_rate
     cash = cash + current_stocks_value - commission_sell
-    current_momentum_table = momentum_function(data = dt_from_db, 
+    current_momentum_table = momentum_function(data = dt_with_filled_missing_prices, 
                                                date_of_analysis = analysis_date, 
                                                number_of_days = number_of_days, 
                                                min_momentum = min_momentum, 
