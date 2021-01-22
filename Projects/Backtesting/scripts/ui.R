@@ -2,7 +2,7 @@ ui <- fluidPage(
   titlePanel('Backtesting'),
   # options(shiny.sanitize.errors = FALSE),
   add_busy_gif(
-    src = "https://jeroen.github.io/images/banana.gif",
+    src = "https://media.giphy.com/media/13HBDT4QSTpveU/giphy.gif",
     height = 70, width = 70, timeout = 1, position = 'full-page'
   ),
   use_waiter(),
