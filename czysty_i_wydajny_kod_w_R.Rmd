@@ -1,0 +1,140 @@
+---
+title: "Czysty i wydajny kod w R"
+author: Bannert Paulina, Bercz Natalia, Mrozik Piotr, Sudół Dariusz, Wyźnikiewicz
+  Monika
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+geometry: left = 3.5 cm, right = 2.5 cm, top = 2.5 cm, bottom = 2.5 cm
+header-includes:
+- \usepackage{polski}
+- \usepackage{lmodern}
+- \usepackage{hyperref}
+- \usepackage{amssymb,amsmath,amsthm}
+- \usepackage[T1]{fontenc}
+- \usepackage{multirow}
+- \usepackage{enumitem}
+line-height: 1.5 cm
+fontsize: 12
+classoption: twoside
+---
+\maketitle
+
+\begin{abstract}
+Poniższy dokument zawiera notatkę dotyczącą pisania czystego i wydajnego kodu w R.  
+Została ona stworzona na podstawie laboratorium z ,,Programowania i analizy danych w R''.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Czysty kod}
+
+Na początku zajmiemy się szeroko pojętą czystością kodu. Aby dany kod mógł aspirować do takiego miana, musi przede wszystkim spełniać dwa podstawowe warunki:
+\begin{itemize}
+\item Być łatwym do zrozumienia
+Aby kod był łatwy do zrozumienia musi być przede wszystkim czytelny. Niewątpliwie pomoże w$~$tym odpowiednie nazwanie zmiennych, zadbanie o to, żeby wszystkie użyte funkcje i obiekty miały swoją określoną rolę oraz by relacje między nimi były zrozumiałe.
+\item Być łatwym do zmiany
+Tworząc kod powinniśmy myśleć o tym, że będzie on w przyszłości wykorzystywany. Aby to ułatwić, musi być napisany w taki sposób, żeby można było nanieść drobne poprawki lub zmienić dane bez konieczności zmieniania całego kodu.
+\end{itemize}
+
+Jeśli te dwa warunki nie są spełnione, istnieje obawa, że wprowadzenie nawet najmniejszych zmian całkowicie zniszczy kod.
+
+\section{Co jeśli w kodzie jest ,,bałagan''?}
+
+Nieuporządkowany i nieklarowny kod może sprawić w przyszłości wiele kłopotów, takich jak na przykład:
+\begin{itemize}
+\item Zmarnowanie czasu
+Jeśli my lub ktokolwiek inny będzie chciał w przyszłości wykorzystać taki kod z pewnością straci mnóstwo czasu na próby jego przeczytania i zrozumienia. Gdy już mu się to uda, może napotkać kolejny problem w postaci trudności z wprowadzeniem jakichkolwiek zmian.
+\item Ograniczenie lub nawet brak możliwości rozwoju
+Złe napisanie kodu może spowodować, że po jego jedynym użyciu stanie się bezwartościowy. Nie będzie sensu wprowadzać w nim jakichkolwiek zmian (gdyż będzie to zbyt pracochłonne), ani w żaden sposób rozwinąć by mógł posłużyć do przyszłych projektów (gdyż nawet najmniejsze zmiany mogą ,,zepsuć'' istniejący kod).
+\item Podatność na wystąpienie błędów
+W nieczytelnym i napisanym w sposób niezrozumiały kodzie, łatwo przemycić błędy, które na pierwszy rzut oka są niewidoczne, ale wychodzą na jaw później.
+\end{itemize}
+
+\section{Opis zmiennych}
+
+\subsection{Opis intencji}
+Aby tworzyć czysty kod musimy pamiętać o kilku zasadach. Jedną z nich jest odpowiednie nazywanie zmiennych. Nie powinniśmy używać do tego skrótów, czy przypadkowych znaków. Idealna nazwa od razu wskazuje na to, czym jest dany obiekt oraz co oznacza. Przedstawia zamiary, jakie mamy do nazywanego obiektu. 
+
+\subsection{Unikanie błędnych informacji}
+Równie ważne jest, aby w nazwach nie znajdywały się błędy lub informacje, które mogą wprowadzić potencjalnego czytelnika w błąd. Mówimy tu np. o:
+\begin{itemize}
+\item nazwaniu kilku obiektów zbyt podobnie,
+\item użyciu do nazwania listy (np. osób) słowa $\mathtt{List}$, choć w rzeczywistości ta ,,lista'' osób może być wektorem,
+\item użyciu trudno rozróżnialnych znaków (takich jak np. `0` i `O`),
+\item nazwaniu wszystkich obiektów za pomocą jednej litery i cyfry (np. $x_1,x_2,...,x_n$).
+\end{itemize}  
+
+\subsection{Kilka wskazówek}
+Jakie powinny być idealne nazwy obiektów w R? Oto kilka wskazówek:
+\begin{itemize}
+\item zrozumiałe dla osób, dla których jest przeznaczony kod,
+\item utrzymane w jednym stylu,
+\item łatwe do zrozumienia i napisania,
+\item nazwa obiektu powinna być rzeczownikiem, który wskazuje na to, z czym mamy do czynienia,
+\item nazwa funkcji powinna być czasownikiem wskazującym na to, co robi dana funkcja.
+\end{itemize}
+
+\section{Funkcje}
+
+W tym rozdziale dowiemy się jak pisać ,,dobre'' funkcje. Tutaj również musimy pamiętać o kilku zasadach.   Funkcje powinny:
+\begin{itemize}
+\item być możliwie jak najkrótsze,
+\item odpowiadać za jedno pojedyncze zadanie,
+\item być na jednym poziomie abstrakcji,
+\item mieć maksymalnie `3` parametry.
+\end{itemize}
+
+To znaczy, że nie jest wskazane, aby tworzyć jedną wielką funkcję, która np. wylicza kilkanaście rzeczy, aby na końcu wygenerować jeden wynik. Zamiast tego lepiej stworzyć kilka mniejszych funkcji, które będą się odwoływały do poprzednich. Dzięki temu nasz kod będzie bardziej przejrzysty oraz w prosty sposób będzie można sprawdzić, czy pojedyncze funkcje działają poprawnie.
+
+Co więcej, nie ma sensu tworzyć funkcji, która zwraca nam już oprawioną tabelę z wynikami. Lepiej, gdy zwraca surowe wyniki, a tworzeniem tabeli zajmuje się kolejna funkcja.
+
+Przykładowe funkcje:
+```{r}
+calculate_conf_interval = function(sample, alpha) {
+  len = length(sample)
+  successes = length(sample[sample == 1])
+  mi = successes / n
+  se = sqrt(mi * (1 - mi) / len)
+  quantile = qt(1 - alpha / 2, len - 1)
+  left = mi - quantile * se
+  right = mi + quantile * se
+  return(c(left, right))
+}
+
+calculate_conf_interval_ac = function(sample, alpha) {
+  len = length(sample)
+  successes = length(sample[sample == 1])
+  mi = successes / n
+  sigma = sqrt(mi * (1 - mi) / len)
+  quantile = qt(1 - alpha / 2, len - 1)
+  middle = (successes + 0.5 * quantile ^ 2) / (len + quantile ^ 2)
+  se = sqrt(middle * (1 - middle) / (len + quantile ^ 2))
+  left = middle - quantile * se
+  right = middle + quantile * se
+return(c(left, right))
+}
+```
+
+\section{Komentarze}
+
+Zazwyczaj komentarze do kodu nie są potrzebne, a wręcz zbędne. Dzieje się tak, ponieważ dobrze napisany kod powinien sam się tłumaczyć, tzn. być na tyle zrozumiałym, żeby dodatkowe komentarze nie były potrzebne. 
+
+Jeśli jednak w kodzie jest bałagan, dodatkowe komentarze mogą wręcz wprowadzić dodatkowy chaos.
+
+Od tej reguły są jednak pewne wyjątki. Jeśli używamy niezbyt oczywistych implementacji lub ,,sztuczek programistycznych'' warto wspomnieć w komentarzu, co się w danej chwili dzieje. Wyjątkiem są też komentarze informujące o tym, co trzeba jeszcze zrobić lub o potrzebie poprawienia jakiejś części kodu.
+
+\section{Obiekt a struktura danych}
+
+W kontekście pisania czystego i wydajnego kodu, należy wziąć pod uwagę rozróżnienie pomiędzy klasami a strukturami danych. Te pierwsze zawierają atrybuty i funkcje, a instancje klasy nazywamy obiektem. Zastosowanie klas pozwala na stworzenie interfejsu definującego pewne dane. Struktury danych służą natomiast do reprezentacji danych dowolnego typu a nie ich opisu.
+
+\section{Styl kodu i narzędzia pomagające w utrzymaniu czystego kodu}
+
+Dobry styl kodowania jest porównywany do prawidłowego stosowania interpunkcji. Jest możliwe nie stosowanie się do jej zasad, jednak przestrzeganie ich pozwala, aby w zapisie panował ład i porzadek.  
+W R dominują dwa style, które pomagają utrzymać dobry układ kodu. Jednym jest tidyverse style, a$~$drugim, wywodzącym się z poprzedniego, Google style. Istnieją przewodniki, które ułatwiają stosowanie się do zasad panujących w tych stylach. Style ustosunkowują się m.in. do stawiania spacji po przecinkach, przed operatorami matematycznymi oraz po nich, a także podkreślników w nazwach.  
+Dodatkowo można zainstalować pakiety, które będą pomagać w utrzymaniu schludnego kodu: cleanr, stylerr, lintr.
