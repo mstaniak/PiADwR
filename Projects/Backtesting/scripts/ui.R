@@ -10,6 +10,9 @@ ui <- fluidPage(
     sidebarPanel(
       tabsetPanel(
         tabPanel("Dane",
+                 br(),
+                 p('Wybierz zakres dat i spółki, które Cię interesują, a następnie wciśnij przycisk "Get data".'),
+                 # br(),
                  dateInput(
                    inputId = 'start_date',
                    label = ('Data początkowa:'),
@@ -42,13 +45,16 @@ ui <- fluidPage(
                    multiple = TRUE
                  ),
                  
+                 br(),
                  actionButton(
                    inputId = "get_data_button",
-                   label = "Get data"
+                   label = "Get data",
+                   class = "btn-primary"
                    ),
-        ),
+                 ),
         
         tabPanel("Parametry",
+                 br(),
                  sliderInput(
                    inputId = "rebalance_frequency",
                    label = "Częstość rebalansacji portfela:",
@@ -92,13 +98,16 @@ ui <- fluidPage(
                    label = "Prowizja brokerska:",
                    value = 0.0038
                  ),
+                 br(),
                  actionButton(
                    inputId = "run_simulation_button",
-                   label = "Symulacja!"
+                   label = "Symulacja!",
+                   class = "btn-primary"
                  ),
                  actionButton(
                    inputId = "show_help",
-                   label = "Informacje o parametrach"
+                   label = "Informacje o parametrach",
+                   class = "btn-info"
                  ),
         )
       )
@@ -108,6 +117,7 @@ ui <- fluidPage(
       use_waiter(),
       tabsetPanel(
         tabPanel('Krzywa kapitału',
+                 br(),
                  prettyRadioButtons(
                    inputId = "plot_type",
                    label = "Wybierz rodzaj wykresu:", 
@@ -121,10 +131,7 @@ ui <- fluidPage(
                  DT::DTOutput('summary_dt') %>% withSpinner(color = 'blue')),
         
         tabPanel('Historia portfela',
-                 # useShinyjs(),
                  DT::DTOutput('portfolio_dt') %>% withSpinner(color = 'blue'),
-                 # actionButton("prevBtn", "< Previous"),
-                 # actionButton("nextBtn", "Next >"),
                  )
       )
     )

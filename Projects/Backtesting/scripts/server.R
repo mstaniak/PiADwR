@@ -1,42 +1,30 @@
 server <- function(input, output){
   observeEvent(input$show_help, {
     showModal(modalDialog(title = "Informacje o parametrach:",
-                          HTML('Częstość rebalansacji portfela - zaznacz wartości, jak często chcesz 
-                          poddawać rebalansacji swój portfel; 1 month oznacza rebalansację raz w miesiącu,
-                          3 week oznacza rebalansację co 3 tygodnie itd.<br>
-                          Ramy czasowe dla wyliczenia momentum - 
-                          okres dla którego wyliczane jest momentum <br>
-                          Minimalne momentum - minimalna wartość wskaźnika momentum <br>
-                          Minimalna zmienność odwrócona - im większa tolerancja ryzyka 
-                          tym mniejszą wartość należy podać <br>
-                          Początkowa gotówka - podaj wartość gotówki jaką chcesz dysponować 
-                          na początku symulacji <br>
-                          Prowizja brokerska - podaj wartość prowizji brokerskiej, którą chcesz
-                          uwzględnić w symulacji
+                          HTML('<label>Częstość rebalansacji portfela</label> - zaznacz wartości, jak często chcesz 
+                          poddawać rebalansacji swój portfel (1 month oznacza rebalansację raz w miesiącu,
+                          3 week oznacza rebalansację co 3 tygodnie, itd.) <br><br>
+                          <label>Ramy czasowe dla wyliczenia momentum</label> - 
+                          okres dla którego wyliczane jest momentum. <br><br>
+                          <label>Minimalne momentum</label> - minimalna wartość wskaźnika momentum. <br><br>
+                          <label>Minimalna zmienność odwrócona</label> - im większa tolerancja ryzyka 
+                          tym mniejszą wartość należy podać. <br><br>
+                          <label>Początkowa gotówka</label> - podaj wartość gotówki jaką chcesz dysponować 
+                          na początku symulacji. <br><br>
+                          <label>Prowizja brokerska</label> - podaj wartość prowizji brokerskiej, którą chcesz
+                          uwzględnić w symulacji.
                           ')))
   })
-  
-  # rv <- reactiveValues(page = 1)
-  # 
-  # observe({
-  #   toggleState(id = "prevBtn", condition = rv$page > 1)
-  #   toggleState(id = "nextBtn", condition = rv$page < 10)
-  #   hide(selector = ".page")
-  #   show(paste0("step", rv$page))
-  # })
-  # 
-  # navPage <- function(direction) {
-  #   rv$page <- rv$page + direction
-  # }
-  # 
-  # observeEvent(input$prevBtn, navPage(-1))
-  # observeEvent(input$nextBtn, navPage(1))
   
   data_from_db <- reactiveValues(data = NULL)
 
   observeEvent(input$get_data_button, {
+    req(input$tickers)
     data_from_db$data <- get_all_data(input$tickers, input$start_date, input$end_date)
+    showNotification(
+      paste('Pomyślnie pobrano dane! Przejdź do zakładki Parametry'), type = "message", duration = 10)
   })
+  
 
   rebalance_dates <- reactive({
     get_rebalance_dates(input$start_date, input$end_date, input$rebalance_frequency, input$period)
@@ -45,6 +33,7 @@ server <- function(input, output){
   simulation <- reactiveValues()
   
   observeEvent(input$run_simulation_button, {
+    req(input$tickers)
     req(data_from_db$data)
     simulation$results <- backtest_simulation(dt_from_db = data_from_db$data,
                                               commission_rate = input$comission_rate,
