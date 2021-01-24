@@ -1,4 +1,5 @@
 ui <- fluidPage(
+  theme = shinytheme("cosmo"),
   titlePanel('Backtesting'),
   # options(shiny.sanitize.errors = FALSE),
   add_busy_gif(
