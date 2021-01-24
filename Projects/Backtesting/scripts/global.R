@@ -1,20 +1,39 @@
 ### LIBRARIES
-libraries = c('data.table', 'tidyverse', 'rvest', 'stringr', 'stringi', 'lubridate',
-              'docstring', 'jsonlite', 'httr', 'dplyr', 'RQuantLib', 'plotly',
-              'TTR', "PerformanceAnalytics", "shiny", "shinyWidgets", "waiter",
-              "shinycssloaders", "shinybusy")
-load_libraries = function(packages_vec){
-  for (package in packages_vec){
-    if (package %in% rownames(installed.packages())){
-      library(package, character.only = TRUE)
-    } else{
-      install.packages(package)
-      library(package, character.only = TRUE)
-    }
-  }
-}
-
-load_libraries(libraries)
+library(data.table)
+library(tidyverse)
+library(rvest)
+library(stringr)
+library(stringi)
+library(lubridate)
+library(docstring)
+library(jsonlite)
+library(httr)
+library(dplyr)
+library(RQuantLib)
+library(plotly)
+library(TTR)
+library(PerformanceAnalytics)
+library(shiny)
+library(shinyWidgets)
+library(waiter)
+library(shinycssloaders)
+library(shinybusy)
+# libraries = c('data.table', 'tidyverse', 'rvest', 'stringr', 'stringi', 'lubridate',
+#               'docstring', 'jsonlite', 'httr', 'dplyr', 'RQuantLib', 'plotly',
+#               'TTR', "PerformanceAnalytics", "shiny", "shinyWidgets", "waiter",
+#               "shinycssloaders", "shinybusy")
+# load_libraries = function(packages_vec){
+#   for (package in packages_vec){
+#     if (package %in% rownames(installed.packages())){
+#       library(package, character.only = TRUE)
+#     } else{
+#       install.packages(package)
+#       library(package, character.only = TRUE)
+#     }
+#   }
+# }
+# 
+# load_libraries(libraries)
 
 get_data_from_db <- function(ticker, start_date, end_date){
   url_code <- paste(c(Sys.getenv("DB_URL"),
