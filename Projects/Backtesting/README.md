@@ -2,6 +2,8 @@
 
 An R tools and Shiny application to backtest momentum strategy (Andreas Clenow) on SWIG80 stocks.
 
+You can view the demo [HERE](https://wojciechwojnar.shinyapps.io/Backtesting/).
+
 Main functionalites:
 
   * Downloading selected stocks data,
