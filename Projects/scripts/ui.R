@@ -2,7 +2,7 @@ library(shiny)
 library(shinydashboard)
 library(dashboardthemes)
 
-load("C:/Users/rogow/OneDrive/Dokumenty/UWr/Programowanie i analiza danych w R/BTC/theme.RData")
+load("theme.RData")
 
 convertMenuItem <- function(mi,tabName) {
     mi$children[[1]]$attribs['data-toggle']="tab"
