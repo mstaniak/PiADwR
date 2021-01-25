@@ -1,10 +1,10 @@
 library(dashboardthemes)
 
-header_color <- "#4d4d4e"#"#696562"#"#000000"
-body_color <- "#5e5e5e"#"#f2a900" #"#454342"# "#191919"
-font_color <- "#f2a900" # bitcoin
+header_color <- "#4d4d4e"
+body_color <- "#5e5e5e"
+font_color <- "#f2a900" 
 sidebar_color <- header_color
-tab_box_color <- "#f0f0f0"# "#222222"
+tab_box_color <- "#f0f0f0"
 box_color <- tab_box_color
 
 customTheme <- shinyDashboardThemeDIY(
@@ -27,7 +27,7 @@ customTheme <- shinyDashboardThemeDIY(
   sidebarMenuPadding = sidebar_color,
   sidebarMenuBorderRadius = 0,
   sidebarUserTextColor = "#ff0000",
-  sidebarSearchBackColor = "white",#"#ff0000",
+  sidebarSearchBackColor = "white",
   sidebarSearchIconColor = "black",
   sidebarSearchBorderColor = "white",
   sidebarTabTextColor = font_color,
@@ -35,7 +35,7 @@ customTheme <- shinyDashboardThemeDIY(
   sidebarTabBorderStyle = "none none solid none",
   sidebarTabBorderColor = "blue",
   sidebarTabBorderWidth = 0,
-  sidebarTabBackColorSelected = sidebar_color, # czy podswietlac wybrane
+  sidebarTabBackColorSelected = sidebar_color,
   sidebarTabTextColorSelected = font_color,
   sidebarTabRadiusSelected = "0px 0px 0px 0px",
   sidebarTabTextColorHover = font_color,
@@ -70,7 +70,7 @@ customTheme <- shinyDashboardThemeDIY(
   buttonBorderColorHover = tab_box_color,
   buttonHeight = 34,
   buttonPadding = "6px 12px",
-  textboxBackColor = "#ffffff", # kolor okienka np. z Open
+  textboxBackColor = "#ffffff", 
   textboxBorderColor = tab_box_color,
   textboxBorderRadius = 2,
   textboxBackColorSelect = "",
@@ -89,4 +89,4 @@ customTheme <- shinyDashboardThemeDIY(
   boxInfoColor = "auto"
 )
 
-save(list = c("customTheme"), file="C:/Users/rogow/OneDrive/Dokumenty/UWr/Programowanie i analiza danych w R/BTC/theme.RData")
+save(list = c("customTheme"), file="theme.RData")
