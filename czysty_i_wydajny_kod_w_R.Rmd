@@ -4,9 +4,9 @@ author: Bannert Paulina, Bercz Natalia, Mrozik Piotr, Sudół Dariusz, Wyźnikie
   Monika
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
   word_document: default
 geometry: left = 3.5 cm, right = 2.5 cm, top = 2.5 cm, bottom = 2.5 cm
 header-includes:
@@ -33,9 +33,11 @@ Została ona stworzona na podstawie laboratorium z ,,Programowania i analizy dan
 
 Na początku zajmiemy się szeroko pojętą czystością kodu. Aby dany kod mógł aspirować do takiego miana, musi przede wszystkim spełniać dwa podstawowe warunki:
 \begin{itemize}
-\item Być łatwym do zrozumienia
+\item Być łatwym do zrozumienia  
+
 Aby kod był łatwy do zrozumienia musi być przede wszystkim czytelny. Niewątpliwie pomoże w$~$tym odpowiednie nazwanie zmiennych, zadbanie o to, żeby wszystkie użyte funkcje i obiekty miały swoją określoną rolę oraz by relacje między nimi były zrozumiałe.
-\item Być łatwym do zmiany
+\item Być łatwym do zmiany  
+
 Tworząc kod powinniśmy myśleć o tym, że będzie on w przyszłości wykorzystywany. Aby to ułatwić, musi być napisany w taki sposób, żeby można było nanieść drobne poprawki lub zmienić dane bez konieczności zmieniania całego kodu.
 \end{itemize}
 
@@ -45,11 +47,14 @@ Jeśli te dwa warunki nie są spełnione, istnieje obawa, że wprowadzenie nawet
 
 Nieuporządkowany i nieklarowny kod może sprawić w przyszłości wiele kłopotów, takich jak na przykład:
 \begin{itemize}
-\item Zmarnowanie czasu
+\item Zmarnowanie czasu  
+
 Jeśli my lub ktokolwiek inny będzie chciał w przyszłości wykorzystać taki kod z pewnością straci mnóstwo czasu na próby jego przeczytania i zrozumienia. Gdy już mu się to uda, może napotkać kolejny problem w postaci trudności z wprowadzeniem jakichkolwiek zmian.
-\item Ograniczenie lub nawet brak możliwości rozwoju
+\item Ograniczenie lub nawet brak możliwości rozwoju  
+
 Złe napisanie kodu może spowodować, że po jego jedynym użyciu stanie się bezwartościowy. Nie będzie sensu wprowadzać w nim jakichkolwiek zmian (gdyż będzie to zbyt pracochłonne), ani w żaden sposób rozwinąć by mógł posłużyć do przyszłych projektów (gdyż nawet najmniejsze zmiany mogą ,,zepsuć'' istniejący kod).
-\item Podatność na wystąpienie błędów
+\item Podatność na wystąpienie błędów  
+
 W nieczytelnym i napisanym w sposób niezrozumiały kodzie, łatwo przemycić błędy, które na pierwszy rzut oka są niewidoczne, ale wychodzą na jaw później.
 \end{itemize}
 
@@ -71,9 +76,9 @@ Równie ważne jest, aby w nazwach nie znajdywały się błędy lub informacje, 
 Jakie powinny być idealne nazwy obiektów w R? Oto kilka wskazówek:
 \begin{itemize}
 \item zrozumiałe dla osób, dla których jest przeznaczony kod,
-\item utrzymane w jednym stylu,
-\item łatwe do zrozumienia i napisania,
-\item nazwa obiektu powinna być rzeczownikiem, który wskazuje na to, z czym mamy do czynienia,
+\item utrzymane w jednym stylu,  
+\item łatwe do zrozumienia i napisania,  
+\item nazwa obiektu powinna być rzeczownikiem, który wskazuje na to, z czym mamy do czynienia,  
 \item nazwa funkcji powinna być czasownikiem wskazującym na to, co robi dana funkcja.
 \end{itemize}
 
@@ -124,7 +129,7 @@ return(c(l,r))}
 Główne problemy:  
 - czasem przypisanie jest za pomocą `=`, czasem `<-`,  
 - brak spacji po przecinkach,  
-- brak spacji pomiędzy `+`, `-`, `*', `/`, itd,  
+- brak spacji pomiędzy `+`, `-`, `*`, `/`, itd,  
 - niepoprawnie umiejscowione nawiasy `{`, `}`.  
 - nazwa funkcji nie opisuje, co robi ta funkcja,  
 - zmienne mają nic nieznaczące i jednoliterowe nazwy,  
