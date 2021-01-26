@@ -94,7 +94,7 @@ To znaczy, że nie jest wskazane, aby tworzyć jedną wielką funkcję, która n
 
 Co więcej, nie ma sensu tworzyć funkcji, która zwraca nam już oprawioną tabelę z wynikami. Lepiej, gdy zwraca surowe wyniki, a tworzeniem tabeli zajmuje się kolejna funkcja.
 
-Przykładowe funkcje:
+Przykładowa, poprawnie napisana funkcja:
 ```{r}
 calculate_conf_interval = function(sample, alpha) {
   len = length(sample)
@@ -106,20 +106,28 @@ calculate_conf_interval = function(sample, alpha) {
   right = mi + quantile * se
   return(c(left, right))
 }
-
-calculate_conf_interval_ac = function(sample, alpha) {
-  len = length(sample)
-  successes = length(sample[sample == 1])
-  mi = successes / n
-  sigma = sqrt(mi * (1 - mi) / len)
-  quantile = qt(1 - alpha / 2, len - 1)
-  middle = (successes + 0.5 * quantile ^ 2) / (len + quantile ^ 2)
-  se = sqrt(middle * (1 - middle) / (len + quantile ^ 2))
-  left = middle - quantile * se
-  right = middle + quantile * se
-return(c(left, right))
-}
 ```
+
+Przykładowa funkcja, napisana w ,,nieładny'' sposób:
+```{r}
+calculate_conf_interval_ac= function(sample,alpha){
+  len =length(sample)
+  successes <-length(sample[sample==1])
+  mi = successes/n
+  sigma = sqrt(mi *(1- mi)/len)
+  quantile<-qt(1 - alpha /2,len-1)
+  middle = (successes + 0.5 * quantile ^ 2) /(len + quantile ^ 2)
+  se = sqrt(middle *(1 - middle)/ (len+ quantile^2))
+  left<- middle- quantile* se
+  right = middle + quantile*se
+return(c(left,right))}
+```
+
+Główne problemy:  
+- czasem przypisane jest `=`, czasem `<-`,  
+- brak spacji po przecinkach,  
+- brak spacji pomiędzy `+`, `-`, `*', `/`, itd,  
+- niepoprawnie umiejscowione nawiasy `{`, `}`.  
 
 \section{Komentarze}
 
