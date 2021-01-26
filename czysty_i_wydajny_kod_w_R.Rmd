@@ -126,7 +126,8 @@ func= function(x,y,temp1,temp2){
 return(c(l,r))}
 ```
 
-Główne problemy:  
+Główne problemy:
+\begin{itemize}
 - czasem przypisanie jest za pomocą `=`, czasem `<-`,  
 - brak spacji po przecinkach,  
 - brak spacji pomiędzy `+`, `-`, `*`, `/`, itd,  
@@ -134,7 +135,8 @@ Główne problemy:
 - nazwa funkcji nie opisuje, co robi ta funkcja,  
 - zmienne mają nic nieznaczące i jednoliterowe nazwy,  
 - nazwa zmiennej `tmp` także nie mówi, czym ona jest,  
-- dwa nieużywane parametry funkcji.  
+- dwa nieużywane parametry funkcji.
+\end{itemize}
 
 \section{Komentarze}
 
