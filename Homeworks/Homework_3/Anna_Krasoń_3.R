@@ -1,0 +1,95 @@
+# library(readr)
+# library(stringr)
+# library(tidyr)
+# library(lubridate)
+# library(dplyr)
+# library(data.table)
+# setwd('/home/datahikerxps/Desktop/progr_R')
+# 
+# gas_files <- list.files("data", full.names = TRUE)
+# 
+# num_unique_noNA <- function(input_vector) {
+#   sum(!is.na(unique(input_vector)))
+#   # length(unique(input_vector[!is.na(input_vector)]))
+#   # length(unique(na.omit(input_vector)))
+# }
+# 
+# 
+# gas_dfs <- lapply(gas_files, read.csv)
+# gas_dfs[[1]]
+# gas_base <- do.call("rbind", gas_dfs)
+# head(gas_base)
+# lapply(gas_base, num_unique_noNA)
+# gas_base = gas_base[, c("State.Name", "County.Name", "City.Name",
+#                         "Local.Site.Name", "Date.Local", "Parameter.Name",
+#                         "Sample.Duration", "Arithmetic.Mean")]
+# 
+#
+# gas_dfs_dt <- lapply(gas_files, fread)
+# gas_dt <- rbindlist(gas_dfs_dt)
+# gas_dt
+# 
+# gas_dt[, lapply(.SD, num_unique_noNA)]
+# 
+# gas_dt = gas_dt[, c("State Name", "County Name", "City Name",
+#                     "Local Site Name", "Date Local", "Parameter Name",
+#                     "Sample Duration", "Arithmetic Mean")]
+# cols = c("State Name", "County Name", "City Name",
+#          "Local Site Name", "Date Local", "Parameter Name",
+#          "Sample Duration", "Arithmetic Mean")
+# gas_dt[, cols]
+# gas_dt[, ..cols]
+# gas_dt[, cols, with = FALSE]
+# 
+# gas_dt[, colnames(gas_dt) %in% c("State Name", "County Name")]
+# gas_dt[, colnames(gas_dt) %in% c("State Name", "County Name"), with = FALSE]
+# 
+# gas_dt[, list(`State Name`, `County Name`, `City Name`,
+#               `Local Site Name`, `Date Local`, `Parameter Name`,
+#               `Sample Duration`, `Arithmetic Mean`)]
+# 
+# gas_dt[, .(`State Name`, `County Name`, `City Name`,
+#            `Local Site Name`, `Date Local`, `Parameter Name`,
+#            `Sample Duration`, `Arithmetic Mean`)]
+# 
+# head(gas_dt)
+# 
+# colnames(gas_base) <- c("State", "County", "City", "Site", "Date", "Pollutant", "SampleDuration", "MeasuredValue")
+# setnames(gas_dt, colnames(gas_dt), colnames(gas_base))
+# head(gas_dt)
+# 
+# gas_dt[, MeasuredValue := ifelse(MeasuredValue < 0, 0, MeasuredValue)]
+# 
+
+#######
+#Rozwiazanie
+#1
+gas_dt[, HMS := paste(sample(1:24,1), sample(0:59,1), sample(0:59,1), sep = ":")] 
+head(gas_dt)
+gas_dt[, Date_as_char := paste(as.character(gas_dt$Date), HMS, sep = " ")]
+gas_dt[, Date_as_date := as.POSIXct(Date_as_char, format="%Y-%m-%d %H:%M:%OS")]
+
+#2
+gas_dt[, Rounding1 := floor_date(gas_dt$Date_as_date, "month")]
+gas_dt[, Rounding2 := floor_date(gas_dt$Date_as_date, "year")]
+gas_dt[, Min := min(MeasuredValue),
+       by = c("Rounding1", "Rounding2")]
+gas_dt[, Max := max(MeasuredValue),
+       by = c("Rounding1", "Rounding2")]
+gas_dt[, Mean := mean(MeasuredValue),
+       by = c("Rounding1", "Rounding2")]
+
+#3
+library(lubridate)
+
+gas_dt[, Year_ch := substr(Date_as_char, 1,4)]
+gas_dt[, Month_ch := substr(Date_as_char,6,7)]
+gas_dt[, Day_ch := substr(Date_as_char,9,10)]
+
+
+gas_dt[, Year_d := year(Date_as_date)]
+gas_dt[, Month_d := month(Date_as_date)]
+gas_dt[, Day_d := day(Date_as_date)]
+gas_dt[, Hour_d := hour(Date_as_date)]
+gas_dt[, Minut_d := minute(Date_as_date)]
+gas_dt[, Sec_d := second(Date_as_date)]
