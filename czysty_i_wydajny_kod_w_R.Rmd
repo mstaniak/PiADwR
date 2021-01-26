@@ -124,7 +124,7 @@ return(c(left,right))}
 ```
 
 Główne problemy:  
-- czasem przypisane jest `=`, czasem `<-`,  
+- czasem przypisanie jest za pomocą `=`, czasem `<-`,  
 - brak spacji po przecinkach,  
 - brak spacji pomiędzy `+`, `-`, `*', `/`, itd,  
 - niepoprawnie umiejscowione nawiasy `{`, `}`.  
