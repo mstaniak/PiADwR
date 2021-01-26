@@ -173,11 +173,11 @@ backtest_simulation = function(dt_from_db, commission_rate, rebalance_dates,
   date_tmp = seq(min(rebalance_dates) - 365, max(rebalance_dates), 1)
   dates_dt = data.table(date = date_tmp[isBusinessDay("Poland", date_tmp)])
   dt_with_filled_missing_prices = fill_missing_prices(dates_dt, dt_from_db)
-  momentum_tables_history = list()
-  cash_history = c()
-  stocks_value_history = c()
-  total_value_history = c()
-  commissions = c()
+  momentum_tables_history = vector("list", length = length(rebalance_dates))
+  cash_history = numeric(length(rebalance_dates))
+  stocks_value_history = numeric(length(rebalance_dates))
+  total_value_history = numeric(length(rebalance_dates))
+  commissions = numeric(length(rebalance_dates))
   current_momentum_table = data.table(matrix(nrow=0, ncol=9))
   setnames(current_momentum_table, colnames(current_momentum_table),
            c("ticker", "date", "momentum", "volatility", "inv_volatility", "weight",
@@ -206,10 +206,10 @@ backtest_simulation = function(dt_from_db, commission_rate, rebalance_dates,
     commission_buy = commission_rate * stocks_value
     cash = cash - stocks_value - commission_buy
     old_momentum_table = current_momentum_table
-    cash_history = c(cash_history, cash)
-    stocks_value_history = c(stocks_value_history, stocks_value)
-    total_value_history = c(total_value_history, cash + stocks_value)
-    commissions = c(commissions, commission_buy + commission_sell)
+    cash_history[date_number] = cash
+    stocks_value_history[date_number] = stocks_value
+    total_value_history[date_number] = cash + stocks_value
+    commissions[date_number] = commission_buy + commission_sell
   }
   history_dt = data.table(date = rebalance_dates, 
                           cash = cash_history, 
@@ -223,7 +223,7 @@ equity_plot = function(history_dt, plot_type){
   history_dt_long = pivot_longer(history_dt, cols = c('cash', 'stocks_value', 'total_value'))
   if (plot_type == 'point'){
     return(ggplot(history_dt_long) + 
-             geom_point(aes(x = date, y = value, col = name)))
+             geom_jitter(aes(x = date, y = value, col = name)))
   }
   if (plot_type == 'col'){
     return(ggplot(history_dt_long) + 
@@ -242,7 +242,7 @@ strat_summary = function(history_dt){
   sortino = round(SortinoRatio(returns)[1], 3)
   std_dev = round(StdDev(returns)[1], 3)
   max_dd = round(maxDrawdown(returns), 3)
-  profitable_rebablances = sum(returns$total_value > 0, na.rm = TRUE)
+  profitable_rebalances = sum(returns$total_value > 0, na.rm = TRUE)
   loss_rebalances = sum(returns$total_value < 0, na.rm = TRUE)
   summary_dt = data.table(list("Początek symulacji", "Koniec symulacji", "Początkowa wartość porfela",
                                "Końcowa wartość portfela", "Suma prowizji", "CAGR",
@@ -251,7 +251,7 @@ strat_summary = function(history_dt){
                                "Stratne rebalansacje"), 
                           list(start, end, start_value, end_value, commissions_value,
                                cagr, sortino, std_dev, max_dd, 
-                               profitable_rebablances, loss_rebalances)
+                               profitable_rebalances, loss_rebalances)
   )
   setnames(summary_dt, colnames(summary_dt), c("Nazwa", "Wartość"))
   return(summary_dt)
