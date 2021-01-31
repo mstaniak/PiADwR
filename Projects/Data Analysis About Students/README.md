@@ -1,4 +1,4 @@
-Project Title: 
+Project Title:  
 Data Analysis About Students
 
 Prepared By:
@@ -6,7 +6,7 @@ Prepared By:
 - Natalia Bercz,
 - Dariusz Sudół,
 - Piotr Mrozik,
- Monika Wyźnikiewicz
+- Monika Wyźnikiewicz
 
-Student Performance Data Set Application:
+Student Performance Data Set Application:  
 https://datable.shinyapps.io/student_performance_data_set/
