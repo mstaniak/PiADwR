@@ -1,10 +1,10 @@
-# Katarzyna Frankiewicz, Maciej Grabias, Jakub Michałowski
+# Wizualizacja danych z pakietem ggplot2
 
 ## Wprowadzenie
 
 Jednym z ważnych elementów przekazywania ciekawych informacji oraz ich analizy jest przedstawienie graficzne interesujących nas danych. W R istnieje kilka sposobów na wizualizację danych. Jednym z nich jest korzytanie z narzędzi oferowanych przez pakiet *ggplot2*. Bibiloteka *ggplot2* oprócz zwykłych funkcji plotowania, implementuje także gramatykę grafiki, co pozwala na wykonanie prawie każdego rodzaju (statystycznej) wizualizacji danych.
 
-### Gramatyka grafiki
+## Gramatyka grafiki
 
 Powyżej wspomnieliśmy o gramatyce grafiki. Dla dokładniejszego uporządkowania wiedzy przypomnijmy, że gramatyka grafiki daje nam możliwość zadawania odpowiednich parametórw dla wszystkich linii, słów, strzałek, itp., które połączone tworzą wykres. Dodatkowo możemy m.in. zmieniać układ współrzędnych, czy korygować położenie każdego obiektu znajdującego się na wykresie. Możliwości jakie oferuje nam gramatyka grafiki będą przedstawione dokładniej w dalszej części notatki.
 
