@@ -1,0 +1,67 @@
+# Eksploracyjna analiza danych
+
+Badanie eksploracyjne danych (ang. exploratory data analysis) dotyczy opisu, wizualizacji i badania zebranych danych bez potrzeby zakładania z góry hipotez badawczych. Badania ekploracyjne obejmują również wstępne sprawdzenie danych w celu skontrolowania założeń modeli statystycznych lub występowania błędów w danych (np. braków odpowiedzi).
+
+## Dane tabelaryczne
+
+Dane tabelaryczne to dane, które mają postać tabeli. Tabela to struktura danych, która składa się z wierszy i kolumn. Każdy wiersz odpowiada pewnej obserwacji, której cechy zostały zapisane w kolejnych kolumnach.
+
+
+## Typy zmiennych
+
+Zmienne, które opisują kolejne obserwacje możemy podzielić na:
+
+* zmienne jakościowe (niemierzalne)
+    * porządkowe - np. klasyfikacja wzrostu (niski, średni, wysoki)
+    * nominalne - np. kolor oczu, płeć, grupa krwi
+* zmienne ilościowe (mierzalne)
+    * dyskretne - np. liczba dzieci, liczba gospodarstw domowych, wiek (w rozumieniu ilości skończonych lat)
+    * ciągłe - np. wzrost, masa, wiek (w rozumieniu ilości dni między datą urodzin a datą badania)
+    * proporcjonalne - np. masa, długość, temperatura wyrażona w Kelwinach lub stopniach Rankine’a (przyjmujemy istnienie zera i możemy twierdzić, że jedno ciało jest dwukrotnie gorętsze od drugiego)
+    * interwałowe - np. temperatura wyrażona w stopniach Celsjusza lub Fahrenheita (możemy twierdzić, że coś jest o 20 °C cieplejsze od czegoś innego, ale nie możemy stwierdzić ilokrotnie cieplejsze jest ciało o temperaturze 40 °C od ciała o temperaturze –10 °C), data kalendarzowa (możemy mówić o stałej różnicy pomiędzy kolejnymi dniami)
+
+## Miary
+
+Zapoznając się z danymi chcielibyśmy sprawdzić wokół jakiej wartości są skupione oraz jak bardzo są zmienne wartości danej cechy.
+
+Miary lokacji (miary tendencji centralnej) pomagają nam umiejscowić dane na osi. Przykładami takich miar są:
+
+* średnia - najczęściej arytmetyczna określona jako $\overline{x} = \frac{1}{n}\sum\limits_{i=1}^n x_i$.
+* dominanta (moda) - ozn. $Mo$ - dla zmiennych o rozkładzie dyskretnym, wartość o największym prawdopodobieństwie wystąpienia lub wartość najczęściej występująca w próbie. Dla zmiennej losowej o rozkładzie ciągłym jest to argument, dla którego funkcja gęstości prawdopodobieństwa ma wartość największą.
+* mediana - ozn. $Me$ - wartość cechy w szeregu uporządkowanym, powyżej i poniżej której znajduje się jednakowa liczba obserwacji.
+* kwantyle rzędu $p$ - wartość cechy w szeregu uporządkowanym, poniżej której znajduje się $p \cdot 100\%$ liczby obserwacji, a powyżej której znajduje się $(1 - p) \cdot 100\%$ liczby obserwacji.
+
+Natomiast miary rozrzutu dostarczają informacji jak bardzo zróżnicowane są obserwacje pod względem badanej cechy. Przykładami takich miar są:
+
+* wariancja - stopień rozrzutu badanej cechy wokół wartości oczekiwanej. Im większa wariancja, tym rozrzut zmiennej jest większy. Nieobciążony estymator wariancji wyraża się wzorem: $s^2 = \frac{1}{n}\sum\limits_{i=1}^n\left(x_i - \overline{x}\right)^2$
+* odchylenie standardowe - mówi nam o przeciętnym odchyleniu wartości zmiennej losowej od jej wartości oczekiwanej. Im odchylenie standardowe jest większe, tym większe zróżnicowanie wartości badanej cechy. Odchylenie standardowe z próby obliczamy jako pierwiastek z wariancji z próby, tzn. $s = \sqrt{s^2}$.
+* rozstęp międzykwartylowy - różnica między trzecim a pierwszym kwartylem. Ponieważ pomiędzy tymi kwartylami znajduje się z definicji 50% wszystkich obserwacji (położonych centralnie w rozkładzie), dlatego im większa szerokość tego rozstępu, tym większe zróżnicowanie cechy.
+
+Wyróżniamy także miary asymetrii. Miary asymetrii mówią nam, czy większa część populacji klasuje się powyżej, czy poniżej przeciętnego poziomu badanej cechy. Asymetrię rozkładu można zbadać porównując średnią, dominantę i medianę. 
+
+* W przypadku rozkładu symetrycznego wszystkie te parametry są równe.
+* Jeśli zachodzi nierówność $Mo < Me < \mathbb{E} X$, to mamy do czynienia z prawostronną asymetrycznością rozkładu. Tzn. dużo małych wartości i bardzo mało dużych.
+* Jeśli zachodzi nierówność $\mathbb{E} X < Me < Mo$, to mamy do czynienia z lewostronną asymetrycznością rozkładu. Tzn. mało małych i bardzo dużo dużych.
+
+## R - podsumowanie kolumn
+
+Podstawowymi funkcjami, które pomagają nam zapoznać się z danymi są funkcje:
+
+* $\texttt{head}$ - zwraca pierwszą część wektora, macierzy, tabeli lub ramki danych. Domyślnie 6 pierwszych elementów.
+* $\texttt{nrow}$ - zwraca liczbę wierszy macierzy, tabeli lub ramki danych.
+* $\texttt{ncol}$ - zwraca liczbę kolumn macierzy, tabeli lub ramki danych.
+
+Natomiast podstawowymi funkcjami, które podsumowują kolejne kolumny są funkcje:
+
+* $\texttt{str}$ - zwraca strukturę danego obiektu. Wyświetla np. klasę obiektu, liczbę wierszy i kolumn, a także nazwę danej kolumny, typ wartości w niej zawartych, jak i kilka początkowych wartości.
+* $\texttt{summary}$ - zwraca podsumowanie każdej kolumny. Dla zmiennych ciagłych wyznacza wartości tj.:
+
+    * wartość najmniejsza i największa
+    * średnia i mediana
+    * 1 (0.25) i 3 (0.75) kwartyl
+    * liczba wartości brakujących (NA)
+    
+  Natomiast w przypadku zmiennych dyskretnych wyznacza liczbę obserwacji, które przyjmują daną wartość zmiennej.     
+  
+* $\texttt{glimpse}$ - funkcja z pakietu $\texttt{tidyverse}$ podobna do $\texttt{str}$, ale stara się pokazać jak najwięcej danych. Wyświetla np. liczbę wierszy i kolumn, a także nazwę danej kolumny, typ wartości w niej zawartych oraz jak najwięcej wartości z tej kolumny.
+

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Interaktywna wizualizacja danych z pakietem shiny: interfejs użytkownika | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’</title>
+  <meta name="description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Interaktywna wizualizacja danych z pakietem shiny: interfejs użytkownika | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Interaktywna wizualizacja danych z pakietem shiny: interfejs użytkownika | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
+  
+  <meta name="twitter:description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
+  
+
+<meta name="author" content="Mateusz Staniak" />
+
+
+<meta name="date" content="2023-10-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="czysty-i-wydajny-kod-w-r.html"/>
+<link rel="next" href="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a></li>
+<li class="chapter" data-level="2" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html"><i class="fa fa-check"></i><b>2</b> Podstawy języka R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#liczby"><i class="fa fa-check"></i><b>2.1</b> Liczby</a></li>
+<li class="chapter" data-level="2.2" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#łańcuchy-znaków"><i class="fa fa-check"></i><b>2.2</b> Łańcuchy znaków</a></li>
+<li class="chapter" data-level="2.3" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#wartości-logiczne"><i class="fa fa-check"></i><b>2.3</b> Wartości logiczne</a></li>
+<li class="chapter" data-level="2.4" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#wektory"><i class="fa fa-check"></i><b>2.4</b> Wektory</a></li>
+<li class="chapter" data-level="2.5" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#indeksowanie"><i class="fa fa-check"></i><b>2.5</b> Indeksowanie</a></li>
+<li class="chapter" data-level="2.6" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#operacje-na-wektorach"><i class="fa fa-check"></i><b>2.6</b> Operacje na wektorach</a></li>
+<li class="chapter" data-level="2.7" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#r---funkcje"><i class="fa fa-check"></i><b>2.7</b> R - funkcje</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html"><i class="fa fa-check"></i><b>3</b> Wczytywanie danych w R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#formaty-danych"><i class="fa fa-check"></i><b>3.1</b> Formaty danych</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#csvdsv"><i class="fa fa-check"></i><b>3.1.1</b> CSV/DSV</a></li>
+<li class="chapter" data-level="3.1.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#xml"><i class="fa fa-check"></i><b>3.1.2</b> XML</a></li>
+<li class="chapter" data-level="3.1.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#json"><i class="fa fa-check"></i><b>3.1.3</b> JSON</a></li>
+<li class="chapter" data-level="3.1.4" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#excel-xlsx"><i class="fa fa-check"></i><b>3.1.4</b> Excel (XLSX)</a></li>
+<li class="chapter" data-level="3.1.5" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#otwarte-wersje-programu-excel"><i class="fa fa-check"></i><b>3.1.5</b> Otwarte wersje programu Excel</a></li>
+<li class="chapter" data-level="3.1.6" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#pliki-tekstowe"><i class="fa fa-check"></i><b>3.1.6</b> Pliki tekstowe</a></li>
+<li class="chapter" data-level="3.1.7" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#arkusze-kalkulacyjne-i-pliki-json"><i class="fa fa-check"></i><b>3.1.7</b> Arkusze kalkulacyjne i pliki JSON</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#locale"><i class="fa fa-check"></i><b>3.2</b> Locale</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#ustawienie-locale-przez-użytkownika"><i class="fa fa-check"></i><b>3.2.1</b> Ustawienie locale przez użytkownika</a></li>
+<li class="chapter" data-level="3.2.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#ustawienie-locale-poprzez-readr"><i class="fa fa-check"></i><b>3.2.2</b> Ustawienie locale poprzez readr</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#natywne-formaty-r"><i class="fa fa-check"></i><b>3.3</b> Natywne formaty R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#rds"><i class="fa fa-check"></i><b>3.3.1</b> RDS</a></li>
+<li class="chapter" data-level="3.3.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#rda"><i class="fa fa-check"></i><b>3.3.2</b> RDA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html"><i class="fa fa-check"></i><b>4</b> Eksploracyjna analiza danych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#dane-tabelaryczne"><i class="fa fa-check"></i><b>4.1</b> Dane tabelaryczne</a></li>
+<li class="chapter" data-level="4.2" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#typy-zmiennych"><i class="fa fa-check"></i><b>4.2</b> Typy zmiennych</a></li>
+<li class="chapter" data-level="4.3" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#miary"><i class="fa fa-check"></i><b>4.3</b> Miary</a></li>
+<li class="chapter" data-level="4.4" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#r---podsumowanie-kolumn"><i class="fa fa-check"></i><b>4.4</b> R - podsumowanie kolumn</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html"><i class="fa fa-check"></i><b>5</b> Przetwarzanie danych tabelarycznych</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#wybieranie-kolumn"><i class="fa fa-check"></i><b>5.1</b> Wybieranie kolumn</a></li>
+<li class="chapter" data-level="5.2" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#zmiana-nazw-kolumn"><i class="fa fa-check"></i><b>5.2</b> Zmiana nazw kolumn</a></li>
+<li class="chapter" data-level="5.3" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#filtrowanie"><i class="fa fa-check"></i><b>5.3</b> Filtrowanie</a></li>
+<li class="chapter" data-level="5.4" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#usuwanie-kolumn"><i class="fa fa-check"></i><b>5.4</b> Usuwanie kolumn</a></li>
+<li class="chapter" data-level="5.5" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#manipulacje-na-kolumnach"><i class="fa fa-check"></i><b>5.5</b> Manipulacje na kolumnach</a></li>
+<li class="chapter" data-level="5.6" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#aplikowanie-transformacji-do-każdej-kolumny"><i class="fa fa-check"></i><b>5.6</b> Aplikowanie transformacji do każdej kolumny</a></li>
+<li class="chapter" data-level="5.7" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#grupowanie-i-podsumowanie"><i class="fa fa-check"></i><b>5.7</b> Grupowanie i podsumowanie</a></li>
+<li class="chapter" data-level="5.8" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#podsumowywanie-wszystkich-kolumn"><i class="fa fa-check"></i><b>5.8</b> Podsumowywanie wszystkich kolumn</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="czyste-dane.html"><a href="czyste-dane.html"><i class="fa fa-check"></i><b>6</b> Czyste dane</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="czyste-dane.html"><a href="czyste-dane.html#dane-w-formacie-wąskim-i-szerokim"><i class="fa fa-check"></i><b>6.1</b> Dane w formacie wąskim i szerokim</a></li>
+<li class="chapter" data-level="6.2" data-path="czyste-dane.html"><a href="czyste-dane.html#rozdzielanie-na-kolumny-wąska---szeroka"><i class="fa fa-check"></i><b>6.2</b> Rozdzielanie na kolumny (wąska -&gt; szeroka)</a></li>
+<li class="chapter" data-level="6.3" data-path="czyste-dane.html"><a href="czyste-dane.html#scalanie-kilku-kolumn-w-jedną-szeroka---wąska"><i class="fa fa-check"></i><b>6.3</b> Scalanie kilku kolumn w jedną (szeroka -&gt; wąska)</a></li>
+<li class="chapter" data-level="6.4" data-path="czyste-dane.html"><a href="czyste-dane.html#łączenie-tabel-danych"><i class="fa fa-check"></i><b>6.4</b> Łączenie tabel danych</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="czyste-dane.html"><a href="czyste-dane.html#merge"><i class="fa fa-check"></i><b>6.4.1</b> merge()</a></li>
+<li class="chapter" data-level="6.4.2" data-path="czyste-dane.html"><a href="czyste-dane.html#join"><i class="fa fa-check"></i><b>6.4.2</b> join()</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="czyste-dane.html"><a href="czyste-dane.html#operacje-na-napisach-i-datach"><i class="fa fa-check"></i><b>6.5</b> Operacje na napisach i datach</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="czyste-dane.html"><a href="czyste-dane.html#operacje-na-napisach"><i class="fa fa-check"></i><b>6.5.1</b> Operacje na napisach</a></li>
+<li class="chapter" data-level="6.5.2" data-path="czyste-dane.html"><a href="czyste-dane.html#operacje-na-datach"><i class="fa fa-check"></i><b>6.5.2</b> Operacje na datach</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><i class="fa fa-check"></i><b>7</b> Katarzyna Frankiewicz, Maciej Grabias, Jakub Michałowski</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#wprowadzenie"><i class="fa fa-check"></i><b>7.1</b> Wprowadzenie</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#gramatyka-grafiki"><i class="fa fa-check"></i><b>7.1.1</b> Gramatyka grafiki</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#podstawy-tworzenia-wykresów-w-ggplot2"><i class="fa fa-check"></i><b>7.2</b> Podstawy tworzenia wykresów w ggplot2</a></li>
+<li class="chapter" data-level="7.3" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#mapowanie"><i class="fa fa-check"></i><b>7.3</b> Mapowanie</a></li>
+<li class="chapter" data-level="7.4" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#geometria-wykresu"><i class="fa fa-check"></i><b>7.4</b> Geometria wykresu</a></li>
+<li class="chapter" data-level="7.5" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#funkcje-pomagające-poprawić-czytelność-wykresu"><i class="fa fa-check"></i><b>7.5</b> Funkcje pomagające poprawić czytelność wykresu</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#systemy-współrzędnych"><i class="fa fa-check"></i><b>7.5.1</b> Systemy współrzędnych</a></li>
+<li class="chapter" data-level="7.5.2" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#dopasowanie-położenia"><i class="fa fa-check"></i><b>7.5.2</b> Dopasowanie położenia</a></li>
+<li class="chapter" data-level="7.5.3" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#zarządzanie-osiami-współrzędnych"><i class="fa fa-check"></i><b>7.5.3</b> Zarządzanie osiami współrzędnych</a></li>
+<li class="chapter" data-level="7.5.4" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#motywy"><i class="fa fa-check"></i><b>7.5.4</b> Motywy</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#panele"><i class="fa fa-check"></i><b>7.6</b> Panele</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html"><i class="fa fa-check"></i><b>8</b> Czysty i wydajny kod w R</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#czysty-kod"><i class="fa fa-check"></i><b>8.1</b> Czysty kod</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#co-jeśli-w-kodzie-jest-bałagan"><i class="fa fa-check"></i><b>8.1.1</b> Co jeśli w kodzie jest ,,bałagan’’?</a></li>
+<li class="chapter" data-level="8.1.2" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#opis-zmiennych"><i class="fa fa-check"></i><b>8.1.2</b> Opis zmiennych</a></li>
+<li class="chapter" data-level="8.1.3" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#opis-intencji"><i class="fa fa-check"></i><b>8.1.3</b> Opis intencji</a></li>
+<li class="chapter" data-level="8.1.4" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#unikanie-błędnych-informacji"><i class="fa fa-check"></i><b>8.1.4</b> Unikanie błędnych informacji</a></li>
+<li class="chapter" data-level="8.1.5" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#funkcje"><i class="fa fa-check"></i><b>8.1.5</b> Funkcje</a></li>
+<li class="chapter" data-level="8.1.6" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#komentarze"><i class="fa fa-check"></i><b>8.1.6</b> Komentarze</a></li>
+<li class="chapter" data-level="8.1.7" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#obiekt-a-struktura-danych"><i class="fa fa-check"></i><b>8.1.7</b> Obiekt a struktura danych</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#styl-kodu-i-narzędzia-pomagające-w-utrzymaniu-czystego-kodu"><i class="fa fa-check"></i><b>8.2</b> Styl kodu i narzędzia pomagające w utrzymaniu czystego kodu</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><i class="fa fa-check"></i><b>9</b> Interaktywna wizualizacja danych z pakietem shiny: interfejs użytkownika</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#wstęp-1"><i class="fa fa-check"></i><b>9.1</b> Wstęp</a></li>
+<li class="chapter" data-level="9.2" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#tworzenie-ui"><i class="fa fa-check"></i><b>9.2</b> Tworzenie UI</a></li>
+<li class="chapter" data-level="9.3" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#układ-strony"><i class="fa fa-check"></i><b>9.3</b> Układ strony</a></li>
+<li class="chapter" data-level="9.4" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#elementy-wejścia-i-wyjścia"><i class="fa fa-check"></i><b>9.4</b> Elementy wejścia i wyjścia</a></li>
+<li class="chapter" data-level="9.5" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#przykład-użycia"><i class="fa fa-check"></i><b>9.5</b> Przykład użycia</a></li>
+<li class="chapter" data-level="9.6" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#wygląd-aplikacji"><i class="fa fa-check"></i><b>9.6</b> Wygląd aplikacji</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#uwaga"><i class="fa fa-check"></i><b>9.6.1</b> Uwaga</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html"><i class="fa fa-check"></i><b>10</b> Interaktywna wizualizacja danych z pakietem shiny: strona serwerowa</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html#wstęp-2"><i class="fa fa-check"></i><b>10.1</b> Wstęp</a></li>
+<li class="chapter" data-level="10.2" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html#serwer-shiny"><i class="fa fa-check"></i><b>10.2</b> Serwer Shiny</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html"><i class="fa fa-check"></i><b>11</b> Podstawy kontroli wersji przy pomocy Gita</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#podstawowe-informacje"><i class="fa fa-check"></i><b>11.1</b> Podstawowe informacje</a></li>
+<li class="chapter" data-level="11.2" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#podstawowe-komendy"><i class="fa fa-check"></i><b>11.2</b> Podstawowe komendy</a></li>
+<li class="chapter" data-level="11.3" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#repozytoria"><i class="fa fa-check"></i><b>11.3</b> Repozytoria</a></li>
+<li class="chapter" data-level="11.4" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#podstawowe-komendy-1"><i class="fa fa-check"></i><b>11.4</b> Podstawowe komendy</a></li>
+<li class="chapter" data-level="11.5" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#cofanie-zmian"><i class="fa fa-check"></i><b>11.5</b> Cofanie zmian</a></li>
+<li class="chapter" data-level="11.6" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#gałęzie"><i class="fa fa-check"></i><b>11.6</b> Gałęzie</a></li>
+<li class="chapter" data-level="11.7" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#tworzenie-własnych-repozytoriów"><i class="fa fa-check"></i><b>11.7</b> Tworzenie własnych repozytoriów</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html"><i class="fa fa-check"></i><b>12</b> Programowanie obiektowe w R: klasy S3</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#systemy-programowania-obiektowego-w-r"><i class="fa fa-check"></i><b>12.1</b> Systemy programowania obiektowego w R</a></li>
+<li class="chapter" data-level="12.2" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#s3"><i class="fa fa-check"></i><b>12.2</b> S3</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#klasy-i-atrybuty"><i class="fa fa-check"></i><b>12.2.1</b> Klasy i atrybuty</a></li>
+<li class="chapter" data-level="12.2.2" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#funkcje-generyczne-i-metody"><i class="fa fa-check"></i><b>12.2.2</b> Funkcje generyczne i metody</a></li>
+<li class="chapter" data-level="12.2.3" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#dziedziczenie"><i class="fa fa-check"></i><b>12.2.3</b> Dziedziczenie</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#s4"><i class="fa fa-check"></i><b>12.3</b> S4</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#bonus-przykład-wykorzystania-systemu-s4"><i class="fa fa-check"></i><b>12.3.1</b> Bonus: przykład wykorzystania systemu S4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html"><i class="fa fa-check"></i><b>13</b> Moduły w aplikacjach shiny</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html#czym-jest-moduł-shiny"><i class="fa fa-check"></i><b>13.1</b> Czym jest moduł Shiny</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html#dlaczego-warto-używać-modułów-shiny"><i class="fa fa-check"></i><b>13.1.1</b> Dlaczego warto używać modułów Shiny?</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html#budowa-modułu-shiny."><i class="fa fa-check"></i><b>13.2</b> Budowa modułu Shiny.</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html#jak-używać-modułów-shiny"><i class="fa fa-check"></i><b>13.2.1</b> Jak używać modułów Shiny?</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notatki z laboratoriów ,,Programowanie i analiza danych w R’’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Interaktywna wizualizacja danych z pakietem shiny: interfejs użytkownika<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="wstęp-1" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Wstęp<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#wstęp-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Shiny jest pakietem R pozwalającym na tworzenie interaktywnych aplikacji webowych w łatwy i przystępny sposób. Aplikacja w shiny zbudowana jest z dwóch następujcych elementów:</p>
+<ul>
+<li><p>ui - user interface, czyli obiekt, w którym zawarty jest wygląd aplikacji,</p></li>
+<li><p>server - funkcja organizująca działanie aplikacji.</p></li>
+</ul>
+<p>Do uruchomienia aplikacji służy funkcja <code>shinyApp(ui, server)</code>. Stworzenie dobrej i czytelnej aplikacji może znacznie ułatwić analizowanie danych.</p>
+<p>W tej notatce zajmiemy się omówieniem elementów oraz podstawowych schematów budowy UI.</p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb352-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinyWidgets)</span>
+<span id="cb352-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb352-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinydashboard)</span></code></pre></div>
+</div>
+<div id="tworzenie-ui" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Tworzenie UI<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#tworzenie-ui" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Do budowania podstawowego interfejsu w shiny będziemy korzystać z funkcji <code>fluidPage</code>, w której tworzymy cały UI. Wszystkie informacje o rodzajach wprowadznych danych, strukturze wyświetlanych danych oraz szeroko rozumianej estetyce aplikacji będą zawarte wewnątrz tej funkcji.</p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb353-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb353-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb353-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># coś</span></span>
+<span id="cb353-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb353-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="układ-strony" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Układ strony<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#układ-strony" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Tym co jest bardzo ważne w UI jest oczywiście wygląd, a dokładniej mówiąc przejrzystość i czytelność, dlatego chcielibyśmy uporządkować wyświetlane elementy tak, aby umożliwić użytkownikowi intuicyjne korzystanie z aplikacji. Pakiet shiny oferuje wiele narzędzi pozwalających na zorganizowanie układu interfejsu zgodnie z naszymi oczekiwaniami.</p>
+<p>Przydadzą nam się do tego następujące funkcje:</p>
+<ul>
+<li><p><code>titlePanel</code> - funkcja tworząca panel tytułowy, w której podajemy tytuł aplikacji,</p></li>
+<li><p><code>sidebarLayout</code> - funkcja organizująca wygląd strony jako mniejszy panel boczny po lewej stronie oraz większy panel po prawej stronie,</p></li>
+<li><p><code>sidebarPanel</code> - funkcja, którą możemy umieścić w poprzedniej funkcji, aby uporządkować panel, w którym będziemy np. wprowadzać dane,</p></li>
+<li><p><code>mainPanel</code> - funkcja, w której umieszczamy treści, które chcemy, aby znalazły się w panelu głównym,</p></li>
+<li><p><code>tabsetPanel</code> - funkcja umożliwiająca organizowanie paska zakładek. Aby utworzyć zakładki w jej ciele używamy funkcji <code>tabPanel</code>, w której umieszczamy dowolne treści, np. wykresy lub tabele.</p></li>
+</ul>
+<p>Oprócz tego możemy bardziej modyfikować wygląd aplikacji dzięki funkcjom <code>fluidRow</code> i <code>column</code> pozwalającym na uporządkowanie obiektów odpowiednio w wierszach oraz kolumnach.</p>
+</div>
+<div id="elementy-wejścia-i-wyjścia" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Elementy wejścia i wyjścia<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#elementy-wejścia-i-wyjścia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Układ strony należy oczywiście podporządkować temu jaką funkcję ma pełnić aplikacja, a także temu jaki rodzaj interakcji ma mieć z nią docelowo użytkownik. Interakcje użytkownika z aplikacją można intuicyjnie podzielić na to co zostaje do aplikacji wprowadzone (input) oraz to co ostatecznie w związku z tym aplikacja zwraca (output). Każdy input i output jest w kodzie identyfikowany dzięki nadanej mu przez nas nazwie. Wewnątrz <code>fluidPage</code> możemy zawrzeć różne rodzaje inputów i outputów w zależności od rodzaju wprowadzanych/wyświetlanych danych.</p>
+<div id="przykładowe-elementy-wejścia" class="section level4 hasAnchor" number="9.4.0.1">
+<h4><span class="header-section-number">9.4.0.1</span> Przykładowe elementy wejścia<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#przykładowe-elementy-wejścia" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><code>textInput</code> - funkcja tworząca pole, w którym użytkownik może wprowadzić dowolny tekst,</li>
+</ul>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb354-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb354-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb354-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Okienko do wpisywania tekstu</span></span>
+<span id="cb354-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb354-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">&quot;nazwa_inputu_1&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>)</span>
+<span id="cb354-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb354-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li><code>numericInput</code> - funkcja tworząca pole, w którym użytkownik może wprowadzić wartość liczbową,</li>
+</ul>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb355-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Okienko do wpisywania liczb</span></span>
+<span id="cb355-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">numericInput</span>(<span class="st">&quot;nazwa_inputu_2&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
+<span id="cb355-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-4" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość domyślna</span></span>
+<span id="cb355-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">value =</span> <span class="dv">10</span>)</span>
+<span id="cb355-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li><code>selectInput</code> - funkcja tworząca listę, z której użytkownik może dokonać wyboru - domyślnie parametr <code>multiple</code> umożliwia wybór jednej pozycji z listy,</li>
+</ul>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb356-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Możliwość wybrania z listy</span></span>
+<span id="cb356-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">selectInput</span>(<span class="st">&quot;nazwa_inputu_3&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>, </span>
+<span id="cb356-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-4" aria-hidden="true" tabindex="-1"></a>               <span class="co"># Lista możliwości do wyboru</span></span>
+<span id="cb356-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">&quot;Wybór_1&quot;</span>, <span class="st">&quot;Wybór_2&quot;</span>))</span>
+<span id="cb356-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li><code>sliderInput</code> - funkcja tworząca suwak umożliwiający użytkownikowi wybór zakresu interesujących go wartości,</li>
+</ul>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb357-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Suwak do wyboru wartości</span></span>
+<span id="cb357-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">&quot;nazwa_inputu_4&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
+<span id="cb357-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-4" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość domyślna</span></span>
+<span id="cb357-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">value =</span> <span class="dv">1</span>,</span>
+<span id="cb357-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-6" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość minimalna</span></span>
+<span id="cb357-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">min =</span> <span class="dv">0</span>,</span>
+<span id="cb357-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-8" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość maksymalna</span></span>
+<span id="cb357-9"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">max =</span> <span class="dv">10</span>)</span>
+<span id="cb357-10"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li><code>dateRangeInput</code> - funkcja tworząca pole wyboru zakresu interesujących dat.</li>
+</ul>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb358-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pole wyboru zakresu dat</span></span>
+<span id="cb358-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateRangeInput</span>(<span class="st">&quot;nazwa_inputu_5&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
+<span id="cb358-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-4" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># Data początkowa</span></span>
+<span id="cb358-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">start =</span> <span class="st">&quot;2001-01-01&quot;</span>,</span>
+<span id="cb358-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-6" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># Data końcowa</span></span>
+<span id="cb358-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">end   =</span> <span class="st">&quot;2010-12-31&quot;</span>)</span>
+<span id="cb358-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="przykładowe-elementy-wyjścia" class="section level4 hasAnchor" number="9.4.0.2">
+<h4><span class="header-section-number">9.4.0.2</span> Przykładowe elementy wyjścia<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#przykładowe-elementy-wyjścia" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Używanie funkcji wyświetlających outputy jest bardzo proste, ponieważ w UI decydujemy jedynie gdzie i jak wyswietlić output, który jest obiektem utworzonym wewnątrz funkcji <code>server</code> na podstawie wprowadzonego przez użytkownika inputu.</p>
+<ul>
+<li><code>textOutput</code> - funkcja wyświetlająca tekst,</li>
+</ul>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb359-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb359-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb359-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wyświetla tekst, który stworzyliśmy w serwerze pod daną nazwą</span></span>
+<span id="cb359-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb359-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="st">&quot;nazwa_outputu_1&quot;</span>)</span>
+<span id="cb359-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb359-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li><code>tableOutput</code> - podstawowa funkcja wyświetlająca tabelę,</li>
+</ul>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb360-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb360-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb360-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wyświetla tabelę stworzoną w serwerze pod daną nazwą</span></span>
+<span id="cb360-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb360-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tableOutput</span>(<span class="st">&quot;nazwa_outputu_2&quot;</span>)</span>
+<span id="cb360-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb360-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li><code>DTOutput</code> - funkcja wyświetlająca interaktywną ramkę danych z użyciem pakietu data.table,</li>
+</ul>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb361-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Interaktywna ramka danych z użyciem data.table</span></span>
+<span id="cb361-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-3" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">DTOutput</span>(<span class="st">&quot;nazwa_outputu_3&quot;</span>)</span>
+<span id="cb361-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li><code>plotOutput</code> - funkcja wyświetlająca wykres.</li>
+</ul>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb362-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wyświetla wykres stworzony w serwerze</span></span>
+<span id="cb362-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">&quot;nazwa_outputu_4&quot;</span>,</span>
+<span id="cb362-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-4" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Szerokość wykresu</span></span>
+<span id="cb362-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, </span>
+<span id="cb362-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-6" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Wysokość wykresu</span></span>
+<span id="cb362-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">height =</span> <span class="st">&quot;400px&quot;</span>)</span>
+<span id="cb362-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+</div>
+<div id="przykład-użycia" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Przykład użycia<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#przykład-użycia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Oczywiście powyższe kody były jedynie fragmentami większej całości. Poniżej możemy zobaczyć przykładowy kod obrazujący strukturę budowy interfejsu. Rzeczą, o której należy pamiętać jest oddzielanie funkcji przecinkami.</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( </span>
+<span id="cb363-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Tytuł</span></span>
+<span id="cb363-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Tytuł&quot;</span>),</span>
+<span id="cb363-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb363-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To co będzie wyświetlone z boku interfejsu</span></span>
+<span id="cb363-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb363-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb363-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Panel boczny</span></span>
+<span id="cb363-9"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb363-10"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-10" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb363-11"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-11" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pierwszy input - wybór</span></span>
+<span id="cb363-12"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">&quot;nazwa_inputu_1&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>, </span>
+<span id="cb363-13"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">&quot;Wybór_1&quot;</span>, <span class="st">&quot;Wybór_2&quot;</span>)),</span>
+<span id="cb363-14"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-14" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Drugi input - suwak</span></span>
+<span id="cb363-15"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sliderInput</span>(<span class="st">&quot;nazwa_inputu_2&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
+<span id="cb363-16"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">value =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">10</span>) </span>
+<span id="cb363-17"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb363-18"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb363-19"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Główny panel</span></span>
+<span id="cb363-20"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mainPanel</span>( </span>
+<span id="cb363-21"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb363-22"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tworzymy zakładki</span></span>
+<span id="cb363-23"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabsetPanel</span>( </span>
+<span id="cb363-24"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-24" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb363-25"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-25" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pierwsza zakładka - wykres</span></span>
+<span id="cb363-26"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(<span class="st">&quot;Tytuł wykresu&quot;</span>, <span class="fu">plotOutput</span>(<span class="st">&quot;nazwa_outputu_1&quot;</span>)),</span>
+<span id="cb363-27"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-27" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Druga zakładka - ramka danych</span></span>
+<span id="cb363-28"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(<span class="st">&quot;Tytuł ramki&quot;</span>, DT<span class="sc">::</span><span class="fu">DTOutput</span>(<span class="st">&quot;nazwa_outputu_2&quot;</span>))</span>
+<span id="cb363-29"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-29" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb363-30"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb363-31"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb363-32"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-32" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Dodatkowo warto zdawać sobie sprawę, że po wprowadzeniu danych przez użytkownika outputy aktualizują się automatycznie, dlatego często przydatne jest programowanie reaktywne z funkcją <code>observeEvent</code> oraz użycie <code>actionButton</code>, który pozwala na wykonanie danego działania dopiero po kliknięciu odpowiedniego przycisku przez użytkownika.</p>
+</div>
+<div id="wygląd-aplikacji" class="section level2 hasAnchor" number="9.6">
+<h2><span class="header-section-number">9.6</span> Wygląd aplikacji<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#wygląd-aplikacji" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Ostatecznie chcielibyśmy, aby aplikacja wyglądała bardziej estetycznie. Możemy do tego użyć kilku narzędzi. Po pierwsze możemy zmienić motyw naszej aplikacji.</p>
+<p>Z pomocą przychodzi nam funkcja <code>shinythemes::themeSelector()</code>, którą musimy umieścić w naszym UI. Wtedy w naszej aplikacji pojawia się pole z możliwością wyboru motywu.</p>
+<p>Gdy już wybierzemy ulubiony motyw zamieniamy poprzednią funkcję w UI na <code>theme = shinythemes::shinytheme('NASZ_MOTYW')</code> i gotowe!</p>
+<p>Poza tym Shiny umożliwia całkowitą customizację wyglądu aplikacji przy użyciu HTML, CSS oraz JavaScript.</p>
+<p>Ostatnim narzędziem, o którym warto pamiętać, jest <code>shinyWidgetsGallery()</code>. Jest to bardzo użyteczna aplikacja stworzona w bibliotece <code>shinyWidgets</code>, dzięki której możemy między innymi zobaczyć w praktyce działanie różnego typu inputów oraz kod umożliwiający użycie ich w aplikacji.</p>
+<div id="uwaga" class="section level3 hasAnchor" number="9.6.1">
+<h3><span class="header-section-number">9.6.1</span> Uwaga<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#uwaga" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>W tej notatce omówiliśmy podstawowe elementy pozwalające na zbudowanie interfejsu w shiny ale chcielibyśmy też dodać, że w poszukiwaniu bardziej zaawansowanych rozwiązań warto odwiedzić stronę <a href="https://shiny.rstudio.com/" class="uri">https://shiny.rstudio.com/</a>, gdzie można znaleźć dokumentację pakietu shiny, wiele przykładów oraz nieomówionych tu funkcji.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="czysty-i-wydajny-kod-w-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/08-shiny-ui.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

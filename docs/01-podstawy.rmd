@@ -1,0 +1,705 @@
+# Podstawy języka R
+
+Język R posiada kilka typów danych, które pokrótce postaramy sie omówić poniżej. Pokażemy ich budowe jak i operacje na nich, przytaczając stosowne przyklady.
+
+## Liczby
+
+Liczby całkowite i rzeczywiste (tutaj separator dziesiętny to kropka). Możemy używać również notacji naukowej. Operacje na liczbach to podstawowe działania matematyczne jak i trochę rozszerzone, ukazane niżej wraz z specjalnymi liczbami.
+
+```{r}
+5; 5.5; 5.5e-2; 
+```
+
+Tutaj liczby specjalne,
+
+```{r}
+NaN # not a number
+Inf # nieskończoność
+-Inf # - nieskończoność
+```
+
+oraz kilka działań na liczbach
+
+```{r}
+1 + 1 # podobnie '-' to odejmowanie
+4/2 # dzielenie, a '*' to mnożenie
+5 %/% 3 # dzielenie całkowite
+5 %% 3 # reszta z dzielenia
+2^3 # potęgowanie
+2**3 # też potęgowanie
+sqrt(4) #pierwiastkowanie
+abs(-1) # wartość bezwzględna
+```
+
+## Łańcuchy znaków
+
+Łańcuch znaków to po prostu napi. Napis jest otoczony przez " lub '. W napisie możemy umieszczać dowolne znaki, pamiętając że są też znaki specjalne (rozpoczynające się od \\ i mające specjalne funkcje). Na napisach istnieje wiele operacji (np. $\verb+paste()+,$ czyli sklejenie dwóch napisów), lecz je zobaczymy w notatce o napisach.
+
+```{r}  
+"napis"
+'to też'
+"'a tutaj nawet z bonusem'"
+# ""a"" to już wbrew intuicji nie jest napis
+cat("i znak \n specjalny, wstawiający nową linie") # cat() wyświetla napis w sposób niesformatowany
+```
+
+## Wartości logiczne
+
+Logiczna Prawda ($\verb+TRUE+$ lub $\verb+T+$) oraz logiczny Fałsz ($\verb+FALSE+$ lub $\verb+F+$). Na tych obiektach możemy wykonywać operacje logiczne oraz algebraiczne.
+```{r}
+TRUE & TRUE # operator 'i'
+TRUE | FALSE # operator 'lub'
+1 == 1 # testowanie równości
+1 != 2 # testowanie nierówności
+2*TRUE # TRUE ma wartość 1
+2*FALSE # FALSE ma wartość 0
+T ; `T` <- FALSE; T # używając `` możemy zmienić wartość logiczną wyrażenia
+```
+
+## Wektory
+
+Wektor to w R uporządkowany zbiór elementów. Elementy te muszą mieć ten sam typ, także jeśli do wektora trafią elementy z różnym typem (poza NA), to nastąpi konwersja elementów do jednego typu. Proste wektory tworzymy przez polecenie $\verb+c()+$ i elementy wypisujemy w nawiasie po przecinku. Dodatkowo, element wektora jest traktowany jako jednoelementowy wektor. Wektory liczbowe jak i inne  możemy tworzyć za pomocą wbudowanych funkcji do tego przeznaczonych.
+  
+```{r}
+v <- c(1, 2, 3) #przypisanie wektora do zmiennej
+0:10 # wektor liczbowy
+seq(from = 0, to = 10, by = 1) # to samo, ale za pomocą seq(), czyli sequance
+seq(0, 1, length.out = 4) # równe odstępy w 4 liczbowym wektorze
+length(v) # zwraca długość vectora
+# vector(mode, lenght) tworzy wektor dlugosci lenght, a wyrazy tego wektora maja klase mode
+vector("integer", 10) # wektor liczb calkowitych
+vector("numeric", 10) # wektor liczb rzeczywistych
+vector("character", 10) # wektor slów
+rep(v, each = 2) # każdy element v zostanie powtórzony 2 razy
+rep(v, times = 2) # v zostanie powtórzony 2 razy
+# mały mix tj. tutaj element v traktujemy jako wektor jednoelementowy
+# i powtarzamy times razy
+rep(v, times = 1:3) 
+x <- c("a", "A") # wektor napisowy
+v <- "a" # to też
+toupper(x) # zmieni stringi w argumencie na wielkie litery
+tolower(x) # zmieni stringi w argumencie na male litery
+```
+
+## Indeksowanie
+
+W R wektory są indeksowane od 1 (a nie od 0 jak w wielu językach programowania!). Aby odwołać się do konkretnego elementu wektora korzystamy z nawiasów kwadratowych $\verb+[]+.$
+
+```{r}
+letters[3]
+```
+
+Można wybrać więcej niż jeden element, wpisując w nawiasach kwadratowych wektor indeksów.
+
+```{r}
+letters[1:10]
+letters[c(1, 15)]
+letters[seq(1, 20, by = 2)]
+```
+
+Jeśli przed wektorem indeksów widnieje znak minus, R zwróci wszystkie elementy wektora z wyjątkiem tych w nawiasie kwadratowym.
+
+```{r}
+letters[-(1:10)] # niezbędny nawias wokół 1:10
+letters[-c(1, 15)]
+letters[-seq(1, 20, by = 2)]
+```
+
+
+Pod wybrane indeksy można przypisać nowe wartości.
+
+```{r}
+new_letters <- letters
+new_letters[1:5] <- LETTERS[1:5]
+new_letters
+```
+
+Albo pod każdy wybrany indeks nową wspólną wartość.
+
+```{r}
+new_letters[1:5] <- "x"
+new_letters
+```
+
+
+Tworząc wektor funkcją $\verb+c()+,$ możemy nazwać każdy z jego elementów.
+
+```{r}
+str_vec_nam <- c("a" = "A", "b" = "B", "c" = "C")
+str_vec_nam
+```
+
+Może być to użyteczne przy odwoływaniu się do konkretnego elementu wektora, nie trzeba wtedy znać numeru jego indeksu.
+
+```{r}
+str_vec_nam["a"]
+str_vec_nam[c("a", "c")]
+str_vec_nam[c("c", "a")]
+```
+
+Wektory możemy również indeksować za pomocą wektorów logicznych. Działa to wtedy jak wybieranie tych elementów wektora, które spełniają ustalony warunek.
+
+```{r}
+x_ind <- new_letters == "x"
+x_ind
+new_letters[x_ind]
+
+seq_vec <- seq(0, 1, length.out = 10)
+seq_vec[seq_vec < 0.5]
+```
+
+Można oczywiście rozbudowywać wyrażenia logiczne, np. następująco:
+
+```{r}
+seq_vec[seq_vec < 0.3 | seq_vec > 0.8]
+seq_vec[seq_vec > 0.3 & seq_vec < 0.8]
+```
+
+## Operacje na wektorach 
+
+W R domyślnym i naturalnym zachowaniem funkcji na wektorach jest działanie element po elemencie
+
+```{r}
+1:10 + seq(0, 1, length.out = 10)
+c(2,4,6,8)^(1:4)
+```
+
+W przypadku gdy wektory, na których wykonujemy obliczenia mają różne długości zachodzi recykling, tj. R samoistnie przedłuża krótszy wektor replikując go odpowiednią liczbę razy. Widzimy, że obie poniższe linie kodu dają taki sam efekt.
+
+```{r}
+1:10 + 1:2
+1:10 + rep(1:2, 5)
+```
+
+Gdy długość dłuższego wektora nie jest wielokrotnością krótszego, recykling także zadziała, jednak R  zgłosi warning.
+
+```{r}
+1:10 + 1:3
+1:10 + 1:3 + 1:2 + 1:5
+```
+
+
+Na wektorach możemy wykonywać oczywiście inne funkcje poza podstawowymi operacjami arytmetycznymi. Jedną z opcji jest posortowanie wektora.
+
+```{r}
+num_vec <- c(3,6,1,9,8,-3,0,102,-5)
+sort(num_vec) # sortowanie rosnące
+sort(num_vec, decreasing = TRUE) # sortowanie malejące
+```
+
+Odwrócić kolejnośc elementów wektora można następująco.
+
+```{r}
+rev(num_vec)
+```
+
+Oto kilka kolejnych funkcji.
+
+```{r}
+sum(num_vec) # suma elementów wektora
+prod(num_vec) # iloczyn elementów wektora
+mean(num_vec) # średnia elementów wektora
+```
+
+Przy operacjach jak powyższe należy jednak uważać na wektory zawierające "NA".
+
+```{r}
+vec_with_NA <- c(3,6,1,NA)
+sum(vec_with_NA)
+```
+
+Aby zsumować wartości z pominięciem "NA" należy dopisać dodatkowy argument funkcji.
+
+```{r}
+sum(vec_with_NA, na.rm = TRUE)
+```
+
+Analogicznie dla iloczynu i średniej elementów.
+
+```{r}
+prod(vec_with_NA)
+prod(vec_with_NA, na.rm = TRUE)
+mean(vec_with_NA)
+mean(vec_with_NA, na.rm = TRUE)
+```
+
+\section{Listy}
+
+  Lista jest podobna do wektora tj. jest pewnym ciągiem obiektów, tyle że jej elementy mogą mieć różne typy.
+\subsection{Tworzenie list}
+```{r}
+l <- list(1:5)
+#lista z elementami bedacymi liczbami
+```
+```{r, echo=FALSE}
+l
+```
+
+```{r}
+l2 <- list(zwierze='dog', imie='Max',czyLubiInnePsy = TRUE)
+#lista z elementami bedacymi stringami lub wartosciami logicznymi
+```
+```{r, echo=FALSE}
+l2
+```
+\subsection{Odwoływanie się do elementów list}
+Kolejnę różnica pomiedzy wektorem a listą jest możliwość odwoływania się do elementów listy za pomocą nazwy tego elementu i operatora $. Np:
+```{r}
+# odwolanie do elementu bedacego za pomoca [], 
+# wynikiem takiej operacji jest lista zawierajaca wektor
+l[1]
+# aby odwolac sie do konkretnego elementu uzwywamy [[]], na przyklad operacja l[[1]][2] 
+# zwroci drugi element wektora z listy
+ l[[1]][2]
+# nadpisywanie elementu listy wektorem
+l[[1]] <- c("a", "b", "c")
+# odwolanie do elementu za pomoca nazwy elementu
+l2$zwierze
+l2$imie
+l2$czyLubiInnePsy
+```
+\subsection{Operacje na listach}
+Listy można łączyć oraz modyfikować. Funkcja $\verb+lapply()+$ to funkcja, która pozwala na wykonanie pewnego konkretnego działania na KAŻDYM elemencie z listy. Na przykład, możemy każdy element chcieć zapisać tylko dużymi literami:
+```{r}
+lapply(l2,toupper)
+```
+Aby połączyć dwie listy, należy użyć $\verb+c()+,$ robiąc z dwóch list wektor i przypisując go do nowej zmiennej.
+```{r}
+l3 <- c(l,l2)
+```
+```{r, echo=FALSE}
+l3
+```
+\section{Macierze}
+
+Macierz to obiekt dwuwymiarowy. Składa się z elementów tego samego typu. Tworzy się ją funkcją $\verb+matrix()+,$ do której podajemy wartości macierzy (zwykle w postaci wektora), liczbę wierszy i kolumn.
+
+```{r}
+matrix(data = 1:10, nrow = 2, ncol = 5)
+```
+
+Widzimy, że R domyślnie wypełnia macierz po kolumnach. Aby wypełnić ją po wierszach ustalamy parametr $\verb+byrow = TRUE+$ 
+
+```{r}
+m <- matrix(data = 1:10, nrow = 2, ncol = 5, byrow = TRUE)
+m
+```
+
+Elementy macierzy wybiera się za pomocą dwóch indeksów - indeksu wiersza i indeksu kolumny umieszczonych w nawiasach kwadaratowych i rozdzielonych przecinkiem.
+
+```{r}
+m[2,3]
+```
+
+Można również wybrać konkretne wiersze lub kolumny.
+
+```{r}
+m[1:2,3:4] # wybiera wiersze 1 i 2 oraz kolumny 3 i 4
+
+m[2,c(1,4,5)] # wybiera wiersz 2 oraz kolumny 1,4 i 5
+```
+
+Nie podanie indeksu przed przecinkiem oznacza, że chcemy otrzymać wszystkie wiersze. Analogicznie nie podanie indeksu po przecinku oznacza, że chcemy otrzymać wszystkie kolumny.
+
+```{r}
+m[,c(1,3)] 
+
+m[2,]
+```
+
+Macierze, podobnie jak wektory, możemy także indeksować warunkami logicznymi.
+
+```{r}
+# zwraca elementy (w tym wypadku element) z pierwszej kolumny,
+# które są większe od 2
+m[m[,1] > 2, 1]  
+```
+
+Można także indeksować macierz inną macierzą o dwóch kolumnach. Zwrócone zostaną wtedy elementy o indeksach będących wierszami tej macierzy.
+
+```{r}
+matrix_ind<- matrix(c(1, 2, 2, 3, 2, 4), byrow = TRUE, nrow = 3, ncol = 2)
+m[matrix_ind]  
+```
+
+Na macierzach o tych samych wymiarach możemy wykonywać operacje arytmetyczne. Trzeba zwrócić uwagę, że są one wykonywane element po elemencie (z matematycznego punktu widzenia jest to oczekiwane przy dodawaniu, ale nieoczekiwane przy mnożeniu macierzy).
+
+```{r}
+m1 <- matrix(1:4,2,2)
+m1
+m2 <- matrix(2:5,2,2)
+m2
+m1 + m2
+m1 * m2
+```
+
+Aby wykonać matematyczne mnożenie macierzy należy użyć operatora $\verb+%*%+.$
+
+```{r}
+m1 %*% m2
+```
+
+\subsection{Ramki danych}
+Jest to obiekt przechowujący dane w postaci tabeli dwuwymiarowej, którą tworzą wektory o dowolnym typie. Z ramki danych można korzystać jak z macierzy dwuwymiarowej (poprzez korzystanie z $\verb+[,]+$), jak i z listy (poprzez korzystanie z $).
+\subsubsection{Tworzenie ramek danych}
+```{r}
+imie <- c("Max", "Reksio","Rex","Luna") #utworzymy ramke z 2 wektorow 
+wiek <- c(2,8,3,11)
+ramka <- data.frame(imie,wiek) 
+ #ramke tworzymy za pomoca polecenia data.frame()
+```
+
+
+
+```{r, echo=FALSE}
+ramka
+```
+
+```{r}
+#wyswietlanie nazw kolumn
+names(ramka)
+```
+
+\subsubsection{Odwoływanie się do elementów ramek danych}
+
+```{r}
+#odnoszenie sie do elementu znajdujacego sie w 2. rzedzie i 1. kolumnie
+ramka[2,1]
+#pobieranie paru wierszy na raz za pomoca wektora
+ramka[c(1, 2), ]
+#pobieranie wszystkich kolumn dla 1. wiersza
+ramka[1,]
+#pobieranie wszystkich wierszy dla 1. kolumny
+ramka[,1]
+# pierwsza kolumna bez drugiego wiersza
+ramka[-2, 1]
+#pobieranie kolumn/wierszy po nazwie
+ramka$wiek
+# inny sposób indeksowanie po nazwie
+ramka[, "wiek"]
+```
+* Indeksowanie na podstawie zawartości ramki danych \
+Dane z ramki mogą być przez nas "filtrowane" za pomocą []. Na przykład
+``` {r}
+# psy poniżej 9 roku życia
+ramka[ramka$wiek < 9, ]
+#dane tylko dla Reksia
+ramka[ramka$imie == "Reksio", ]
+# analogicznie dla wektorów
+wiek[wiek < 9]
+```
+
+\subsubsection{Operacje na ramkach danych}
+Tworząc ramkę danych należy pamiętać o tym, aby wektory danych służące za kolumny były tej samej długości.
+```{r}
+#zamiana nazw kolumn
+names(ramka) <- c("imie_psa", "wiek_psa")
+```
+```{r, echo=FALSE}
+ramka
+```
+Ramki danych możemy powiększać o dodatkowe wiersze i kolumny, ale typy (dla wierszy) i rozmiary muszą sie zgadzać z typami i rozmiarem ramki danych. Rozpatrzmy poniższy przykład, aby pokazać, jak dodać wiersz i kolumnę za pomocą funkcji $\verb+cbind()+$ oraz $\verb+rbind()+$.
+
+```{r}
+#dodawanie nowego wiersza
+dodajemy_wiersz <- data.frame(imie_psa ="Quentin", wiek_psa=9)
+#funkcja rbind "skleja" wierszowo argument pierwszy (u nas ramka) z drugim
+ramka <- rbind(ramka,dodajemy_wiersz)
+#dodawanie nowej kolumny 
+czyLubiInnePsy <- c(TRUE,TRUE, FALSE, TRUE, FALSE)
+#funkcja cbind "skleja" kolumnowo argument pierwszy (u nas ramka) z drugim
+ramka <- cbind(ramka,czyLubiInnePsy)
+```
+```{r, echo=FALSE}
+ramka
+```
+Możemy rownież dodawać wiersze za pomocą indeksowania, to znaczy  przypisywania wartości do konkretnych indeksów ramki:
+```{r}
+#jako 6. wiersz "wkladamy" nowy wektor
+ramka[6,] <- c("Fanta",0.5,TRUE)
+```
+```{r, echo=FALSE}
+ramka
+```
+```{r}
+# jako 4.kolumne "wkladamy" nowy wektor
+ramka[,4] <- c("Mateusz","Romek","Renata","Leon","Quennie","Filip")
+# nazywamy kolumne 4.
+names(ramka)[4] <- "opiekun_psa"
+```
+```{r, echo=FALSE}
+ramka
+```
+
+\subsubsection{Badanie ramek}
+Analizując nową dla nas ramkę danych, użyteczne okazują się funkcje pozwalające na poznanie właściwości ramki danych. Oto pare z nich:
+```{r}
+# wymiary ramki (6 wierszy,4 kolumny) mozna sprawdzic za pomoca funkcji dim()
+dim(ramka)
+# aby zobaczyc skrocony opis typow danych zawartych w ramce uzywana jest funkcja str()
+str(ramka)
+# aby "podejrzec" pierwsze wiersze ramki danych, wraz naglowkami kolumn uzywana jest funkcja head()
+head(ramka)
+# wysietlanie pierwszych n wierszy
+head(ramka,n=2)
+# wyswietlanie ostatnich n wierszy za pomoca funkcji tail()
+tail(ramka,n=2)
+```
+
+\section{Pętle oraz instrukcje warunkowe}
+
+Pętli oraz instrukcji warunkowych używamy, kiedy chcemy uniknąć powielania kodu i chcemy zachować jego przejrzystość. Ułatwia to wprowadzanie potencjalnych zmian. Instrukcje opisujące co powinno się zdarzyć należy umieścić w nawiasach $\verb+{ }+$. Jeśli chcemy wykonać tylko jedną linijke kodu, możemy je opuścić. 
+
+\subsection{Instrukcja warunkowa if... else}
+
+Umożliwia warunkowe wykonanie kawałka kodu - jeśli warunek zawarty w $\verb+if+$ jest spełniony, to R przejdzie do zawartej instrukcji. W przeciwnym wypadku wykona polecenie zawarte w $\verb+else+$, a jeśli go nie ma , to przejdzie do kolejnych pętli. Część $\verb+else+$ nie jest wymagana, w tym wypadku z góry wiadomo ile razy kod zostanie wykonany.
+
+Składnia wygląda następująco:
+
+```{r, eval = FALSE}
+if(warunek)
+{
+  instrukcja_1
+}
+```
+
+i jest analogiczna do 
+
+```{r, eval = FALSE}
+if(warunek) instrukcja_1
+```
+
+Możemy także zapisać
+
+```{r, eval = FALSE}
+if(warunek)
+{
+  instrukcja_1
+  instrukcja_2 
+} else
+  {
+    instrukcja_3
+  }
+```
+
+
+Powiedzmy, że rozpatrujemy liczbe z rozkładu normalnego i sprawdzamy jakiego jest znaku.
+
+```{r}
+x_norm <- rnorm(1)
+
+if (x_norm < 0)
+{
+  cat("Liczba", x_norm, "jest ujemna")
+} else
+{
+  cat("Liczba ", x_norm, "jest dodatnia")
+}
+```
+
+Możemy chcieć wykonać różne operacje na tak wylosowanej liczbie. Przykładowo, jeśli będzie ujemna, to zmienić znak, zaokrąglić i zreplikować w wektorze
+
+```{r}
+if (x_norm < 0)
+{
+  x_norm <- abs(x_norm)
+  x_wek <- rep(round(x_norm, 2), times = 5)
+} else 
+{
+  x_wek <- "X"
+}
+```
+
+i otrzymać `r x_wek` (X oznacza, że wylosowana liczba była dodatnia, a z nią nic nie robimy).
+
+\subsection{Pętla while}
+
+Pętla $\verb+while+$ działa tak długo, dopóki warunek jest spełniony - tzn. do kiedy nie dostaniemy $\verb+FALSE+$. Warunek należy opisać tak, żeby w pewnym momencie został spełniony - inaczej pętla będzie działać w "nieskończoność". Często używa sie jej do szukania losowych liczb o pewnych właściwościach.
+
+Składnia tej pętli jest następująca:
+
+```{r, eval = FALSE}
+while(warunek)
+{
+  instrukcja_1
+  instrukcja_2 
+}
+```
+
+Tutaj przykład wykorzystania, gdy chcemy losować liczby z przedziału [1, 100], dopóki różnica między dwoma kolejnymi nie będzie parzysta
+
+```{r}
+i <- 2
+los <- c()
+los[1] <- 0
+roznica <- 1
+while(roznica%%2 != 0)
+{
+  los <- c(los, sample(1:100, 1, replace = TRUE))
+  roznica <- los[i]-los[i-1]
+  i = i+1
+}
+```
+
+W ten sposób dostajemy wylosowane liczby: `r los`, z różnicą między ostatnimi równą `r roznica`.
+
+\subsection{Pętla for}
+
+Pętla $\verb+for+$ wygląda następująco:
+
+```{r, eval = FALSE}
+for(iterator in warunek)
+{
+  instrukcja_1
+  instrukcja_2 
+}
+```
+
+Ta pętla wykonuje instrukcje określoną ilość razy - tyle ile elementów $\verb+iterator+$ w zbiorze $\verb+warunek+$. W warunku możemy mieć liste albo wektor. Po każdym wykonaniu pętli, zmienna $\verb+iterator+$ przeskakuje do kolejnego elementu warunku.
+
+Jeśli chcemy wykonać tylko 1 instrukcje, można zapisać
+
+```{r, eval = FALSE}
+for(iterator in warunek) instrukcja_1
+```
+
+Przykładowo, jeśli chcemy elementy ze zbioru [1, 10] podnieść do potęgi, możemy użyć pętli $\verb+for+$.
+
+```{r}
+wynik <-c()
+for (i in 1:10) wynik <- c(wynik, i*i)
+wynik
+```
+
+Możemy także napisać pętle zagnieżdżone, przykładowo do obliczenia wartości w macierzach. W tym wypadku wartością każdego elementu macierzy (3x3) jest iloczyn jego indeksów, co daje następujący wynik
+
+```{r}
+macierz <- matrix(nrow=3, ncol=3)
+
+for(i in 1:dim(macierz)[1]) 
+  {
+    for(j in 1:dim(macierz)[2]) 
+      {
+        macierz[i,j] = i*j
+      }
+}
+
+macierz
+```
+\section{Rodzina funkcji apply}
+Teraz zajmiemy się rodziną funkcji $\verb+apply+$. Należą do niej takie funkcję jak $\verb+apply, tapply, sapply, lapply, vapply+$. Wszystkie one pozwalają na wykonanie pewnej operacji na szeregu podzbiorów danych.  Operacja, która ma być wykonana określana jest przez argument $\verb+FUN+$. Funkcje z tej rodziny przyjmują elementy listy $\verb+(lapply()+)$, elementy wektora $\verb+(sapply())+$, macierze $\verb+(apply())+$ oraz podgrup wskazanych przez jedną lub kilka zmiennych $\verb+(by()+$ i $\verb+tapply())+$.
+
+Zacznijmy od funkcji $\verb+lapply()+$. Wykonuje funkcję $\verb+FUN+$ dla wszystkich elementów wektora $\verb+x+$. Przydatna funkcja zastępująca pętlę $\verb+for+$.  Domyślnie wynikiem działania jest lista, lecz jeżeli w wyniku chcielibyśmy otrzymać wektor, to jednym z rozwiązań jest zamiana listy na wektor funkcją $\verb+unlist()+$. Oto przykładowe działanie funkcji $\verb+lapply()+$:
+```{r}
+x=c(1,2,3,4,5,6,7,8,9,10)
+func=function(x){return(x**3-3*x)}
+lapply(x,func)
+
+```
+
+Funkcja $\verb+sapply+$ jest bardziej przyjazną użytkownikowi wersją $\verb+lapply+$ zwracającą wektor lub macierz i może przyjmować więcej argumentów, np. $\verb+sapply(x, f, simplify = FALSE, USE.NAMES = FALSE)+$ zwraca ten sam wynik co $\verb+lapply(x, f)+$.
+
+Funkcja $\verb+vapply+$ jest podobna do $\verb+sapply+$, ale ma z góry określony typ zwracanych wartości, a może być również bezpieczniejszy w użyciu, a czasem nawet szybszy.
+
+
+Teraz weźmiemy pod lupe $\verb+tapply()+$, która to wykonuje funkcję $\verb+FUN+$ dla podzbiorów wektora $\verb+x+$ określonego
+przez poziomy zmiennej czynnikowej $\verb+index+$. Przydatna funkcja, gdy chcemy policzyć pewną statystykę w podgrupach, np.
+odchylenie standardowe w z wagami. W tym przypadku $\verb+x+$ będzie wektorem z wagami, $\verb+index+$ wektorem z płcią a $\verb+FUN+$ będzie
+funkcją sd).
+
+```{r}
+x=c(98,67,65,82,55,60,72,81,48,88)
+index=c('M','M','K','M','K','M','M','M','K','M')
+tapply(x,index,sd)
+```
+A teraz bardziej zaawansowana werssa funkcji $\verb+tapply()+$ z tą różnicą, że $\verb+x+$ może być macierzą lub listą, $\verb+index+$ może być listą, a wynik tej funkcji jest specyficznie wyświetlany. Jeżeli $\verb+index+$ jest listą zmiennych czynnikowych, to wartość funkcji $\verb+FUN+$ będzie wyznaczona dla każdego przecięcia czynników tych zmiennych. Wynik
+funkcji $\verb+by()+$ jest klasy $\verb+by+$, ale po usunięciu informacji o klasie, np. poprzez użycie funkcji $\verb+unclass()+$ otrzymujemy zwykłą
+macierz. Argument $\verb+x+$ może być listą lub macierzą, dzięki czemu
+do funkcji $\verb+FUN+$ przekazać można kilka zmiennych – elementów/kolumn listy/macierzy $\verb+x+$.
+
+```{r}
+m1=seq(1:9)
+x=c('a','b','c','a','b','c','a','b','c')
+by(m1,x,mean)
+
+```
+
+Z kolei $\verb+mapply()+$ to wielowymiarowy odpowiednik funkcji $\verb+sapply()+$. Argumentami tej funkcji jest funkcja $\verb+fun+$ oraz kilka (dwa lub więcej) wektorów o tej samej długości. Wynikiem jest wektor, w którym na pozycji $\verb+i+$-tej jest wynik funkcji $\verb+fun+$ wywołanej z $\verb+i+$-tych elementów wektorów będących argumentami.
+
+```{r}
+a=function(x,y){return(x**y)}
+mapply(a,x=seq(1,101,by=10),y=seq(1:11))
+```
+
+
+## R - funkcje
+
+Funkcje przydają się do zamknięcia w nich operacji, które się często powtarzają w naszym kodzie lub dla jego lepszej czytelności. Podstawowa składnia funkcji w R wygląda tak:
+```
+nazwa_funkcja <-  function(argument 1, argument 2, …){
+  ciało funkcji
+  return(wartość lub obiekt zwracany)
+}
+```
+Napiszmy funkcję, która będzie mnożyła dowolny wektor przez podaną liczbę, a następnie zsumuje elementy wektora:
+```{r}
+funkcja1 <- function(wektor, liczba){
+  rezultat <- wektor * liczba
+  rezultat <- sum(rezultat)
+  return(rezultat)
+}
+```
+Możemy także pominąc $\texttt{return}$ i zdefiniować funkcje:
+```{r}
+funkcja2 <- function(wektor, liczba){
+  rezultat <- wektor * liczba
+  rezultat <- sum(rezultat)
+  rezultat
+}
+```
+Obie funkcje $\texttt{funkcja1}$ i $\texttt{funkcja2}$ robią to samo. Wykonajmy nasze funkcje dla dwóch zdefiniowanych zmiennych:
+```{r}
+v <- 1:5
+n <- 2
+
+funkcja1(v, n)
+
+funkcja2(v, n)
+```
+Oczywiście do wykonania funkcji potrzebne jest zdefiniowanie obu argumentów. Jak ich nie dodamy wyświetli się błąd, że argument drugi zaginął i nie mamy zdefiniowanej jego wartości domyślnej. Zdefiniujmy zatem domyślną wartość argumentu $\texttt{liczba}$ jako $\texttt{NULL}$ i dopiszmy do naszej funkcji kod, który gdy ten argument będzie miał wartość domyślną zwróci tylko sumę elementów wektora:
+```{r}
+funkcja3 <- function(wektor, liczba = NULL){
+  if(is.null(liczba)){
+    rezultat <- sum(wektor)
+  } else{
+    rezultat <- wektor * liczba
+    rezultat <- sum(rezultat)
+  }
+  rezultat
+}
+```
+Wykonajmy funckję $\texttt{funkcja3}$ na wcześniej zdefiniowanym wektorze $\texttt{v}$:
+```{r}
+funkcja3(v)
+```
+Oprócz zdefiniowania wartości domyślnej argumentu poprzez trzy kropki możemy również dopuścić parametry dodatkowe. Zdefiniujmy funkcję z parametrami dodatkowymi:
+```{r}
+funkcja4 <- function(wektor, liczba = NULL, ...){
+  if(is.null(liczba)){
+    rezultat <- sum(wektor, ...)
+  } else{
+    rezultat <- wektor * liczba
+    rezultat <- sum(rezultat, ...)
+  }
+  rezultat
+}
+```
+Wykonajmy funckję $\texttt{funkcja4}$ usuwając wartości brakujące z nowo zdefiniowanego wektora:
+```{r}
+v <- c(NA, 1, NA, 2:4, NA, 5)
+
+v
+
+funkcja4(v, na.rm = TRUE)
+```
+Funkcje są bardzo przydatne, gdy mamy do napisania długi skrypt. Pozwalają na podzielenie głównej części kodu na mniejsze kawałeczki, które kolejnemu użytkownikowi skryptu lub nam będzie łatwiej modyfikować.    

@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Łączenie tabel danych | Dane w formacie wąskim i szerokim. Łączenie tabel danych (join). Operacje na napisach i datach.</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Łączenie tabel danych | Dane w formacie wąskim i szerokim. Łączenie tabel danych (join). Operacje na napisach i datach." />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Łączenie tabel danych | Dane w formacie wąskim i szerokim. Łączenie tabel danych (join). Operacje na napisach i datach." />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Dominika Szewc, Helena Wołoch, Kacper Ambroży, Radosław Szudra" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="dane-w-formacie-wąskim-i-szerokim.html"/>
+<link rel="next" href="operacje-na-napisach-i-datach.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a></li>
+<li class="chapter" data-level="2" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html"><i class="fa fa-check"></i><b>2</b> Podstawy języka R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#liczby"><i class="fa fa-check"></i><b>2.1</b> Liczby</a></li>
+<li class="chapter" data-level="2.2" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#łańcuchy-znaków"><i class="fa fa-check"></i><b>2.2</b> Łańcuchy znaków</a></li>
+<li class="chapter" data-level="2.3" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#wartości-logiczne"><i class="fa fa-check"></i><b>2.3</b> Wartości logiczne</a></li>
+<li class="chapter" data-level="2.4" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#wektory"><i class="fa fa-check"></i><b>2.4</b> Wektory</a></li>
+<li class="chapter" data-level="2.5" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#indeksowanie"><i class="fa fa-check"></i><b>2.5</b> Indeksowanie</a></li>
+<li class="chapter" data-level="2.6" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#operacje-na-wektorach"><i class="fa fa-check"></i><b>2.6</b> Operacje na wektorach</a></li>
+<li class="chapter" data-level="2.7" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#r---funkcje"><i class="fa fa-check"></i><b>2.7</b> R - funkcje</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html"><i class="fa fa-check"></i><b>3</b> Wczytywanie danych w R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#formaty-danych"><i class="fa fa-check"></i><b>3.1</b> Formaty danych</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#csvdsv"><i class="fa fa-check"></i><b>3.1.1</b> CSV/DSV</a></li>
+<li class="chapter" data-level="3.1.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#xml"><i class="fa fa-check"></i><b>3.1.2</b> XML</a></li>
+<li class="chapter" data-level="3.1.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#json"><i class="fa fa-check"></i><b>3.1.3</b> JSON</a></li>
+<li class="chapter" data-level="3.1.4" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#excel-xlsx"><i class="fa fa-check"></i><b>3.1.4</b> Excel (XLSX)</a></li>
+<li class="chapter" data-level="3.1.5" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#otwarte-wersje-programu-excel"><i class="fa fa-check"></i><b>3.1.5</b> Otwarte wersje programu Excel</a></li>
+<li class="chapter" data-level="3.1.6" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#pliki-tekstowe"><i class="fa fa-check"></i><b>3.1.6</b> Pliki tekstowe</a></li>
+<li class="chapter" data-level="3.1.7" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#arkusze-kalkulacyjne-i-pliki-json"><i class="fa fa-check"></i><b>3.1.7</b> Arkusze kalkulacyjne i pliki JSON</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#locale"><i class="fa fa-check"></i><b>3.2</b> Locale</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#ustawienie-locale-przez-użytkownika"><i class="fa fa-check"></i><b>3.2.1</b> Ustawienie locale przez użytkownika</a></li>
+<li class="chapter" data-level="3.2.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#ustawienie-locale-poprzez-readr"><i class="fa fa-check"></i><b>3.2.2</b> Ustawienie locale poprzez readr</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#natywne-formaty-r"><i class="fa fa-check"></i><b>3.3</b> Natywne formaty R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#rds"><i class="fa fa-check"></i><b>3.3.1</b> RDS</a></li>
+<li class="chapter" data-level="3.3.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#rda"><i class="fa fa-check"></i><b>3.3.2</b> RDA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html"><i class="fa fa-check"></i><b>4</b> Eksploracyjna analiza danych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#dane-tabelaryczne"><i class="fa fa-check"></i><b>4.1</b> Dane tabelaryczne</a></li>
+<li class="chapter" data-level="4.2" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#typy-zmiennych"><i class="fa fa-check"></i><b>4.2</b> Typy zmiennych</a></li>
+<li class="chapter" data-level="4.3" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#miary"><i class="fa fa-check"></i><b>4.3</b> Miary</a></li>
+<li class="chapter" data-level="4.4" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#r---podsumowanie-kolumn"><i class="fa fa-check"></i><b>4.4</b> R - podsumowanie kolumn</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html"><i class="fa fa-check"></i><b>5</b> Przetwarzanie danych tabelarycznych</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#wybieranie-kolumn"><i class="fa fa-check"></i><b>5.1</b> Wybieranie kolumn</a></li>
+<li class="chapter" data-level="5.2" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#zmiana-nazw-kolumn"><i class="fa fa-check"></i><b>5.2</b> Zmiana nazw kolumn</a></li>
+<li class="chapter" data-level="5.3" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#filtrowanie"><i class="fa fa-check"></i><b>5.3</b> Filtrowanie</a></li>
+<li class="chapter" data-level="5.4" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#usuwanie-kolumn"><i class="fa fa-check"></i><b>5.4</b> Usuwanie kolumn</a></li>
+<li class="chapter" data-level="5.5" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#manipulacje-na-kolumnach"><i class="fa fa-check"></i><b>5.5</b> Manipulacje na kolumnach</a></li>
+<li class="chapter" data-level="5.6" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#aplikowanie-transformacji-do-każdej-kolumny"><i class="fa fa-check"></i><b>5.6</b> Aplikowanie transformacji do każdej kolumny</a></li>
+<li class="chapter" data-level="5.7" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#grupowanie-i-podsumowanie"><i class="fa fa-check"></i><b>5.7</b> Grupowanie i podsumowanie</a></li>
+<li class="chapter" data-level="5.8" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#podsumowywanie-wszystkich-kolumn"><i class="fa fa-check"></i><b>5.8</b> Podsumowywanie wszystkich kolumn</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="wstęp-1.html"><a href="wstęp-1.html"><i class="fa fa-check"></i><b>6</b> Wstęp</a></li>
+<li class="chapter" data-level="7" data-path="dane-w-formacie-wąskim-i-szerokim.html"><a href="dane-w-formacie-wąskim-i-szerokim.html"><i class="fa fa-check"></i><b>7</b> Dane w formacie wąskim i szerokim</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="dane-w-formacie-wąskim-i-szerokim.html"><a href="dane-w-formacie-wąskim-i-szerokim.html#rozdzielanie-na-kolumny-wąska---szeroka"><i class="fa fa-check"></i><b>7.1</b> Rozdzielanie na kolumny (wąska -&gt; szeroka)</a></li>
+<li class="chapter" data-level="7.2" data-path="dane-w-formacie-wąskim-i-szerokim.html"><a href="dane-w-formacie-wąskim-i-szerokim.html#scalanie-kilku-kolumn-w-jedną-szeroka---wąska"><i class="fa fa-check"></i><b>7.2</b> Scalanie kilku kolumn w jedną (szeroka -&gt; wąska)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="łączenie-tabel-danych.html"><a href="łączenie-tabel-danych.html"><i class="fa fa-check"></i><b>8</b> Łączenie tabel danych</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="łączenie-tabel-danych.html"><a href="łączenie-tabel-danych.html#merge"><i class="fa fa-check"></i><b>8.1</b> merge()</a></li>
+<li class="chapter" data-level="8.2" data-path="łączenie-tabel-danych.html"><a href="łączenie-tabel-danych.html#join"><i class="fa fa-check"></i><b>8.2</b> join()</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="operacje-na-napisach-i-datach.html"><a href="operacje-na-napisach-i-datach.html"><i class="fa fa-check"></i><b>9</b> Operacje na napisach i datach</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="operacje-na-napisach-i-datach.html"><a href="operacje-na-napisach-i-datach.html#operacje-na-napisach"><i class="fa fa-check"></i><b>9.1</b> Operacje na napisach</a></li>
+<li class="chapter" data-level="9.2" data-path="operacje-na-napisach-i-datach.html"><a href="operacje-na-napisach-i-datach.html#operacje-na-datach"><i class="fa fa-check"></i><b>9.2</b> Operacje na datach</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Dane w formacie wąskim i szerokim. Łączenie tabel danych (join). Operacje na napisach i datach.</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="łączenie-tabel-danych" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Łączenie tabel danych<a href="łączenie-tabel-danych.html#łączenie-tabel-danych" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Mamy dwie tabele danych <strong>tab1</strong> z małymi literami oraz <strong>tab2</strong> z wielkimi literami:</p>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-94">Table 8.1: </span>tab1 = x
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-94">Table 8.1: </span>tab2 = y
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+H
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+I
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+J
+</td>
+</tr>
+</tbody>
+</table>
+<p>gdzie <code>x</code> = <strong>tab1</strong>, a <code>y</code> = <strong>tab2</strong>.</p>
+<p>Aby połączyć dwie tabele danych na podstawie wskazanych kolumn lub kolumn o wspólnej nazwie można użyć przykładowych funkcji.</p>
+<div id="merge" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> merge()<a href="łączenie-tabel-danych.html#merge" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dostępna w bazowym R. Domyślnie funkcja ta łączy tabele względem nazw kolumn, które są wspólne.</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="łączenie-tabel-danych.html#cb300-1" aria-hidden="true" tabindex="-1"></a>tabela <span class="ot">&lt;-</span> <span class="fu">merge</span>(<span class="at">x =</span> tab1, <span class="at">y =</span> tab2)</span>
+<span id="cb300-2"><a href="łączenie-tabel-danych.html#cb300-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+</tbody>
+</table>
+<p>Jeśli chcemy być pewni, że tabele zostaną połączone po odpowiedniej kolumnie, możemy przekazać nazwę tej kolumny w argumencie. W tym przypadku:</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="łączenie-tabel-danych.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">by =</span> <span class="st">&quot;indeks&quot;</span>) <span class="co"># INNER JOIN</span></span></code></pre></div>
+<p>Jeśli jest więcej kolumn, po których chcemy połączyć tabele, wystarczy przekazać w argumencie <code>by</code> wektor z nazwami tych kolumn.</p>
+<p>Gdy nazwy kolumn po których chcemy złączyć tabele różnią się, należy wykorzystać argument <code>by.*</code>. Załóżmy, że kolumna tabeli <strong>tab1</strong> - <em>indeks</em> zmieniła nazwę na <em>index</em>, zatem:</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="łączenie-tabel-danych.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">by.x =</span> <span class="st">&quot;index&quot;</span>, <span class="at">by.y =</span> <span class="st">&quot;indeks&quot;</span>)</span></code></pre></div>
+<p>Wartości kolumn <code>indeks</code> w <strong>tab1</strong> oraz <strong>tab2</strong> różnią się. Dlatego korzystając z funkcji bez dodatkowych argumentów tracimy dane.</p>
+<p>Aby zapobiec traceniu danych z poszczególnych tabel należy skorzystać z argumentu <code>all</code>, brakujące wartości zostaną uzupełnione <code>NA</code>:</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="łączenie-tabel-danych.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">all.x =</span> <span class="cn">TRUE</span>) <span class="co"># LEFT JOIN</span></span>
+<span id="cb303-2"><a href="łączenie-tabel-danych.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">all.y =</span> <span class="cn">TRUE</span>) <span class="co"># RIGHT JOIN</span></span>
+<span id="cb303-3"><a href="łączenie-tabel-danych.html#cb303-3" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">all =</span> <span class="cn">TRUE</span>)   <span class="co"># OUTER JOIN</span></span></code></pre></div>
+<p>Dostajemy wtedy kolejno:</p>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-101">Table 8.2: </span>all.x = TRUE
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-101">Table 8.2: </span>all.y = TRUE
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+H
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+I
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+J
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-101">Table 8.2: </span>all = TRUE
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+H
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+I
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+J
+</td>
+</tr>
+</tbody>
+</table>
+<p>Bez sprecyzowania argumentu <code>sort</code> wiersze wyniku merge() zostaną posortowane leksykograficznie po wspólnych kolumnach. Gdy <code>sort = FALSE</code> wiersze będą w nieokreślonej kolejności.</p>
+<p>Kolumny złączonej tabeli to najpierw kolumny wspólne, następnie pozostałe z <code>x</code> a na końcu pozostałe z <code>y</code>, co widać na przykładach.</p>
+</div>
+<div id="join" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> join()<a href="łączenie-tabel-danych.html#join" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Funkcja z paczki <code>dplyr</code>. Tabele <code>x</code> i <code>y</code> powinny zwykle pochodzić z tego samego źródła danych, ale jeśli <code>copy = TRUE</code>, <code>y</code> zostanie automatycznie skopiowany do tego samego źródła co <code>x</code>.</p>
+<p>Są cztery typy join zmieniających:</p>
+<ul>
+<li><code>left_join()</code> - zwraca wszystkie wiersze z <code>x</code> i wszystkie kolumny z <code>x</code> i <code>y</code>. Wiersze w <code>x</code> bez dopasowania w <code>y</code> będą miały wartości <code>NA</code> w nowych kolumnach. Jeśli istnieje wiele dopasowań między <code>x</code> a <code>y</code>, zwracane są wszystkie kombinacje dopasowań</li>
+</ul>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="łączenie-tabel-danych.html#cb304-1" aria-hidden="true" tabindex="-1"></a>tabela <span class="ot">&lt;-</span> <span class="fu">left_join</span>(tab1, tab2)</span>
+<span id="cb304-2"><a href="łączenie-tabel-danych.html#cb304-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+z
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><code>right_join()</code> - analogicznie do <code>left_join()</code>, ale zwraca wszystkie wiersze z <code>y</code>, a wiersze bez dopasowania w <code>x</code> będą miały wartości <code>NA</code></p></li>
+<li><p><code>inner_join()</code> - zwraca wszystkie wiersze z <code>x</code>, w których znajdują się pasujące wartości w <code>y</code>, oraz wszystkie kolumny z <code>x</code> i <code>y</code>. Jeśli istnieje wiele dopasowań między <code>x</code> a <code>y</code>, zwracane są wszystkie kombinacje dopasowań.</p></li>
+</ul>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="łączenie-tabel-danych.html#cb305-1" aria-hidden="true" tabindex="-1"></a>tabela <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(tab1, tab2)</span>
+<span id="cb305-2"><a href="łączenie-tabel-danych.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+z
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>full_join()</code> - zwraca wszystkie wiersze i wszystkie kolumny zarówno z <code>x</code>, jak i <code>y</code>. Jeśli nie ma pasujących wartości, zwraca <code>NA</code> dla brakujących.</li>
+</ul>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="łączenie-tabel-danych.html#cb306-1" aria-hidden="true" tabindex="-1"></a>tabela <span class="ot">&lt;-</span> <span class="fu">full_join</span>(tab1, tab2)</span>
+<span id="cb306-2"><a href="łączenie-tabel-danych.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+z
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+H
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+I
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+J
+</td>
+</tr>
+</tbody>
+</table>
+<p>Argument <code>by</code> przyjmuje wektor nazw zmiennych do połączenia. Jeśli <code>by = NULL</code> funkcja <code>*_join()</code> domyślnie połączy tabele dopasowując wartości ze wszystkich kolumn o wspólnych nazwach w obu tabelach.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="dane-w-formacie-wąskim-i-szerokim.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="operacje-na-napisach-i-datach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-czyste-dane.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

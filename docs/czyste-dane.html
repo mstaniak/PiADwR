@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Czyste dane | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’</title>
+  <meta name="description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Czyste dane | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Czyste dane | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
+  
+  <meta name="twitter:description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
+  
+
+<meta name="author" content="Mateusz Staniak" />
+
+
+<meta name="date" content="2023-10-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="przetwarzanie-danych-tabelarycznych.html"/>
+<link rel="next" href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> </a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Wstęp</a></li>
+<li class="chapter" data-level="2" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html"><i class="fa fa-check"></i><b>2</b> Podstawy języka R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#liczby"><i class="fa fa-check"></i><b>2.1</b> Liczby</a></li>
+<li class="chapter" data-level="2.2" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#łańcuchy-znaków"><i class="fa fa-check"></i><b>2.2</b> Łańcuchy znaków</a></li>
+<li class="chapter" data-level="2.3" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#wartości-logiczne"><i class="fa fa-check"></i><b>2.3</b> Wartości logiczne</a></li>
+<li class="chapter" data-level="2.4" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#wektory"><i class="fa fa-check"></i><b>2.4</b> Wektory</a></li>
+<li class="chapter" data-level="2.5" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#indeksowanie"><i class="fa fa-check"></i><b>2.5</b> Indeksowanie</a></li>
+<li class="chapter" data-level="2.6" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#operacje-na-wektorach"><i class="fa fa-check"></i><b>2.6</b> Operacje na wektorach</a></li>
+<li class="chapter" data-level="2.7" data-path="podstawy-języka-r.html"><a href="podstawy-języka-r.html#r---funkcje"><i class="fa fa-check"></i><b>2.7</b> R - funkcje</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html"><i class="fa fa-check"></i><b>3</b> Wczytywanie danych w R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#formaty-danych"><i class="fa fa-check"></i><b>3.1</b> Formaty danych</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#csvdsv"><i class="fa fa-check"></i><b>3.1.1</b> CSV/DSV</a></li>
+<li class="chapter" data-level="3.1.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#xml"><i class="fa fa-check"></i><b>3.1.2</b> XML</a></li>
+<li class="chapter" data-level="3.1.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#json"><i class="fa fa-check"></i><b>3.1.3</b> JSON</a></li>
+<li class="chapter" data-level="3.1.4" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#excel-xlsx"><i class="fa fa-check"></i><b>3.1.4</b> Excel (XLSX)</a></li>
+<li class="chapter" data-level="3.1.5" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#otwarte-wersje-programu-excel"><i class="fa fa-check"></i><b>3.1.5</b> Otwarte wersje programu Excel</a></li>
+<li class="chapter" data-level="3.1.6" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#pliki-tekstowe"><i class="fa fa-check"></i><b>3.1.6</b> Pliki tekstowe</a></li>
+<li class="chapter" data-level="3.1.7" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#arkusze-kalkulacyjne-i-pliki-json"><i class="fa fa-check"></i><b>3.1.7</b> Arkusze kalkulacyjne i pliki JSON</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#locale"><i class="fa fa-check"></i><b>3.2</b> Locale</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#ustawienie-locale-przez-użytkownika"><i class="fa fa-check"></i><b>3.2.1</b> Ustawienie locale przez użytkownika</a></li>
+<li class="chapter" data-level="3.2.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#ustawienie-locale-poprzez-readr"><i class="fa fa-check"></i><b>3.2.2</b> Ustawienie locale poprzez readr</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#natywne-formaty-r"><i class="fa fa-check"></i><b>3.3</b> Natywne formaty R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#rds"><i class="fa fa-check"></i><b>3.3.1</b> RDS</a></li>
+<li class="chapter" data-level="3.3.2" data-path="wczytywanie-danych-w-r.html"><a href="wczytywanie-danych-w-r.html#rda"><i class="fa fa-check"></i><b>3.3.2</b> RDA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html"><i class="fa fa-check"></i><b>4</b> Eksploracyjna analiza danych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#dane-tabelaryczne"><i class="fa fa-check"></i><b>4.1</b> Dane tabelaryczne</a></li>
+<li class="chapter" data-level="4.2" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#typy-zmiennych"><i class="fa fa-check"></i><b>4.2</b> Typy zmiennych</a></li>
+<li class="chapter" data-level="4.3" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#miary"><i class="fa fa-check"></i><b>4.3</b> Miary</a></li>
+<li class="chapter" data-level="4.4" data-path="eksploracyjna-analiza-danych.html"><a href="eksploracyjna-analiza-danych.html#r---podsumowanie-kolumn"><i class="fa fa-check"></i><b>4.4</b> R - podsumowanie kolumn</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html"><i class="fa fa-check"></i><b>5</b> Przetwarzanie danych tabelarycznych</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#wybieranie-kolumn"><i class="fa fa-check"></i><b>5.1</b> Wybieranie kolumn</a></li>
+<li class="chapter" data-level="5.2" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#zmiana-nazw-kolumn"><i class="fa fa-check"></i><b>5.2</b> Zmiana nazw kolumn</a></li>
+<li class="chapter" data-level="5.3" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#filtrowanie"><i class="fa fa-check"></i><b>5.3</b> Filtrowanie</a></li>
+<li class="chapter" data-level="5.4" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#usuwanie-kolumn"><i class="fa fa-check"></i><b>5.4</b> Usuwanie kolumn</a></li>
+<li class="chapter" data-level="5.5" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#manipulacje-na-kolumnach"><i class="fa fa-check"></i><b>5.5</b> Manipulacje na kolumnach</a></li>
+<li class="chapter" data-level="5.6" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#aplikowanie-transformacji-do-każdej-kolumny"><i class="fa fa-check"></i><b>5.6</b> Aplikowanie transformacji do każdej kolumny</a></li>
+<li class="chapter" data-level="5.7" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#grupowanie-i-podsumowanie"><i class="fa fa-check"></i><b>5.7</b> Grupowanie i podsumowanie</a></li>
+<li class="chapter" data-level="5.8" data-path="przetwarzanie-danych-tabelarycznych.html"><a href="przetwarzanie-danych-tabelarycznych.html#podsumowywanie-wszystkich-kolumn"><i class="fa fa-check"></i><b>5.8</b> Podsumowywanie wszystkich kolumn</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="czyste-dane.html"><a href="czyste-dane.html"><i class="fa fa-check"></i><b>6</b> Czyste dane</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="czyste-dane.html"><a href="czyste-dane.html#dane-w-formacie-wąskim-i-szerokim"><i class="fa fa-check"></i><b>6.1</b> Dane w formacie wąskim i szerokim</a></li>
+<li class="chapter" data-level="6.2" data-path="czyste-dane.html"><a href="czyste-dane.html#rozdzielanie-na-kolumny-wąska---szeroka"><i class="fa fa-check"></i><b>6.2</b> Rozdzielanie na kolumny (wąska -&gt; szeroka)</a></li>
+<li class="chapter" data-level="6.3" data-path="czyste-dane.html"><a href="czyste-dane.html#scalanie-kilku-kolumn-w-jedną-szeroka---wąska"><i class="fa fa-check"></i><b>6.3</b> Scalanie kilku kolumn w jedną (szeroka -&gt; wąska)</a></li>
+<li class="chapter" data-level="6.4" data-path="czyste-dane.html"><a href="czyste-dane.html#łączenie-tabel-danych"><i class="fa fa-check"></i><b>6.4</b> Łączenie tabel danych</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="czyste-dane.html"><a href="czyste-dane.html#merge"><i class="fa fa-check"></i><b>6.4.1</b> merge()</a></li>
+<li class="chapter" data-level="6.4.2" data-path="czyste-dane.html"><a href="czyste-dane.html#join"><i class="fa fa-check"></i><b>6.4.2</b> join()</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="czyste-dane.html"><a href="czyste-dane.html#operacje-na-napisach-i-datach"><i class="fa fa-check"></i><b>6.5</b> Operacje na napisach i datach</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="czyste-dane.html"><a href="czyste-dane.html#operacje-na-napisach"><i class="fa fa-check"></i><b>6.5.1</b> Operacje na napisach</a></li>
+<li class="chapter" data-level="6.5.2" data-path="czyste-dane.html"><a href="czyste-dane.html#operacje-na-datach"><i class="fa fa-check"></i><b>6.5.2</b> Operacje na datach</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><i class="fa fa-check"></i><b>7</b> Katarzyna Frankiewicz, Maciej Grabias, Jakub Michałowski</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#wprowadzenie"><i class="fa fa-check"></i><b>7.1</b> Wprowadzenie</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#gramatyka-grafiki"><i class="fa fa-check"></i><b>7.1.1</b> Gramatyka grafiki</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#podstawy-tworzenia-wykresów-w-ggplot2"><i class="fa fa-check"></i><b>7.2</b> Podstawy tworzenia wykresów w ggplot2</a></li>
+<li class="chapter" data-level="7.3" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#mapowanie"><i class="fa fa-check"></i><b>7.3</b> Mapowanie</a></li>
+<li class="chapter" data-level="7.4" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#geometria-wykresu"><i class="fa fa-check"></i><b>7.4</b> Geometria wykresu</a></li>
+<li class="chapter" data-level="7.5" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#funkcje-pomagające-poprawić-czytelność-wykresu"><i class="fa fa-check"></i><b>7.5</b> Funkcje pomagające poprawić czytelność wykresu</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#systemy-współrzędnych"><i class="fa fa-check"></i><b>7.5.1</b> Systemy współrzędnych</a></li>
+<li class="chapter" data-level="7.5.2" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#dopasowanie-położenia"><i class="fa fa-check"></i><b>7.5.2</b> Dopasowanie położenia</a></li>
+<li class="chapter" data-level="7.5.3" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#zarządzanie-osiami-współrzędnych"><i class="fa fa-check"></i><b>7.5.3</b> Zarządzanie osiami współrzędnych</a></li>
+<li class="chapter" data-level="7.5.4" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#motywy"><i class="fa fa-check"></i><b>7.5.4</b> Motywy</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html"><a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html#panele"><i class="fa fa-check"></i><b>7.6</b> Panele</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html"><i class="fa fa-check"></i><b>8</b> Czysty i wydajny kod w R</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#czysty-kod"><i class="fa fa-check"></i><b>8.1</b> Czysty kod</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#co-jeśli-w-kodzie-jest-bałagan"><i class="fa fa-check"></i><b>8.1.1</b> Co jeśli w kodzie jest ,,bałagan’’?</a></li>
+<li class="chapter" data-level="8.1.2" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#opis-zmiennych"><i class="fa fa-check"></i><b>8.1.2</b> Opis zmiennych</a></li>
+<li class="chapter" data-level="8.1.3" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#opis-intencji"><i class="fa fa-check"></i><b>8.1.3</b> Opis intencji</a></li>
+<li class="chapter" data-level="8.1.4" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#unikanie-błędnych-informacji"><i class="fa fa-check"></i><b>8.1.4</b> Unikanie błędnych informacji</a></li>
+<li class="chapter" data-level="8.1.5" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#funkcje"><i class="fa fa-check"></i><b>8.1.5</b> Funkcje</a></li>
+<li class="chapter" data-level="8.1.6" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#komentarze"><i class="fa fa-check"></i><b>8.1.6</b> Komentarze</a></li>
+<li class="chapter" data-level="8.1.7" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#obiekt-a-struktura-danych"><i class="fa fa-check"></i><b>8.1.7</b> Obiekt a struktura danych</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="czysty-i-wydajny-kod-w-r.html"><a href="czysty-i-wydajny-kod-w-r.html#styl-kodu-i-narzędzia-pomagające-w-utrzymaniu-czystego-kodu"><i class="fa fa-check"></i><b>8.2</b> Styl kodu i narzędzia pomagające w utrzymaniu czystego kodu</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><i class="fa fa-check"></i><b>9</b> Interaktywna wizualizacja danych z pakietem shiny: interfejs użytkownika</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#wstęp-1"><i class="fa fa-check"></i><b>9.1</b> Wstęp</a></li>
+<li class="chapter" data-level="9.2" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#tworzenie-ui"><i class="fa fa-check"></i><b>9.2</b> Tworzenie UI</a></li>
+<li class="chapter" data-level="9.3" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#układ-strony"><i class="fa fa-check"></i><b>9.3</b> Układ strony</a></li>
+<li class="chapter" data-level="9.4" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#elementy-wejścia-i-wyjścia"><i class="fa fa-check"></i><b>9.4</b> Elementy wejścia i wyjścia</a></li>
+<li class="chapter" data-level="9.5" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#przykład-użycia"><i class="fa fa-check"></i><b>9.5</b> Przykład użycia</a></li>
+<li class="chapter" data-level="9.6" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#wygląd-aplikacji"><i class="fa fa-check"></i><b>9.6</b> Wygląd aplikacji</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#uwaga"><i class="fa fa-check"></i><b>9.6.1</b> Uwaga</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html"><i class="fa fa-check"></i><b>10</b> Interaktywna wizualizacja danych z pakietem shiny: strona serwerowa</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html#wstęp-2"><i class="fa fa-check"></i><b>10.1</b> Wstęp</a></li>
+<li class="chapter" data-level="10.2" data-path="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa.html#serwer-shiny"><i class="fa fa-check"></i><b>10.2</b> Serwer Shiny</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html"><i class="fa fa-check"></i><b>11</b> Podstawy kontroli wersji przy pomocy Gita</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#podstawowe-informacje"><i class="fa fa-check"></i><b>11.1</b> Podstawowe informacje</a></li>
+<li class="chapter" data-level="11.2" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#podstawowe-komendy"><i class="fa fa-check"></i><b>11.2</b> Podstawowe komendy</a></li>
+<li class="chapter" data-level="11.3" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#repozytoria"><i class="fa fa-check"></i><b>11.3</b> Repozytoria</a></li>
+<li class="chapter" data-level="11.4" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#podstawowe-komendy-1"><i class="fa fa-check"></i><b>11.4</b> Podstawowe komendy</a></li>
+<li class="chapter" data-level="11.5" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#cofanie-zmian"><i class="fa fa-check"></i><b>11.5</b> Cofanie zmian</a></li>
+<li class="chapter" data-level="11.6" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#gałęzie"><i class="fa fa-check"></i><b>11.6</b> Gałęzie</a></li>
+<li class="chapter" data-level="11.7" data-path="podstawy-kontroli-wersji-przy-pomocy-gita.html"><a href="podstawy-kontroli-wersji-przy-pomocy-gita.html#tworzenie-własnych-repozytoriów"><i class="fa fa-check"></i><b>11.7</b> Tworzenie własnych repozytoriów</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html"><i class="fa fa-check"></i><b>12</b> Programowanie obiektowe w R: klasy S3</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#systemy-programowania-obiektowego-w-r"><i class="fa fa-check"></i><b>12.1</b> Systemy programowania obiektowego w R</a></li>
+<li class="chapter" data-level="12.2" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#s3"><i class="fa fa-check"></i><b>12.2</b> S3</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#klasy-i-atrybuty"><i class="fa fa-check"></i><b>12.2.1</b> Klasy i atrybuty</a></li>
+<li class="chapter" data-level="12.2.2" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#funkcje-generyczne-i-metody"><i class="fa fa-check"></i><b>12.2.2</b> Funkcje generyczne i metody</a></li>
+<li class="chapter" data-level="12.2.3" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#dziedziczenie"><i class="fa fa-check"></i><b>12.2.3</b> Dziedziczenie</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#s4"><i class="fa fa-check"></i><b>12.3</b> S4</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="programowanie-obiektowe-w-r-klasy-s3.html"><a href="programowanie-obiektowe-w-r-klasy-s3.html#bonus-przykład-wykorzystania-systemu-s4"><i class="fa fa-check"></i><b>12.3.1</b> Bonus: przykład wykorzystania systemu S4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html"><i class="fa fa-check"></i><b>13</b> Moduły w aplikacjach shiny</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html#czym-jest-moduł-shiny"><i class="fa fa-check"></i><b>13.1</b> Czym jest moduł Shiny</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html#dlaczego-warto-używać-modułów-shiny"><i class="fa fa-check"></i><b>13.1.1</b> Dlaczego warto używać modułów Shiny?</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html#budowa-modułu-shiny."><i class="fa fa-check"></i><b>13.2</b> Budowa modułu Shiny.</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="moduły-w-aplikacjach-shiny.html"><a href="moduły-w-aplikacjach-shiny.html#jak-używać-modułów-shiny"><i class="fa fa-check"></i><b>13.2.1</b> Jak używać modułów Shiny?</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notatki z laboratoriów ,,Programowanie i analiza danych w R’’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="czyste-dane" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Czyste dane<a href="czyste-dane.html#czyste-dane" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Transformacja danych jest niezwykle ważnym elementem dobrze zrobionego raportu. Dane te powinny być prezentowane w sposób czytelny i ułatwiający ich porównywanie. To od potrzeby biznesowej zależy w jaki sposób powinniśmy przedstwiać dane. Np. dysponując wynikami finansowymi zbieranymi co miesiąc przez trzy lata bo planowania budżetu na następny rok przyda nam się prezentacja ich w formacie wąskim, czyli skupionym na wydatkach względem każdego roku. Jednakże, jeżeli chcielibyśmy kontrolować wydatki w tym następnym roku prezentacja danych w formacie szerokim będzie bardziej korzystna, gdyż będziemy mieli informację ile średnio wydajemy w danym miesiącu i na bieżąco będziemy mogli podejmować decyzję o inwestowaniu lub zaciskaniu pasa.</p>
+<p>Niekiedy jednak dane mają bardziej skomplikowaną formę i np. składają się z wielu tabel. Wówczas dla łatwiejszego uzyskania informacji biznesowej będzie połączenie tych tabel. Takie operacje w połączeniu z odpowiednią agregacją i grupowaniem zdecydowanie ułatwia wgląd w aktualną sytuację.</p>
+<p>Ostatnim tematem, na temat któtego ta notatka traktuje są operacje na napisach i datach. Bardzo łatwo uzmysłowić sobie przydatność w posługiwaniu się takimi operacjami. Ułatwia to konstruowanie prostych funkcji, które są kluczowe w każdym projekcie. Chociażby bazując na imionach i nazwiskach pewnych obywateli Polski łatwo wskazać z dużą pewnością kobiety w tym zbiorze sprawdzając ostatnią literę ich imienia (tj. czy dane imie kończy się na literę “a”).</p>
+<div id="dane-w-formacie-wąskim-i-szerokim" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Dane w formacie wąskim i szerokim<a href="czyste-dane.html#dane-w-formacie-wąskim-i-szerokim" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dane najczęściej są przedstawiane w postaci tabelarycznej. Jednak mogą być w tej tabeli różnie sformatowane. Wyróżnia się między innymi szeroką reprezentacje danych i wąską reprezentacje danych. W zależności od tego, co chcemy z nimi zrobić czasami trzeba przejść z jednej postaci do drugiej. Aby przetransformować dane korzysta się z funkcji z pakietów <strong>dplyr</strong> i <strong>tidyverse</strong>.</p>
+<p>O postaci szerokiej mówimy, gdy pojedyncza zmienna jest rozdzielona pomiędzy kilka kolumn. Różnicę najłatwiej jest pokazać na przykładzie. W tym celu wykorzystamy wbudowany zbiór danych <code>sleep</code> zawierający informacje o wpływie dwóch leków nasennych na ilość przespanych godzin. Kolumna <code>extra</code> zawiera informacje o ilości dodatkowo przespanych godzin.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+extra
+</th>
+<th style="text-align:left;">
+group
+</th>
+<th style="text-align:left;">
+ID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-1.6
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-1.2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+6
+</td>
+</tr>
+</tbody>
+</table>
+<p>Dane są przedstawione w postaci wąskiej, każda zmienna jest przedstawiona w oddzielnej kolumnie. Teraz ‘rozbijmy’ kolumnę <code>group</code> na <code>group 1</code> i <code>group 2</code>.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+ID
+</th>
+<th style="text-align:right;">
+group 1
+</th>
+<th style="text-align:right;">
+group 2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+-1.6
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+-0.2
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+-1.2
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+-0.1
+</td>
+<td style="text-align:right;">
+-0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:right;">
+5.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+</tr>
+</tbody>
+</table>
+<p>Można zaobserwować, że wartości z kolumny <code>extra</code> zostały wpisane w poszczególne komórki, a kolumna <code>group</code> została podzielona na dwie oddzielne kolumny <code>group 1</code> i <code>group 2</code>. Tak sformatowane dane nazywamy szeroką reprezentacją danych.</p>
+</div>
+<div id="rozdzielanie-na-kolumny-wąska---szeroka" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Rozdzielanie na kolumny (wąska -&gt; szeroka)<a href="czyste-dane.html#rozdzielanie-na-kolumny-wąska---szeroka" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Aby przejść z wąskiego formatu przedstawiania danych do szerokiego, można użyć funkcji <code>spread()</code> z pakietu <strong>dplyr</strong>.</p>
+<p>Funkcja <code>spread(dataset,key,value)</code> przyjmuje trzy agrumenty:</p>
+<ul>
+<li><p><code>dataset</code> - zbiór danych w formacie wąskim,</p></li>
+<li><p><code>key</code> - kolumna (klucz) odpowiadająca kolumnie, która ma zostać rozłożona,</p></li>
+<li><p><code>value</code> - kolumna, w której znajdują się wartości wypełniające nowe kolumny.</p></li>
+</ul>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="czyste-dane.html#cb296-1" aria-hidden="true" tabindex="-1"></a>szeroka <span class="ot">&lt;-</span> <span class="fu">spread</span>(sleep, group, extra)</span>
+<span id="cb296-2"><a href="czyste-dane.html#cb296-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(szeroka) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;ID&quot;</span>,<span class="st">&quot;group 1&quot;</span>,<span class="st">&quot;group 2&quot;</span>)</span>
+<span id="cb296-3"><a href="czyste-dane.html#cb296-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="fu">kable</span>(<span class="fu">head</span>(szeroka)), <span class="at">position =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+ID
+</th>
+<th style="text-align:right;">
+group 1
+</th>
+<th style="text-align:right;">
+group 2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+-1.6
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+-0.2
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+-1.2
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+-0.1
+</td>
+<td style="text-align:right;">
+-0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+</tr>
+</tbody>
+</table>
+<p>Drugą opcją na uzyskanie tego samego rezultatu jest użycie funkcji <code>pivot_wider</code> z pakietu <strong>tidyverse</strong>.</p>
+<p>Funkcja przyjmuje dwa argumenty <code>pivot_wider(names_from = name, values_from = value)</code>:</p>
+<ul>
+<li><p><code>name</code> - nazwa kolumny, która ma zostać rozłożona,</p></li>
+<li><p><code>value</code> - nazwa kolumny, w której znajdują się wartości.</p></li>
+</ul>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="czyste-dane.html#cb297-1" aria-hidden="true" tabindex="-1"></a>sleep <span class="sc">%&gt;%</span></span>
+<span id="cb297-2"><a href="czyste-dane.html#cb297-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> group, <span class="at">values_from =</span> extra)</span></code></pre></div>
+</div>
+<div id="scalanie-kilku-kolumn-w-jedną-szeroka---wąska" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Scalanie kilku kolumn w jedną (szeroka -&gt; wąska)<a href="czyste-dane.html#scalanie-kilku-kolumn-w-jedną-szeroka---wąska" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Można wrócić z postaci szerokiej do wąskiej. W tym celu należy użyć funkcji <code>gather()</code> z pakietu <strong>tidyr</strong>.</p>
+<p>Funkcja <code>gather(dataset, key, value, other)</code> przyjmuje również trzy argumenty:</p>
+<ul>
+<li><p><code>dataset</code> - zbiór danych w formacie szerokim,</p></li>
+<li><p><code>key</code> - nazwy kolumn z kluczami,</p></li>
+<li><p><code>value</code> - nazwy kolumn z wartościami,</p></li>
+<li><p><code>other</code> - kolumny <code>dataset</code>, które mają być zawarte w nowej tabeli.</p></li>
+</ul>
+<p>Aby wrócić do postaci wąskiej nałóżmy funkcję <code>gather</code> na wygenerowaną wcześniej tabele <code>szeroka</code>.</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="czyste-dane.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="fu">kable</span>(<span class="fu">head</span>(szeroka <span class="sc">%&gt;%</span> </span>
+<span id="cb298-2"><a href="czyste-dane.html#cb298-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(group, extra, <span class="sc">-</span>ID))),<span class="at">position =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+ID
+</th>
+<th style="text-align:left;">
+group
+</th>
+<th style="text-align:right;">
+extra
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+-1.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+-0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+-1.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+-0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+</tr>
+</tbody>
+</table>
+<p>Drugą funkcją, która umożliwia przejście z szerokiej reprezentacji danych do wąskiej jest funkcja <code>pivot_longer</code> z pakietu <strong>tidyverse</strong>.</p>
+<p>Funkcja <code>pivot_longer(col_names, names_to = name, values_to = value)</code> przyjmuje trzy argumenty</p>
+<ul>
+<li><p><code>col_names</code> - ciąg nazw kolumn, które chcemy złączyć,</p></li>
+<li><p><code>name</code> - nazwa nowo powstałej kolumny,</p></li>
+<li><p><code>value</code> - nazwa kolumny, w której pojawią się wartości.</p></li>
+</ul>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="czyste-dane.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_styling</span>(<span class="fu">kable</span>(<span class="fu">head</span>(szeroka <span class="sc">%&gt;%</span> </span>
+<span id="cb299-2"><a href="czyste-dane.html#cb299-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;group&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;extra&quot;</span>))), </span>
+<span id="cb299-3"><a href="czyste-dane.html#cb299-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">position =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+</div>
+<div id="łączenie-tabel-danych" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Łączenie tabel danych<a href="czyste-dane.html#łączenie-tabel-danych" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Mamy dwie tabele danych <strong>tab1</strong> z małymi literami oraz <strong>tab2</strong> z wielkimi literami:</p>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-94">Table 6.1: </span>tab1 = x
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-94">Table 6.1: </span>tab2 = y
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+H
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+I
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+J
+</td>
+</tr>
+</tbody>
+</table>
+<p>gdzie <code>x</code> = <strong>tab1</strong>, a <code>y</code> = <strong>tab2</strong>.</p>
+<p>Aby połączyć dwie tabele danych na podstawie wskazanych kolumn lub kolumn o wspólnej nazwie można użyć przykładowych funkcji.</p>
+<div id="merge" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> merge()<a href="czyste-dane.html#merge" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dostępna w bazowym R. Domyślnie funkcja ta łączy tabele względem nazw kolumn, które są wspólne.</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="czyste-dane.html#cb300-1" aria-hidden="true" tabindex="-1"></a>tabela <span class="ot">&lt;-</span> <span class="fu">merge</span>(<span class="at">x =</span> tab1, <span class="at">y =</span> tab2)</span>
+<span id="cb300-2"><a href="czyste-dane.html#cb300-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+</tbody>
+</table>
+<p>Jeśli chcemy być pewni, że tabele zostaną połączone po odpowiedniej kolumnie, możemy przekazać nazwę tej kolumny w argumencie. W tym przypadku:</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="czyste-dane.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">by =</span> <span class="st">&quot;indeks&quot;</span>) <span class="co"># INNER JOIN</span></span></code></pre></div>
+<p>Jeśli jest więcej kolumn, po których chcemy połączyć tabele, wystarczy przekazać w argumencie <code>by</code> wektor z nazwami tych kolumn.</p>
+<p>Gdy nazwy kolumn po których chcemy złączyć tabele różnią się, należy wykorzystać argument <code>by.*</code>. Załóżmy, że kolumna tabeli <strong>tab1</strong> - <em>indeks</em> zmieniła nazwę na <em>index</em>, zatem:</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="czyste-dane.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">by.x =</span> <span class="st">&quot;index&quot;</span>, <span class="at">by.y =</span> <span class="st">&quot;indeks&quot;</span>)</span></code></pre></div>
+<p>Wartości kolumn <code>indeks</code> w <strong>tab1</strong> oraz <strong>tab2</strong> różnią się. Dlatego korzystając z funkcji bez dodatkowych argumentów tracimy dane.</p>
+<p>Aby zapobiec traceniu danych z poszczególnych tabel należy skorzystać z argumentu <code>all</code>, brakujące wartości zostaną uzupełnione <code>NA</code>:</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="czyste-dane.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">all.x =</span> <span class="cn">TRUE</span>) <span class="co"># LEFT JOIN</span></span>
+<span id="cb303-2"><a href="czyste-dane.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">all.y =</span> <span class="cn">TRUE</span>) <span class="co"># RIGHT JOIN</span></span>
+<span id="cb303-3"><a href="czyste-dane.html#cb303-3" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tab1, tab2, <span class="at">all =</span> <span class="cn">TRUE</span>)   <span class="co"># OUTER JOIN</span></span></code></pre></div>
+<p>Dostajemy wtedy kolejno:</p>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-101">Table 6.2: </span>all.x = TRUE
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-101">Table 6.2: </span>all.y = TRUE
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+H
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+I
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+J
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-101">Table 6.2: </span>all = TRUE
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+H
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+I
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+J
+</td>
+</tr>
+</tbody>
+</table>
+<p>Bez sprecyzowania argumentu <code>sort</code> wiersze wyniku merge() zostaną posortowane leksykograficznie po wspólnych kolumnach. Gdy <code>sort = FALSE</code> wiersze będą w nieokreślonej kolejności.</p>
+<p>Kolumny złączonej tabeli to najpierw kolumny wspólne, następnie pozostałe z <code>x</code> a na końcu pozostałe z <code>y</code>, co widać na przykładach.</p>
+</div>
+<div id="join" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> join()<a href="czyste-dane.html#join" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Funkcja z paczki <code>dplyr</code>. Tabele <code>x</code> i <code>y</code> powinny zwykle pochodzić z tego samego źródła danych, ale jeśli <code>copy = TRUE</code>, <code>y</code> zostanie automatycznie skopiowany do tego samego źródła co <code>x</code>.</p>
+<p>Są cztery typy join zmieniających:</p>
+<ul>
+<li><code>left_join()</code> - zwraca wszystkie wiersze z <code>x</code> i wszystkie kolumny z <code>x</code> i <code>y</code>. Wiersze w <code>x</code> bez dopasowania w <code>y</code> będą miały wartości <code>NA</code> w nowych kolumnach. Jeśli istnieje wiele dopasowań między <code>x</code> a <code>y</code>, zwracane są wszystkie kombinacje dopasowań</li>
+</ul>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="czyste-dane.html#cb304-1" aria-hidden="true" tabindex="-1"></a>tabela <span class="ot">&lt;-</span> <span class="fu">left_join</span>(tab1, tab2)</span>
+<span id="cb304-2"><a href="czyste-dane.html#cb304-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+z
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><code>right_join()</code> - analogicznie do <code>left_join()</code>, ale zwraca wszystkie wiersze z <code>y</code>, a wiersze bez dopasowania w <code>x</code> będą miały wartości <code>NA</code></p></li>
+<li><p><code>inner_join()</code> - zwraca wszystkie wiersze z <code>x</code>, w których znajdują się pasujące wartości w <code>y</code>, oraz wszystkie kolumny z <code>x</code> i <code>y</code>. Jeśli istnieje wiele dopasowań między <code>x</code> a <code>y</code>, zwracane są wszystkie kombinacje dopasowań.</p></li>
+</ul>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="czyste-dane.html#cb305-1" aria-hidden="true" tabindex="-1"></a>tabela <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(tab1, tab2)</span>
+<span id="cb305-2"><a href="czyste-dane.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+z
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>full_join()</code> - zwraca wszystkie wiersze i wszystkie kolumny zarówno z <code>x</code>, jak i <code>y</code>. Jeśli nie ma pasujących wartości, zwraca <code>NA</code> dla brakujących.</li>
+</ul>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="czyste-dane.html#cb306-1" aria-hidden="true" tabindex="-1"></a>tabela <span class="ot">&lt;-</span> <span class="fu">full_join</span>(tab1, tab2)</span>
+<span id="cb306-2"><a href="czyste-dane.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabela)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+indeks
+</th>
+<th style="text-align:left;">
+litery
+</th>
+<th style="text-align:left;">
+LITERY
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+E
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;">
+F
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+z
+</td>
+<td style="text-align:left;">
+G
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+H
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+I
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+J
+</td>
+</tr>
+</tbody>
+</table>
+<p>Argument <code>by</code> przyjmuje wektor nazw zmiennych do połączenia. Jeśli <code>by = NULL</code> funkcja <code>*_join()</code> domyślnie połączy tabele dopasowując wartości ze wszystkich kolumn o wspólnych nazwach w obu tabelach.</p>
+</div>
+</div>
+<div id="operacje-na-napisach-i-datach" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Operacje na napisach i datach<a href="czyste-dane.html#operacje-na-napisach-i-datach" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Większość poniższych funkcji pochodzi z pakietu <strong>string</strong>i.</p>
+<div id="operacje-na-napisach" class="section level3 hasAnchor" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Operacje na napisach<a href="czyste-dane.html#operacje-na-napisach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Wyznaczanie długości napisów.
+Funkcja <strong>stri_lenght()</strong> zwraca długości poszczególnych napisów w danym wektorze, a <strong>stri_isempty()</strong> sprawdza, które napisy są puste -&gt; ’’.</p></li>
+<li><p>Łączenie i powielanie napisów.
+Funkcja używana do łączenia kilku wektorów napisów w inny wektor napisów lub nawet w jeden napis, jest <strong>stri_paste()</strong> i jej warianty.</p></li>
+</ol>
+<p>Przykład:</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="czyste-dane.html#cb307-1" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb307-2"><a href="czyste-dane.html#cb307-2" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] </span>
+<span id="cb307-3"><a href="czyste-dane.html#cb307-3" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="st">&#39;!&#39;</span></span>
+<span id="cb307-4"><a href="czyste-dane.html#cb307-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stri_paste</span>(x, y, z)</span></code></pre></div>
+<pre><code>## [1] &quot;Aa!&quot; &quot;Bb!&quot; &quot;Cc!&quot;</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Przycinanie i wypełnianie.</li>
+</ol>
+<p>Funkcja <strong>stri_wrap()</strong> wstawia znaki nowego wiersza (<strong>n</strong>), by napis po wyświetleniu np. przy funkcji <strong>cat()</strong> miał szerokość nie większą, niż podana, jeżeli to możliwe.</p>
+<p>W przypadku przetwarzania tekstów pochodzących np. z formularzy na stronach internetowych może zachodzić potrzeba usunięcia tzw. białych znaków, np. spacji z początku lub końca napisu. Możemy to zrobić przy użyciu funkcji <strong>stri_trim()</strong>. Operacja w pewnym sensie odwrotną do tej można wykonać przy użyciu funkcji <strong>stri_pad()</strong>.</p>
+<p>Przykład:</p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="czyste-dane.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stri_trim</span>(<span class="st">&#39;            Mama i tata</span><span class="sc">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Mama i tata&quot;</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Formatowanie napisów na podstawie innych obiektów.
+Najprostszym sposobem na uzyskanie napisowej reprezentacji danego obiektu jest użycie funkcji <strong>as.character()</strong>.</li>
+</ol>
+<p>Przykład:</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="czyste-dane.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(<span class="fu">list</span>(1L, mean, <span class="cn">NULL</span>, pi, <span class="cn">FALSE</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;1&quot;                                       &quot;function (x, ...) \nUseMethod(\&quot;mean\&quot;)&quot;
+## [3] &quot;NULL&quot;                                    &quot;3.14159265358979&quot;                       
+## [5] &quot;FALSE&quot;</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="czyste-dane.html#cb313-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">a=</span><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>), <span class="at">b=</span><span class="fu">as.integer</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</span>
+<span id="cb313-2"><a href="czyste-dane.html#cb313-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;c(TRUE, FALSE, FALSE)&quot; &quot;1:3&quot;</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Zmiana pojedynczych znaków.
+Zmiana poszczególnych znaków na inne przydaje się między innymi na etapie wstępnego przygotowania danych w celu ujednolicenia tekstowych identyfikatorów obiektów, możemy np. zmieniać wielkości wszystkich liter w napisach.</li>
+</ol>
+<p>Przykład:</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="czyste-dane.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stri_trans_toupper</span>(<span class="st">&#39;chcemy duże litery&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;CHCEMY DUŻE LITERY&quot;</code></pre>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="czyste-dane.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stri_trans_tolower</span>(<span class="st">&#39;ChCemY MałE LiTErY&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;chcemy małe litery&quot;</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="czyste-dane.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stri_trans_char</span>(<span class="st">&#39;zastępowanie znaków&#39;</span>, <span class="st">&#39;ąćęłńóśżź&#39;</span>, <span class="st">&#39;acelnoszz&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;zastepowanie znakow&quot;</code></pre>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="czyste-dane.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stri_trans_general</span>(<span class="st">&#39;żółć&#39;</span>, <span class="st">&#39;Latin-ASCII&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;zolc&quot;</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Wyznaczanie podnapisów.
+Funkcja <strong>stri_sub()</strong> zwraca podnapis składający się ze znaków leżących na określonych pozycjach danego napisu.</li>
+</ol>
+<p>Przykład:</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="czyste-dane.html#cb323-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">&#39;Lasy, pola, pastwiska, koszą traktorem&#39;</span></span>
+<span id="cb323-2"><a href="czyste-dane.html#cb323-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stri_sub</span>(x, <span class="dv">7</span>)  </span></code></pre></div>
+<pre><code>## [1] &quot;pola, pastwiska, koszą traktorem&quot;</code></pre>
+</div>
+<div id="operacje-na-datach" class="section level3 hasAnchor" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> Operacje na datach<a href="czyste-dane.html#operacje-na-datach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Funkcją zwracającą aktualną datę systemową jest <strong>Sys.Date()</strong>, a <strong>Sys.time()</strong> aktualny czas systemowy wraz z datą.</li>
+</ol>
+<p>Przykład:</p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="czyste-dane.html#cb325-1" aria-hidden="true" tabindex="-1"></a>(data <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>())</span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-12&quot;</code></pre>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="czyste-dane.html#cb327-1" aria-hidden="true" tabindex="-1"></a>(czas <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>())</span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-12 00:42:21 CEST&quot;</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Operacje arytmetyczne na datach – dodawanie, odejmowanie i porównywanie.</li>
+</ol>
+<p>Przykład:</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="czyste-dane.html#cb329-1" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-12&quot;</code></pre>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="czyste-dane.html#cb331-1" aria-hidden="true" tabindex="-1"></a>data<span class="dv">-365</span></span></code></pre></div>
+<pre><code>## [1] &quot;2022-10-12&quot;</code></pre>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="czyste-dane.html#cb333-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">+</span><span class="dv">365</span></span></code></pre></div>
+<pre><code>## [1] &quot;2024-10-11&quot;</code></pre>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="czyste-dane.html#cb335-1" aria-hidden="true" tabindex="-1"></a>(d <span class="ot">&lt;-</span> data<span class="sc">-</span><span class="fu">as.Date</span>(<span class="st">&#39;2021-01-01&#39;</span>))</span></code></pre></div>
+<pre><code>## Time difference of 1014 days</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Do konwersji do napisu może służyć przeciążona wersja metody <strong>format()</strong>, której wywołanie jest tożsame z wywołaniem funkcji <strong>strftime()</strong> (ang. string-format-time).</li>
+</ol>
+<p>Przykład:</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="czyste-dane.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strftime</span>(czas, <span class="st">&#39;%Y-%m-%d %H:%M:%S %Z&#39;</span>)  </span></code></pre></div>
+<pre><code>## [1] &quot;2023-10-12 00:42:21 CEST&quot;</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Do znajdowania “najstarszej” i “najmłodszej” daty używamy funkcji <strong>max()</strong> oraz <strong>min()</strong>.</p></li>
+<li><p>Do pracy ze strefami czasowymi możemy używać poniższych funkcji:</p></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><strong>force_tz()</strong> ustawienie strefy czasowej,</li>
+<li><strong>with_tz()</strong> sprawdzenie daty w innej strefie czasowej.</li>
+</ol>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="przetwarzanie-danych-tabelarycznych.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="katarzyna-frankiewicz-maciej-grabias-jakub-michałowski.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-czyste-dane.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

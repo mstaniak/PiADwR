@@ -1,0 +1,36 @@
+--- 
+title: "Notatki z laboratoriów ,,Programowanie i analiza danych w R''"
+subtitle: "Instytut Matematyczny, Uniwersytet Wrocławski"
+author: "Mateusz Staniak"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  Notatki z laboratoriów Programowanie i analiza danych w R.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# Wstęp
+
+
+Autorzy poszczególnych rozdziałów:
+
+  - _Podstawy języka R_: Michał Dylewicz, Marcela Kamchen, Anna Krasoń, Katarzyna Kulon, Arkadiusz Soból (z wyjątkiem podrozdziału _Funkcje_).
+  - _Wczytywanie danych_: Marta Kałużna, Sebastian Jachimek, Joanna Grunwald, Wojciech Wojnar.
+  - _Eksploracyjna analiza danych_: Magdalena Mazur, Agata Rogowska, Zuzanna Różak, Aleksandra Siepiela. [Także podrozdział _Funkcje_ pierwszego rozdziału.]
+  - _Podstawy kontroli wersji z Gitem_: Magdalena Mazur, Agata Rogowska, Zuzanna Różak, Aleksandra Siepiela.
+  - _Przetwarzanie danych tabelarycznych_: Weronika Domaszewska, Ewelina Grzmocińska, Gracjan Hrynczyszyn, Dominik Jaźwiecki, Michał Ociepa.
+  - _Czyste dane_: Kacper Ambroży, Dominika Szewc, Radosław Szudra, Helena Wołoch.
+  - _Wizualizacja danych z pakietem ggplot2_: Katarzyna Frankiewicz, Maciej Grabias, Jakub Michałowski
+  - _Czysty i wydajny kod w R_: Paulina Bannert, Natalia Bercz, Piotr Mrozik, Dariusz Sudół, Monika Wyźnikiewicz
+  - _Interaktywna wizualizacja danych z pakietem shiny: interfejs użytkownika_: Stanisław Banaszek, Mateusz Drobina, Dominik Mika, Adrian Płoszczyca, Jakub Sobkowiak
+  - _Interaktywna wizualizacja danych z pakietem shiny: strona serwerowa_: Wojciech Leszkowicz, Małgorzata Stawińska, Tomasz Szmyd, Maciej Tadej.
+
+Dodatkowe rozdziały:
+  - _Podstawy kontroli wersji przy pomocy Gita_: Magdalena Mazur, Agata Rogowska, Zuzanna Różak, Aleksandra Siepiela.
+  - _Programowanie obiektowe w R: klasy S3_: Agata Cieślik.
+  - _Moduły w aplikacjach shiny_: Krystyna Grzesiak.
