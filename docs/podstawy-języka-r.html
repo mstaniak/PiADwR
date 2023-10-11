@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Podstawy języka R | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’</title>
+  <title>Rozdział2 Podstawy języka R | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’</title>
   <meta name="description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Podstawy języka R | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
+  <meta property="og:title" content="Rozdział2 Podstawy języka R | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Podstawy języka R | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
+  <meta name="twitter:title" content="Rozdział2 Podstawy języka R | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
   
   <meta name="twitter:description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
   
@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="podstawy-języka-r" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Podstawy języka R<a href="podstawy-języka-r.html#podstawy-języka-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Rozdział2</span> Podstawy języka R<a href="podstawy-języka-r.html#podstawy-języka-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Język R posiada kilka typów danych, które pokrótce postaramy sie omówić poniżej. Pokażemy ich budowe jak i operacje na nich, przytaczając stosowne przyklady.</p>
 <div id="liczby" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Liczby<a href="podstawy-języka-r.html#liczby" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -802,7 +802,7 @@ Dane z ramki mogą być przez nas “filtrowane” za pomocą []. Na przykład</
 <span id="cb239-7"><a href="podstawy-języka-r.html#cb239-7" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb239-8"><a href="podstawy-języka-r.html#cb239-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Liczba &quot;</span>, x_norm, <span class="st">&quot;jest dodatnia&quot;</span>)</span>
 <span id="cb239-9"><a href="podstawy-języka-r.html#cb239-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## Liczba  1.31791 jest dodatnia</code></pre>
+<pre><code>## Liczba -0.6126401 jest ujemna</code></pre>
 <p>Możemy chcieć wykonać różne operacje na tak wylosowanej liczbie. Przykładowo, jeśli będzie ujemna, to zmienić znak, zaokrąglić i zreplikować w wektorze</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="podstawy-języka-r.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x_norm <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
 <span id="cb241-2"><a href="podstawy-języka-r.html#cb241-2" aria-hidden="true" tabindex="-1"></a>{</span>
@@ -812,7 +812,7 @@ Dane z ramki mogą być przez nas “filtrowane” za pomocą []. Na przykład</
 <span id="cb241-6"><a href="podstawy-języka-r.html#cb241-6" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb241-7"><a href="podstawy-języka-r.html#cb241-7" aria-hidden="true" tabindex="-1"></a>  x_wek <span class="ot">&lt;-</span> <span class="st">&quot;X&quot;</span></span>
 <span id="cb241-8"><a href="podstawy-języka-r.html#cb241-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>i otrzymać X (X oznacza, że wylosowana liczba była dodatnia, a z nią nic nie robimy).</p>
+<p>i otrzymać 0.61, 0.61, 0.61, 0.61, 0.61 (X oznacza, że wylosowana liczba była dodatnia, a z nią nic nie robimy).</p>
 <p>Pętla <span class="math inline">\(\verb+while+\)</span> działa tak długo, dopóki warunek jest spełniony - tzn. do kiedy nie dostaniemy <span class="math inline">\(\verb+FALSE+\)</span>. Warunek należy opisać tak, żeby w pewnym momencie został spełniony - inaczej pętla będzie działać w “nieskończoność”. Często używa sie jej do szukania losowych liczb o pewnych właściwościach.</p>
 <p>Składnia tej pętli jest następująca:</p>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="podstawy-języka-r.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(warunek)</span>
@@ -831,7 +831,7 @@ Dane z ramki mogą być przez nas “filtrowane” za pomocą []. Na przykład</
 <span id="cb243-8"><a href="podstawy-języka-r.html#cb243-8" aria-hidden="true" tabindex="-1"></a>  roznica <span class="ot">&lt;-</span> los[i]<span class="sc">-</span>los[i<span class="dv">-1</span>]</span>
 <span id="cb243-9"><a href="podstawy-języka-r.html#cb243-9" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">=</span> i<span class="sc">+</span><span class="dv">1</span></span>
 <span id="cb243-10"><a href="podstawy-języka-r.html#cb243-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>W ten sposób dostajemy wylosowane liczby: 0, 11, 29, z różnicą między ostatnimi równą 18.</p>
+<p>W ten sposób dostajemy wylosowane liczby: 0, 95, 44, 33, 7, z różnicą między ostatnimi równą -26.</p>
 <p>Pętla <span class="math inline">\(\verb+for+\)</span> wygląda następująco:</p>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="podstawy-języka-r.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(iterator <span class="cf">in</span> warunek)</span>
 <span id="cb244-2"><a href="podstawy-języka-r.html#cb244-2" aria-hidden="true" tabindex="-1"></a>{</span>

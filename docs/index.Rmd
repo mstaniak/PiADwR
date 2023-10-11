@@ -16,7 +16,6 @@ github-repo: rstudio/bookdown-demo
 
 # Wstęp
 
-
 Autorzy poszczególnych rozdziałów:
 
   - _Podstawy języka R_: Michał Dylewicz, Marcela Kamchen, Anna Krasoń, Katarzyna Kulon, Arkadiusz Soból (z wyjątkiem podrozdziału _Funkcje_).
