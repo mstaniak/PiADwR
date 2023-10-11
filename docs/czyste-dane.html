@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Rozdział6 Czyste dane | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’</title>
+  <title>6 Czyste dane | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’</title>
   <meta name="description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Rozdział6 Czyste dane | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
+  <meta property="og:title" content="6 Czyste dane | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Rozdział6 Czyste dane | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
+  <meta name="twitter:title" content="6 Czyste dane | Notatki z laboratoriów ,,Programowanie i analiza danych w R’’" />
   
   <meta name="twitter:description" content="Notatki z laboratoriów Programowanie i analiza danych w R." />
   
@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="czyste-dane" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Rozdział6</span> Czyste dane<a href="czyste-dane.html#czyste-dane" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">6</span> Czyste dane<a href="czyste-dane.html#czyste-dane" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Transformacja danych jest niezwykle ważnym elementem dobrze zrobionego raportu. Dane te powinny być prezentowane w sposób czytelny i ułatwiający ich porównywanie. To od potrzeby biznesowej zależy w jaki sposób powinniśmy przedstwiać dane. Np. dysponując wynikami finansowymi zbieranymi co miesiąc przez trzy lata bo planowania budżetu na następny rok przyda nam się prezentacja ich w formacie wąskim, czyli skupionym na wydatkach względem każdego roku. Jednakże, jeżeli chcielibyśmy kontrolować wydatki w tym następnym roku prezentacja danych w formacie szerokim będzie bardziej korzystna, gdyż będziemy mieli informację ile średnio wydajemy w danym miesiącu i na bieżąco będziemy mogli podejmować decyzję o inwestowaniu lub zaciskaniu pasa.</p>
 <p>Niekiedy jednak dane mają bardziej skomplikowaną formę i np. składają się z wielu tabel. Wówczas dla łatwiejszego uzyskania informacji biznesowej będzie połączenie tych tabel. Takie operacje w połączeniu z odpowiednią agregacją i grupowaniem zdecydowanie ułatwia wgląd w aktualną sytuację.</p>
 <p>Ostatnim tematem, na temat któtego ta notatka traktuje są operacje na napisach i datach. Bardzo łatwo uzmysłowić sobie przydatność w posługiwaniu się takimi operacjami. Ułatwia to konstruowanie prostych funkcji, które są kluczowe w każdym projekcie. Chociażby bazując na imionach i nazwiskach pewnych obywateli Polski łatwo wskazać z dużą pewnością kobiety w tym zbiorze sprawdzając ostatnią literę ich imienia (tj. czy dane imie kończy się na literę “a”).</p>
@@ -1615,7 +1615,7 @@ Funkcja <strong>stri_sub()</strong> zwraca podnapis składający się ze znaków
 <div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="czyste-dane.html#cb325-1" aria-hidden="true" tabindex="-1"></a>(data <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>())</span></code></pre></div>
 <pre><code>## [1] &quot;2023-10-12&quot;</code></pre>
 <div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="czyste-dane.html#cb327-1" aria-hidden="true" tabindex="-1"></a>(czas <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>())</span></code></pre></div>
-<pre><code>## [1] &quot;2023-10-12 00:52:30 CEST&quot;</code></pre>
+<pre><code>## [1] &quot;2023-10-12 00:54:00 CEST&quot;</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Operacje arytmetyczne na datach – dodawanie, odejmowanie i porównywanie.</li>
 </ol>
@@ -1633,7 +1633,7 @@ Funkcja <strong>stri_sub()</strong> zwraca podnapis składający się ze znaków
 </ol>
 <p>Przykład:</p>
 <div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="czyste-dane.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strftime</span>(czas, <span class="st">&#39;%Y-%m-%d %H:%M:%S %Z&#39;</span>)  </span></code></pre></div>
-<pre><code>## [1] &quot;2023-10-12 00:52:30 CEST&quot;</code></pre>
+<pre><code>## [1] &quot;2023-10-12 00:54:00 CEST&quot;</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Do znajdowania “najstarszej” i “najmłodszej” daty używamy funkcji <strong>max()</strong> oraz <strong>min()</strong>.</p></li>
 <li><p>Do pracy ze strefami czasowymi możemy używać poniższych funkcji:</p></li>
