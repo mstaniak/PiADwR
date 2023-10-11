@@ -31,6 +31,7 @@ Autorzy poszczególnych rozdziałów:
   - _Interaktywna wizualizacja danych z pakietem shiny: strona serwerowa_: Wojciech Leszkowicz, Małgorzata Stawińska, Tomasz Szmyd, Maciej Tadej.
 
 Dodatkowe rozdziały:
+
   - _Podstawy kontroli wersji przy pomocy Gita_: Magdalena Mazur, Agata Rogowska, Zuzanna Różak, Aleksandra Siepiela.
   - _Programowanie obiektowe w R: klasy S3_: Agata Cieślik.
   - _Moduły w aplikacjach shiny_: Krystyna Grzesiak.

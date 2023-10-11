@@ -802,7 +802,7 @@ Dane z ramki mogą być przez nas “filtrowane” za pomocą []. Na przykład</
 <span id="cb239-7"><a href="podstawy-języka-r.html#cb239-7" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb239-8"><a href="podstawy-języka-r.html#cb239-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Liczba &quot;</span>, x_norm, <span class="st">&quot;jest dodatnia&quot;</span>)</span>
 <span id="cb239-9"><a href="podstawy-języka-r.html#cb239-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## Liczba  1.19251 jest dodatnia</code></pre>
+<pre><code>## Liczba  0.333467 jest dodatnia</code></pre>
 <p>Możemy chcieć wykonać różne operacje na tak wylosowanej liczbie. Przykładowo, jeśli będzie ujemna, to zmienić znak, zaokrąglić i zreplikować w wektorze</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="podstawy-języka-r.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x_norm <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
 <span id="cb241-2"><a href="podstawy-języka-r.html#cb241-2" aria-hidden="true" tabindex="-1"></a>{</span>
@@ -831,7 +831,7 @@ Dane z ramki mogą być przez nas “filtrowane” za pomocą []. Na przykład</
 <span id="cb243-8"><a href="podstawy-języka-r.html#cb243-8" aria-hidden="true" tabindex="-1"></a>  roznica <span class="ot">&lt;-</span> los[i]<span class="sc">-</span>los[i<span class="dv">-1</span>]</span>
 <span id="cb243-9"><a href="podstawy-języka-r.html#cb243-9" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">=</span> i<span class="sc">+</span><span class="dv">1</span></span>
 <span id="cb243-10"><a href="podstawy-języka-r.html#cb243-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>W ten sposób dostajemy wylosowane liczby: 0, 91, 35, z różnicą między ostatnimi równą -56.</p>
+<p>W ten sposób dostajemy wylosowane liczby: 0, 86, z różnicą między ostatnimi równą 86.</p>
 <p>Pętla <span class="math inline">\(\verb+for+\)</span> wygląda następująco:</p>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="podstawy-języka-r.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(iterator <span class="cf">in</span> warunek)</span>
 <span id="cb244-2"><a href="podstawy-języka-r.html#cb244-2" aria-hidden="true" tabindex="-1"></a>{</span>
