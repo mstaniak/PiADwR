@@ -99,11 +99,7 @@ shinyApp(ui, server)
 
 Aplikacja wygląda następująco:
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=700pt, height = 300 pt]{img/app_screen1.PNG}
-\end{figure}
-\end{center}
+![](img/app_screen1.png)
 
 W naszej przestrzeni wykorzystaliśmy nazwy: 
 
