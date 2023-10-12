@@ -52,7 +52,7 @@ join
 operacje-na-napisach-i-datach
 operacje-na-napisach
 operacje-na-datach
-katarzyna-frankiewicz-maciej-grabias-jakub-michałowski
+wizualizacja-danych-z-pakietem-ggplot2
 wprowadzenie
 gramatyka-grafiki
 podstawy-tworzenia-wykresów-w-ggplot2
@@ -85,6 +85,7 @@ przykładowe-elementy-wyjścia
 przykład-użycia
 wygląd-aplikacji
 uwaga
+interaktywna-wizualizacja-danych-z-pakietem-shiny-strona-serwerowa
 wstęp-2
 serwer-shiny
 podstawy-kontroli-wersji-przy-pomocy-gita

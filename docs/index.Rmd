@@ -16,6 +16,8 @@ github-repo: rstudio/bookdown-demo
 
 # Wstęp
 
+Zaliczenie przedmiotu opiera się głównie na projekcie grupowym. Przykładowy projekt z poprzednich edycji: [SpotifyViz](https://asimon.shinyapps.io/SpotifyViz/).
+
 Autorzy poszczególnych rozdziałów:
 
   - _Podstawy języka R_: Michał Dylewicz, Marcela Kamchen, Anna Krasoń, Katarzyna Kulon, Arkadiusz Soból (z wyjątkiem podrozdziału _Funkcje_).
@@ -34,3 +36,4 @@ Dodatkowe rozdziały:
   - _Podstawy kontroli wersji przy pomocy Gita_: Magdalena Mazur, Agata Rogowska, Zuzanna Różak, Aleksandra Siepiela.
   - _Programowanie obiektowe w R: klasy S3_: Agata Cieślik.
   - _Moduły w aplikacjach shiny_: Krystyna Grzesiak.
+
