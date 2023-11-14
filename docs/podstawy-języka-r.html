@@ -23,7 +23,7 @@
 <meta name="author" content="Mateusz Staniak" />
 
 
-<meta name="date" content="2023-10-12" />
+<meta name="date" content="2023-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -460,7 +460,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Wektory możemy również indeksować za pomocą wektorów logicznych. Działa to wtedy jak wybieranie tych elementów wektora, które spełniają ustalony warunek.</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="podstawy-języka-r.html#cb100-1" aria-hidden="true" tabindex="-1"></a>x_ind <span class="ot">&lt;-</span> new_letters <span class="sc">==</span> <span class="st">&quot;x&quot;</span></span>
 <span id="cb100-2"><a href="podstawy-języka-r.html#cb100-2" aria-hidden="true" tabindex="-1"></a>x_ind</span></code></pre></div>
-<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [21] FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="podstawy-języka-r.html#cb102-1" aria-hidden="true" tabindex="-1"></a>new_letters[x_ind]</span></code></pre></div>
 <pre><code>## [1] &quot;x&quot; &quot;x&quot; &quot;x&quot; &quot;x&quot; &quot;x&quot; &quot;x&quot;</code></pre>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="podstawy-języka-r.html#cb104-1" aria-hidden="true" tabindex="-1"></a>seq_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">10</span>)</span>
@@ -797,7 +798,7 @@ Dane z ramki mogą być przez nas “filtrowane” za pomocą []. Na przykład</
 <span id="cb239-7"><a href="podstawy-języka-r.html#cb239-7" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb239-8"><a href="podstawy-języka-r.html#cb239-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Liczba &quot;</span>, x_norm, <span class="st">&quot;jest dodatnia&quot;</span>)</span>
 <span id="cb239-9"><a href="podstawy-języka-r.html#cb239-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## Liczba -0.6045206 jest ujemna</code></pre>
+<pre><code>## Liczba -1.563892 jest ujemna</code></pre>
 <p>Możemy chcieć wykonać różne operacje na tak wylosowanej liczbie. Przykładowo, jeśli będzie ujemna, to zmienić znak, zaokrąglić i zreplikować w wektorze</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="podstawy-języka-r.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x_norm <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
 <span id="cb241-2"><a href="podstawy-języka-r.html#cb241-2" aria-hidden="true" tabindex="-1"></a>{</span>
@@ -807,7 +808,7 @@ Dane z ramki mogą być przez nas “filtrowane” za pomocą []. Na przykład</
 <span id="cb241-6"><a href="podstawy-języka-r.html#cb241-6" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb241-7"><a href="podstawy-języka-r.html#cb241-7" aria-hidden="true" tabindex="-1"></a>  x_wek <span class="ot">&lt;-</span> <span class="st">&quot;X&quot;</span></span>
 <span id="cb241-8"><a href="podstawy-języka-r.html#cb241-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>i otrzymać 0.6, 0.6, 0.6, 0.6, 0.6 (X oznacza, że wylosowana liczba była dodatnia, a z nią nic nie robimy).</p>
+<p>i otrzymać 1.56, 1.56, 1.56, 1.56, 1.56 (X oznacza, że wylosowana liczba była dodatnia, a z nią nic nie robimy).</p>
 <p>Pętla <span class="math inline">\(\verb+while+\)</span> działa tak długo, dopóki warunek jest spełniony - tzn. do kiedy nie dostaniemy <span class="math inline">\(\verb+FALSE+\)</span>. Warunek należy opisać tak, żeby w pewnym momencie został spełniony - inaczej pętla będzie działać w “nieskończoność”. Często używa sie jej do szukania losowych liczb o pewnych właściwościach.</p>
 <p>Składnia tej pętli jest następująca:</p>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="podstawy-języka-r.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(warunek)</span>
@@ -826,7 +827,7 @@ Dane z ramki mogą być przez nas “filtrowane” za pomocą []. Na przykład</
 <span id="cb243-8"><a href="podstawy-języka-r.html#cb243-8" aria-hidden="true" tabindex="-1"></a>  roznica <span class="ot">&lt;-</span> los[i]<span class="sc">-</span>los[i<span class="dv">-1</span>]</span>
 <span id="cb243-9"><a href="podstawy-języka-r.html#cb243-9" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">=</span> i<span class="sc">+</span><span class="dv">1</span></span>
 <span id="cb243-10"><a href="podstawy-języka-r.html#cb243-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>W ten sposób dostajemy wylosowane liczby: 0, 85, 75, z różnicą między ostatnimi równą -10.</p>
+<p>W ten sposób dostajemy wylosowane liczby: 0, 5, 37, z różnicą między ostatnimi równą 32.</p>
 <p>Pętla <span class="math inline">\(\verb+for+\)</span> wygląda następująco:</p>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="podstawy-języka-r.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(iterator <span class="cf">in</span> warunek)</span>
 <span id="cb244-2"><a href="podstawy-języka-r.html#cb244-2" aria-hidden="true" tabindex="-1"></a>{</span>
@@ -911,16 +912,17 @@ do funkcji <span class="math inline">\(\verb+FUN+\)</span> przekazać można kil
 <span id="cb254-3"><a href="podstawy-języka-r.html#cb254-3" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(m1,x,mean)</span></code></pre></div>
 <pre><code>## x: a
 ## [1] 4
-## ------------------------------------------------------------------------------------------------------------------------------------------------------ 
+## ----------------------------------------------------------------------------------------------- 
 ## x: b
 ## [1] 5
-## ------------------------------------------------------------------------------------------------------------------------------------------------------ 
+## ----------------------------------------------------------------------------------------------- 
 ## x: c
 ## [1] 6</code></pre>
 <p>Z kolei <span class="math inline">\(\verb+mapply()+\)</span> to wielowymiarowy odpowiednik funkcji <span class="math inline">\(\verb+sapply()+\)</span>. Argumentami tej funkcji jest funkcja <span class="math inline">\(\verb+fun+\)</span> oraz kilka (dwa lub więcej) wektorów o tej samej długości. Wynikiem jest wektor, w którym na pozycji <span class="math inline">\(\verb+i+\)</span>-tej jest wynik funkcji <span class="math inline">\(\verb+fun+\)</span> wywołanej z <span class="math inline">\(\verb+i+\)</span>-tych elementów wektorów będących argumentami.</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="podstawy-języka-r.html#cb256-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="cf">function</span>(x,y){<span class="fu">return</span>(x<span class="sc">**</span>y)}</span>
 <span id="cb256-2"><a href="podstawy-języka-r.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mapply</span>(a,<span class="at">x=</span><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">101</span>,<span class="at">by=</span><span class="dv">10</span>),<span class="at">y=</span><span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>))</span></code></pre></div>
-<pre><code>##  [1] 1.000000e+00 1.210000e+02 9.261000e+03 9.235210e+05 1.158562e+08 1.759629e+10 3.142743e+12 6.457535e+14 1.500946e+17 3.894161e+19 1.115668e+22</code></pre>
+<pre><code>##  [1] 1.000000e+00 1.210000e+02 9.261000e+03 9.235210e+05 1.158562e+08 1.759629e+10 3.142743e+12 6.457535e+14 1.500946e+17
+## [10] 3.894161e+19 1.115668e+22</code></pre>
 </div>
 <div id="r---funkcje" class="section level2 hasAnchor" number="2.7">
 <h2><span class="header-section-number">2.7</span> R - funkcje<a href="podstawy-języka-r.html#r---funkcje" class="anchor-section" aria-label="Anchor link to header"></a></h2>

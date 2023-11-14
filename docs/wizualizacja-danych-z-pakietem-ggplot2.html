@@ -23,7 +23,7 @@
 <meta name="author" content="Mateusz Staniak" />
 
 
-<meta name="date" content="2023-10-12" />
+<meta name="date" content="2023-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -347,20 +347,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Do dodawania nowych warstw do wykresu używamy symbolu “+” .</p>
 <div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Budujemy podstawę wykresu, określając z jakich danych będziemy korzytsać</span></span>
 <span id="cb341-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg)</span></code></pre></div>
-<p><img src="_main_files/figure-html/first%20plot-1.png" width="192" style="display: block; margin: auto;" /></p>
+<p><img src="main_files/unnamed-chunk-125-1.png" width="672" /></p>
 <div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapujemy dane ( na osiach pojawiły się odpowiednie podziałki)</span></span>
 <span id="cb342-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb342-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg , <span class="fu">aes</span>( <span class="at">x =</span> displ, <span class="at">y =</span> hwy))</span></code></pre></div>
-<p><img src="_main_files/figure-html/first%20plot-2.png" width="192" style="display: block; margin: auto;" /></p>
+<p><img src="main_files/unnamed-chunk-125-2.png" width="672" /></p>
 <div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Określamy styl wykresu, dzięki czemu dostemy wykres odpwiednich zależności</span></span>
 <span id="cb343-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg , <span class="fu">aes</span>( <span class="at">x =</span> displ, <span class="at">y =</span> hwy))<span class="sc">+</span></span>
 <span id="cb343-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb343-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/first%20plot-3.png" width="192" style="display: block; margin: auto;" /></p>
+<p><img src="main_files/unnamed-chunk-125-3.png" width="672" /></p>
 <div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Personalizujemy wykres poprzez dodanie tytułu oraz określenie motywu wykresu</span></span>
 <span id="cb344-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb344-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg , <span class="fu">aes</span>( <span class="at">x =</span> displ, <span class="at">y =</span> hwy))<span class="sc">+</span></span>
 <span id="cb344-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb344-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
 <span id="cb344-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb344-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;disp vs hwy&quot;</span>)<span class="sc">+</span></span>
 <span id="cb344-5"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb344-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/first%20plot-4.png" width="192" style="display: block; margin: auto;" /></p>
+<p><img src="main_files/unnamed-chunk-125-4.png" width="672" /></p>
 </div>
 <div id="mapowanie" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Mapowanie<a href="wizualizacja-danych-z-pakietem-ggplot2.html#mapowanie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -373,13 +373,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb345-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb345-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;displ vs hwy&quot;</span>)<span class="sc">+</span></span>
 <span id="cb345-5"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb345-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>( <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">1</span>))<span class="sc">+</span></span>
 <span id="cb345-6"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb345-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/mapping%20plot-1.png" width="240" style="display: block; margin: auto;" /></p>
+<p><img src="main_files/unnamed-chunk-126-1.png" width="672" /></p>
 <div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Punkty na wykresie to czerwone kropki</span></span>
 <span id="cb346-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb346-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb346-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb346-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
 <span id="cb346-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb346-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;displ vs hwy&quot;</span>)<span class="sc">+</span></span>
 <span id="cb346-5"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb346-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/mapping%20plot-2.png" width="240" style="display: block; margin: auto;" /></p>
+<p><img src="main_files/unnamed-chunk-126-2.png" width="672" /></p>
 </div>
 <div id="geometria-wykresu" class="section level2 hasAnchor" number="7.5">
 <h2><span class="header-section-number">7.5</span> Geometria wykresu<a href="wizualizacja-danych-z-pakietem-ggplot2.html#geometria-wykresu" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -399,15 +399,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Na wykresach liniowych model jest dopasowywany do danych, a nastęonie wykreślane są przewidywania wyznaczone przez model</li>
 <li>Wykresy pudełkowe obliczają kompleksowe podsumowanie rozkładu wartości</li>
 </ul>
-<p>Poniżej przedstawione są dwa przykładowe typy wykresów. Pierwszy narysowany przy użyciu funkcji <em>geom_smooth</em>, która służy do rysowania wygładzonych linii, np. dla prostych trendów. Drugi wykres powstał przy zastosowaniu funkcji <em>geom_histogram</em>.
-<img src="_main_files/figure-html/geom%20plot-1.png" width="480" style="display: block; margin: auto;" /><img src="_main_files/figure-html/geom%20plot-2.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Poniżej przedstawione są dwa przykładowe typy wykresów. Pierwszy narysowany przy użyciu funkcji <em>geom_smooth</em>, która służy do rysowania wygładzonych linii, np. dla prostych trendów. Drugi wykres powstał przy zastosowaniu funkcji <em>geom_histogram</em>.</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb347-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb347-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="main_files/geomplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb349-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb349-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="main_files/geomplot-2.png" width="672" /></p>
 <p>W pakiecie <em>ggplot2</em> bardzo prosto możemy łączyć ze sobą różne geometrie na jednym wykresie. Wystarczy wstawić znak “+” pomiędzy odpowiednimi funkcjami.</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg , <span class="fu">aes</span>( <span class="at">x =</span> displ, <span class="at">y =</span> hwy))<span class="sc">+</span></span>
-<span id="cb347-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb347-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb347-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb347-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
-<span id="cb347-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb347-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Multiple geomteries&quot;</span>)<span class="sc">+</span></span>
-<span id="cb347-5"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb347-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/two%20geoms%20on%20plot-1.png" width="480" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg , <span class="fu">aes</span>( <span class="at">x =</span> displ, <span class="at">y =</span> hwy))<span class="sc">+</span></span>
+<span id="cb351-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb351-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb351-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb351-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb351-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb351-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Multiple geomteries&quot;</span>)<span class="sc">+</span></span>
+<span id="cb351-5"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb351-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="main_files/unnamed-chunk-127-1.png" width="672" /></p>
 </div>
 <div id="funkcje-pomagające-poprawić-czytelność-wykresu" class="section level2 hasAnchor" number="7.6">
 <h2><span class="header-section-number">7.6</span> Funkcje pomagające poprawić czytelność wykresu<a href="wizualizacja-danych-z-pakietem-ggplot2.html#funkcje-pomagające-poprawić-czytelność-wykresu" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -424,11 +432,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="dopasowanie-położenia" class="section level3 hasAnchor" number="7.6.2">
 <h3><span class="header-section-number">7.6.2</span> Dopasowanie położenia<a href="wizualizacja-danych-z-pakietem-ggplot2.html#dopasowanie-położenia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Każda geometria w <em>ggplot2</em> ma ustawione domyślne położenie różnych elementów na wykresie względem siebie. Różne opcje ustawienia położenia są dobrze widoczne na wykresach słupkowych. Zacznijmy od stworzenia zwykłego wykresu słupkowego, bez żadnych dodatkowych funkcji.</p>
-<p><img src="_main_files/figure-html/dopasowanie%20po%C5%82o%C5%BCenia-1.png" width="480" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span> </span>
+<span id="cb353-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb353-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="main_files/unnamed-chunk-128-1.png" width="672" /></p>
 <p>Jeżeli teraz do mapowania dodamy opcję <em>fill = dvr</em>, to każdy prostokąt będzie reprezentował kombinację wartości class oraz dvr.</p>
-<p><img src="_main_files/figure-html/dopasowanie%20po%C5%82o%C5%BCenia2-1.png" width="480" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span> </span>
+<span id="cb354-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb354-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb354-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb354-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))<span class="sc">+</span></span>
+<span id="cb354-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb354-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="main_files/unnamed-chunk-129-1.png" width="672" /></p>
 <p>Takie przedstawienie danych nie dla każdego może być czytelne, dlatego możemy skorzystać z opcji <em>position</em>, która przyjmuje m.in. argumenty: “dodge” i “fill”.</p>
-<p><img src="_main_files/figure-html/dopasowanie%20po%C5%82o%C5%BCenia3-1.png" width="480" style="display: block; margin: auto;" /><img src="_main_files/figure-html/dopasowanie%20po%C5%82o%C5%BCenia3-2.png" width="480" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span> </span>
+<span id="cb355-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb355-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>)<span class="sc">+</span></span>
+<span id="cb355-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb355-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot; Plot for dodge position&quot;</span>)<span class="sc">+</span></span>
+<span id="cb355-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb355-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="main_files/unnamed-chunk-130-1.png" width="672" /></p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span> </span>
+<span id="cb356-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb356-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;fill&quot;</span>)<span class="sc">+</span></span>
+<span id="cb356-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb356-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot; Plot for fill position&quot;</span>)<span class="sc">+</span></span>
+<span id="cb356-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb356-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="main_files/unnamed-chunk-130-2.png" width="672" /></p>
 </div>
 <div id="zarządzanie-osiami-współrzędnych" class="section level3 hasAnchor" number="7.6.3">
 <h3><span class="header-section-number">7.6.3</span> Zarządzanie osiami współrzędnych<a href="wizualizacja-danych-z-pakietem-ggplot2.html#zarządzanie-osiami-współrzędnych" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -441,13 +464,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>xlim(5,40)</em> powoduje ograniczenie podziałki na osi x od 5 do 40 (analogicznie z ylim)</li>
 </ul>
 <p>W <em>ggplot2</em> z łatwością także dodamy etykiety tekstowe oraz adnotacje. Do wykresu możemy dodać tytuł oraz nazwy osi korzystając m.in. z funkcji <em>labs()</em>.</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
-<span id="cb348-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb348-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb348-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb348-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Fuel Efficiency by Engine Power&quot;</span>,</span>
-<span id="cb348-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb348-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Engine power&quot;</span>,</span>
-<span id="cb348-5"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb348-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Fuel Efficiency&quot;</span>,</span>
-<span id="cb348-6"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb348-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Car Type&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/zarz%C4%85dzanaie%20osiami%20wsp%C3%B3%C5%82rz%C4%99dnych-1.png" width="384" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb357-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb357-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb357-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb357-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Fuel Efficiency by Engine Power&quot;</span>,</span>
+<span id="cb357-4"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb357-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Engine power&quot;</span>,</span>
+<span id="cb357-5"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb357-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Fuel Efficiency&quot;</span>,</span>
+<span id="cb357-6"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb357-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Car Type&quot;</span>)</span></code></pre></div>
+<p><img src="main_files/unnamed-chunk-131-1.png" width="672" /></p>
 </div>
 <div id="motywy" class="section level3 hasAnchor" number="7.6.4">
 <h3><span class="header-section-number">7.6.4</span> Motywy<a href="wizualizacja-danych-z-pakietem-ggplot2.html#motywy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -462,10 +485,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><em>facet_wrap()</em>, która ustawia panele w prostokątnym układzie</li>
 <li><em>facet_grid()</em>, która ustawia panele w kolumny lub w wiersze (zależnie jaką opcję wybierzemy)</li>
 </ul>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
-<span id="cb349-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb349-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb349-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb349-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> class)</span></code></pre></div>
-<p><img src="_main_files/figure-html/panele-1.png" width="384" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb358-2"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb358-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb358-3"><a href="wizualizacja-danych-z-pakietem-ggplot2.html#cb358-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> class)</span></code></pre></div>
+<p><img src="main_files/unnamed-chunk-132-1.png" width="672" /></p>
 <p><strong>Uwaga!</strong></p>
 <p>Aby zadać względem, której zmiennej chcemy grupować, w funkcji ‘facet_’ po znaku “~”, podajemy nazwę tej zmiennej.</p>
 <p>Kiedy korzystamy z funkcji tworzącej panele, automatycznie wszytskie wykresy będą pokazane w układzie współrzędnych dopasowanym do wszytkich okienek. Istnieje jednak możliwość dopasowania układu współrzędnych do każdego panelu osobno. W tym celu możemy wykorzystać funcję ‘scale = “free”’.</p>

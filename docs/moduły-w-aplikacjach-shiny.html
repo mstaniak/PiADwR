@@ -23,7 +23,7 @@
 <meta name="author" content="Mateusz Staniak" />
 
 
-<meta name="date" content="2023-10-12" />
+<meta name="date" content="2023-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -335,77 +335,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="jak-używać-modułów-shiny" class="section level3 hasAnchor" number="13.2.1">
 <h3><span class="header-section-number">13.2.1</span> Jak używać modułów Shiny?<a href="moduły-w-aplikacjach-shiny.html#jak-używać-modułów-shiny" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Rozważmy aplikację składającą się z dwóch paneli - każdy z wykresem i danymi dla dwóch rozkładów, otrzymaną za pomocą poniższego kodu:</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="moduły-w-aplikacjach-shiny.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb447-2"><a href="moduły-w-aplikacjach-shiny.html#cb447-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb447-3"><a href="moduły-w-aplikacjach-shiny.html#cb447-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb447-4"><a href="moduły-w-aplikacjach-shiny.html#cb447-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb447-5"><a href="moduły-w-aplikacjach-shiny.html#cb447-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
-<span id="cb447-6"><a href="moduły-w-aplikacjach-shiny.html#cb447-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy panel dla rozkładu normalnego</span></span>
-<span id="cb447-7"><a href="moduły-w-aplikacjach-shiny.html#cb447-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Rozkład normalny&quot;</span>,</span>
-<span id="cb447-8"><a href="moduły-w-aplikacjach-shiny.html#cb447-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">tabsetPanel</span>(</span>
-<span id="cb447-9"><a href="moduły-w-aplikacjach-shiny.html#cb447-9" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tabPanel</span>(</span>
-<span id="cb447-10"><a href="moduły-w-aplikacjach-shiny.html#cb447-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Wykres&quot;</span>,</span>
-<span id="cb447-11"><a href="moduły-w-aplikacjach-shiny.html#cb447-11" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">numericInput</span>(<span class="at">inputId =</span> <span class="st">&quot;normal_n&quot;</span>,</span>
-<span id="cb447-12"><a href="moduły-w-aplikacjach-shiny.html#cb447-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label =</span> <span class="st">&quot;Podaj wielkość próby&quot;</span>, </span>
-<span id="cb447-13"><a href="moduły-w-aplikacjach-shiny.html#cb447-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">value =</span> <span class="dv">1000</span>),</span>
-<span id="cb447-14"><a href="moduły-w-aplikacjach-shiny.html#cb447-14" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">plotOutput</span>(<span class="st">&quot;normal_plot&quot;</span>)</span>
-<span id="cb447-15"><a href="moduły-w-aplikacjach-shiny.html#cb447-15" aria-hidden="true" tabindex="-1"></a>               ),</span>
-<span id="cb447-16"><a href="moduły-w-aplikacjach-shiny.html#cb447-16" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tabPanel</span>(</span>
-<span id="cb447-17"><a href="moduły-w-aplikacjach-shiny.html#cb447-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Dane&quot;</span>,</span>
-<span id="cb447-18"><a href="moduły-w-aplikacjach-shiny.html#cb447-18" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">tableOutput</span>(<span class="st">&quot;normal_data&quot;</span>)</span>
-<span id="cb447-19"><a href="moduły-w-aplikacjach-shiny.html#cb447-19" aria-hidden="true" tabindex="-1"></a>               )</span>
-<span id="cb447-20"><a href="moduły-w-aplikacjach-shiny.html#cb447-20" aria-hidden="true" tabindex="-1"></a>             )</span>
-<span id="cb447-21"><a href="moduły-w-aplikacjach-shiny.html#cb447-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb447-22"><a href="moduły-w-aplikacjach-shiny.html#cb447-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy panel dla rozkładu wykładniczego</span></span>
-<span id="cb447-23"><a href="moduły-w-aplikacjach-shiny.html#cb447-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Rozkład wykładniczy&quot;</span>,</span>
-<span id="cb447-24"><a href="moduły-w-aplikacjach-shiny.html#cb447-24" aria-hidden="true" tabindex="-1"></a>             <span class="fu">tabsetPanel</span>(</span>
-<span id="cb447-25"><a href="moduły-w-aplikacjach-shiny.html#cb447-25" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tabPanel</span>(</span>
-<span id="cb447-26"><a href="moduły-w-aplikacjach-shiny.html#cb447-26" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;wykres&quot;</span>,</span>
-<span id="cb447-27"><a href="moduły-w-aplikacjach-shiny.html#cb447-27" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">numericInput</span>(<span class="at">inputId =</span> <span class="st">&quot;exp_n&quot;</span>,</span>
-<span id="cb447-28"><a href="moduły-w-aplikacjach-shiny.html#cb447-28" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label =</span> <span class="st">&quot;Podaj wielkość próby&quot;</span>, </span>
-<span id="cb447-29"><a href="moduły-w-aplikacjach-shiny.html#cb447-29" aria-hidden="true" tabindex="-1"></a>                              <span class="at">value =</span> <span class="dv">1000</span>),</span>
-<span id="cb447-30"><a href="moduły-w-aplikacjach-shiny.html#cb447-30" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">plotOutput</span>(<span class="st">&quot;exp_plot&quot;</span>)</span>
-<span id="cb447-31"><a href="moduły-w-aplikacjach-shiny.html#cb447-31" aria-hidden="true" tabindex="-1"></a>               ),</span>
-<span id="cb447-32"><a href="moduły-w-aplikacjach-shiny.html#cb447-32" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tabPanel</span>(</span>
-<span id="cb447-33"><a href="moduły-w-aplikacjach-shiny.html#cb447-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Dane&quot;</span>,</span>
-<span id="cb447-34"><a href="moduły-w-aplikacjach-shiny.html#cb447-34" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">tableOutput</span>(<span class="st">&quot;exp_data&quot;</span>)</span>
-<span id="cb447-35"><a href="moduły-w-aplikacjach-shiny.html#cb447-35" aria-hidden="true" tabindex="-1"></a>               )</span>
-<span id="cb447-36"><a href="moduły-w-aplikacjach-shiny.html#cb447-36" aria-hidden="true" tabindex="-1"></a>             )</span>
-<span id="cb447-37"><a href="moduły-w-aplikacjach-shiny.html#cb447-37" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb447-38"><a href="moduły-w-aplikacjach-shiny.html#cb447-38" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb447-39"><a href="moduły-w-aplikacjach-shiny.html#cb447-39" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb447-40"><a href="moduły-w-aplikacjach-shiny.html#cb447-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb447-41"><a href="moduły-w-aplikacjach-shiny.html#cb447-41" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb447-42"><a href="moduły-w-aplikacjach-shiny.html#cb447-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">#generujemy dane</span></span>
-<span id="cb447-43"><a href="moduły-w-aplikacjach-shiny.html#cb447-43" aria-hidden="true" tabindex="-1"></a>  normal_data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
-<span id="cb447-44"><a href="moduły-w-aplikacjach-shiny.html#cb447-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(<span class="dv">17</span>)</span>
-<span id="cb447-45"><a href="moduły-w-aplikacjach-shiny.html#cb447-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>input[[<span class="st">&quot;normal_n&quot;</span>]],</span>
-<span id="cb447-46"><a href="moduły-w-aplikacjach-shiny.html#cb447-46" aria-hidden="true" tabindex="-1"></a>               <span class="at">sample =</span> <span class="fu">rnorm</span>(input[[<span class="st">&quot;normal_n&quot;</span>]]))</span>
-<span id="cb447-47"><a href="moduły-w-aplikacjach-shiny.html#cb447-47" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb447-48"><a href="moduły-w-aplikacjach-shiny.html#cb447-48" aria-hidden="true" tabindex="-1"></a>  exp_data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
-<span id="cb447-49"><a href="moduły-w-aplikacjach-shiny.html#cb447-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(<span class="dv">17</span>)</span>
-<span id="cb447-50"><a href="moduły-w-aplikacjach-shiny.html#cb447-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>input[[<span class="st">&quot;exp_n&quot;</span>]],</span>
-<span id="cb447-51"><a href="moduły-w-aplikacjach-shiny.html#cb447-51" aria-hidden="true" tabindex="-1"></a>               <span class="at">sample =</span> <span class="fu">rnorm</span>(input[[<span class="st">&quot;exp_n&quot;</span>]]))</span>
-<span id="cb447-52"><a href="moduły-w-aplikacjach-shiny.html#cb447-52" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb447-53"><a href="moduły-w-aplikacjach-shiny.html#cb447-53" aria-hidden="true" tabindex="-1"></a>  <span class="co">#generujemy tabele</span></span>
-<span id="cb447-54"><a href="moduły-w-aplikacjach-shiny.html#cb447-54" aria-hidden="true" tabindex="-1"></a>  output[[<span class="st">&quot;normal_data&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
-<span id="cb447-55"><a href="moduły-w-aplikacjach-shiny.html#cb447-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">normal_data</span>()</span>
-<span id="cb447-56"><a href="moduły-w-aplikacjach-shiny.html#cb447-56" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb447-57"><a href="moduły-w-aplikacjach-shiny.html#cb447-57" aria-hidden="true" tabindex="-1"></a>  output[[<span class="st">&quot;exp_data&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
-<span id="cb447-58"><a href="moduły-w-aplikacjach-shiny.html#cb447-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp_data</span>()</span>
-<span id="cb447-59"><a href="moduły-w-aplikacjach-shiny.html#cb447-59" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb447-60"><a href="moduły-w-aplikacjach-shiny.html#cb447-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">#generuemy wykresy</span></span>
-<span id="cb447-61"><a href="moduły-w-aplikacjach-shiny.html#cb447-61" aria-hidden="true" tabindex="-1"></a>  output[[<span class="st">&quot;normal_plot&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb447-62"><a href="moduły-w-aplikacjach-shiny.html#cb447-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">normal_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> sample)) <span class="sc">+</span></span>
-<span id="cb447-63"><a href="moduły-w-aplikacjach-shiny.html#cb447-63" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_density</span>()</span>
-<span id="cb447-64"><a href="moduły-w-aplikacjach-shiny.html#cb447-64" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb447-65"><a href="moduły-w-aplikacjach-shiny.html#cb447-65" aria-hidden="true" tabindex="-1"></a>  output[[<span class="st">&quot;exp_plot&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb447-66"><a href="moduły-w-aplikacjach-shiny.html#cb447-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">exp_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> sample)) <span class="sc">+</span></span>
-<span id="cb447-67"><a href="moduły-w-aplikacjach-shiny.html#cb447-67" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb447-68"><a href="moduły-w-aplikacjach-shiny.html#cb447-68" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">5</span>)</span>
-<span id="cb447-69"><a href="moduły-w-aplikacjach-shiny.html#cb447-69" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb447-70"><a href="moduły-w-aplikacjach-shiny.html#cb447-70" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb447-71"><a href="moduły-w-aplikacjach-shiny.html#cb447-71" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="moduły-w-aplikacjach-shiny.html#cb456-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb456-2"><a href="moduły-w-aplikacjach-shiny.html#cb456-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb456-3"><a href="moduły-w-aplikacjach-shiny.html#cb456-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb456-4"><a href="moduły-w-aplikacjach-shiny.html#cb456-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb456-5"><a href="moduły-w-aplikacjach-shiny.html#cb456-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb456-6"><a href="moduły-w-aplikacjach-shiny.html#cb456-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy panel dla rozkładu normalnego</span></span>
+<span id="cb456-7"><a href="moduły-w-aplikacjach-shiny.html#cb456-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Rozkład normalny&quot;</span>,</span>
+<span id="cb456-8"><a href="moduły-w-aplikacjach-shiny.html#cb456-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">tabsetPanel</span>(</span>
+<span id="cb456-9"><a href="moduły-w-aplikacjach-shiny.html#cb456-9" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tabPanel</span>(</span>
+<span id="cb456-10"><a href="moduły-w-aplikacjach-shiny.html#cb456-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Wykres&quot;</span>,</span>
+<span id="cb456-11"><a href="moduły-w-aplikacjach-shiny.html#cb456-11" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">numericInput</span>(<span class="at">inputId =</span> <span class="st">&quot;normal_n&quot;</span>,</span>
+<span id="cb456-12"><a href="moduły-w-aplikacjach-shiny.html#cb456-12" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label =</span> <span class="st">&quot;Podaj wielkość próby&quot;</span>, </span>
+<span id="cb456-13"><a href="moduły-w-aplikacjach-shiny.html#cb456-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">value =</span> <span class="dv">1000</span>),</span>
+<span id="cb456-14"><a href="moduły-w-aplikacjach-shiny.html#cb456-14" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">plotOutput</span>(<span class="st">&quot;normal_plot&quot;</span>)</span>
+<span id="cb456-15"><a href="moduły-w-aplikacjach-shiny.html#cb456-15" aria-hidden="true" tabindex="-1"></a>               ),</span>
+<span id="cb456-16"><a href="moduły-w-aplikacjach-shiny.html#cb456-16" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tabPanel</span>(</span>
+<span id="cb456-17"><a href="moduły-w-aplikacjach-shiny.html#cb456-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Dane&quot;</span>,</span>
+<span id="cb456-18"><a href="moduły-w-aplikacjach-shiny.html#cb456-18" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">tableOutput</span>(<span class="st">&quot;normal_data&quot;</span>)</span>
+<span id="cb456-19"><a href="moduły-w-aplikacjach-shiny.html#cb456-19" aria-hidden="true" tabindex="-1"></a>               )</span>
+<span id="cb456-20"><a href="moduły-w-aplikacjach-shiny.html#cb456-20" aria-hidden="true" tabindex="-1"></a>             )</span>
+<span id="cb456-21"><a href="moduły-w-aplikacjach-shiny.html#cb456-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb456-22"><a href="moduły-w-aplikacjach-shiny.html#cb456-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy panel dla rozkładu wykładniczego</span></span>
+<span id="cb456-23"><a href="moduły-w-aplikacjach-shiny.html#cb456-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Rozkład wykładniczy&quot;</span>,</span>
+<span id="cb456-24"><a href="moduły-w-aplikacjach-shiny.html#cb456-24" aria-hidden="true" tabindex="-1"></a>             <span class="fu">tabsetPanel</span>(</span>
+<span id="cb456-25"><a href="moduły-w-aplikacjach-shiny.html#cb456-25" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tabPanel</span>(</span>
+<span id="cb456-26"><a href="moduły-w-aplikacjach-shiny.html#cb456-26" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;wykres&quot;</span>,</span>
+<span id="cb456-27"><a href="moduły-w-aplikacjach-shiny.html#cb456-27" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">numericInput</span>(<span class="at">inputId =</span> <span class="st">&quot;exp_n&quot;</span>,</span>
+<span id="cb456-28"><a href="moduły-w-aplikacjach-shiny.html#cb456-28" aria-hidden="true" tabindex="-1"></a>                              <span class="at">label =</span> <span class="st">&quot;Podaj wielkość próby&quot;</span>, </span>
+<span id="cb456-29"><a href="moduły-w-aplikacjach-shiny.html#cb456-29" aria-hidden="true" tabindex="-1"></a>                              <span class="at">value =</span> <span class="dv">1000</span>),</span>
+<span id="cb456-30"><a href="moduły-w-aplikacjach-shiny.html#cb456-30" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">plotOutput</span>(<span class="st">&quot;exp_plot&quot;</span>)</span>
+<span id="cb456-31"><a href="moduły-w-aplikacjach-shiny.html#cb456-31" aria-hidden="true" tabindex="-1"></a>               ),</span>
+<span id="cb456-32"><a href="moduły-w-aplikacjach-shiny.html#cb456-32" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tabPanel</span>(</span>
+<span id="cb456-33"><a href="moduły-w-aplikacjach-shiny.html#cb456-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Dane&quot;</span>,</span>
+<span id="cb456-34"><a href="moduły-w-aplikacjach-shiny.html#cb456-34" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">tableOutput</span>(<span class="st">&quot;exp_data&quot;</span>)</span>
+<span id="cb456-35"><a href="moduły-w-aplikacjach-shiny.html#cb456-35" aria-hidden="true" tabindex="-1"></a>               )</span>
+<span id="cb456-36"><a href="moduły-w-aplikacjach-shiny.html#cb456-36" aria-hidden="true" tabindex="-1"></a>             )</span>
+<span id="cb456-37"><a href="moduły-w-aplikacjach-shiny.html#cb456-37" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb456-38"><a href="moduły-w-aplikacjach-shiny.html#cb456-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb456-39"><a href="moduły-w-aplikacjach-shiny.html#cb456-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb456-40"><a href="moduły-w-aplikacjach-shiny.html#cb456-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb456-41"><a href="moduły-w-aplikacjach-shiny.html#cb456-41" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb456-42"><a href="moduły-w-aplikacjach-shiny.html#cb456-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">#generujemy dane</span></span>
+<span id="cb456-43"><a href="moduły-w-aplikacjach-shiny.html#cb456-43" aria-hidden="true" tabindex="-1"></a>  normal_data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb456-44"><a href="moduły-w-aplikacjach-shiny.html#cb456-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(<span class="dv">17</span>)</span>
+<span id="cb456-45"><a href="moduły-w-aplikacjach-shiny.html#cb456-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>input[[<span class="st">&quot;normal_n&quot;</span>]],</span>
+<span id="cb456-46"><a href="moduły-w-aplikacjach-shiny.html#cb456-46" aria-hidden="true" tabindex="-1"></a>               <span class="at">sample =</span> <span class="fu">rnorm</span>(input[[<span class="st">&quot;normal_n&quot;</span>]]))</span>
+<span id="cb456-47"><a href="moduły-w-aplikacjach-shiny.html#cb456-47" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb456-48"><a href="moduły-w-aplikacjach-shiny.html#cb456-48" aria-hidden="true" tabindex="-1"></a>  exp_data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb456-49"><a href="moduły-w-aplikacjach-shiny.html#cb456-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">set.seed</span>(<span class="dv">17</span>)</span>
+<span id="cb456-50"><a href="moduły-w-aplikacjach-shiny.html#cb456-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>input[[<span class="st">&quot;exp_n&quot;</span>]],</span>
+<span id="cb456-51"><a href="moduły-w-aplikacjach-shiny.html#cb456-51" aria-hidden="true" tabindex="-1"></a>               <span class="at">sample =</span> <span class="fu">rnorm</span>(input[[<span class="st">&quot;exp_n&quot;</span>]]))</span>
+<span id="cb456-52"><a href="moduły-w-aplikacjach-shiny.html#cb456-52" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb456-53"><a href="moduły-w-aplikacjach-shiny.html#cb456-53" aria-hidden="true" tabindex="-1"></a>  <span class="co">#generujemy tabele</span></span>
+<span id="cb456-54"><a href="moduły-w-aplikacjach-shiny.html#cb456-54" aria-hidden="true" tabindex="-1"></a>  output[[<span class="st">&quot;normal_data&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb456-55"><a href="moduły-w-aplikacjach-shiny.html#cb456-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">normal_data</span>()</span>
+<span id="cb456-56"><a href="moduły-w-aplikacjach-shiny.html#cb456-56" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb456-57"><a href="moduły-w-aplikacjach-shiny.html#cb456-57" aria-hidden="true" tabindex="-1"></a>  output[[<span class="st">&quot;exp_data&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb456-58"><a href="moduły-w-aplikacjach-shiny.html#cb456-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp_data</span>()</span>
+<span id="cb456-59"><a href="moduły-w-aplikacjach-shiny.html#cb456-59" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb456-60"><a href="moduły-w-aplikacjach-shiny.html#cb456-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">#generuemy wykresy</span></span>
+<span id="cb456-61"><a href="moduły-w-aplikacjach-shiny.html#cb456-61" aria-hidden="true" tabindex="-1"></a>  output[[<span class="st">&quot;normal_plot&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb456-62"><a href="moduły-w-aplikacjach-shiny.html#cb456-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">normal_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> sample)) <span class="sc">+</span></span>
+<span id="cb456-63"><a href="moduły-w-aplikacjach-shiny.html#cb456-63" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_density</span>()</span>
+<span id="cb456-64"><a href="moduły-w-aplikacjach-shiny.html#cb456-64" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb456-65"><a href="moduły-w-aplikacjach-shiny.html#cb456-65" aria-hidden="true" tabindex="-1"></a>  output[[<span class="st">&quot;exp_plot&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb456-66"><a href="moduły-w-aplikacjach-shiny.html#cb456-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">exp_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> sample)) <span class="sc">+</span></span>
+<span id="cb456-67"><a href="moduły-w-aplikacjach-shiny.html#cb456-67" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb456-68"><a href="moduły-w-aplikacjach-shiny.html#cb456-68" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb456-69"><a href="moduły-w-aplikacjach-shiny.html#cb456-69" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb456-70"><a href="moduły-w-aplikacjach-shiny.html#cb456-70" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb456-71"><a href="moduły-w-aplikacjach-shiny.html#cb456-71" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
 <p>Aplikacja wygląda następująco:</p>
 <p><img src="img/app_screen1.png" /></p>
 <p>W naszej przestrzeni wykorzystaliśmy nazwy:</p>
@@ -415,68 +415,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Co daje razem 6 obiektów. W aplikacji <em>UI</em> zajmuje 36 linijek kodu, a <em>server</em> 29, razem 65 linijek.</p>
 <p>Zrefaktoryzuemy kod powyższej aplikacji przy użyciu modułów Shiny. Za powtarzające się elementy (tj. panele z wykresem i danymi) będą odpowiedzialne następujące funkcje <em>module_UI</em> oraz <em>module_SERVER</em> (odpowiedniki UI oraz servera dla odrębnego fragmentu aplikacji).</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="moduły-w-aplikacjach-shiny.html#cb448-1" aria-hidden="true" tabindex="-1"></a>module_UI <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
-<span id="cb448-2"><a href="moduły-w-aplikacjach-shiny.html#cb448-2" aria-hidden="true" tabindex="-1"></a>  ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(id)</span>
-<span id="cb448-3"><a href="moduły-w-aplikacjach-shiny.html#cb448-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tagList</span>(</span>
-<span id="cb448-4"><a href="moduły-w-aplikacjach-shiny.html#cb448-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabsetPanel</span>(</span>
-<span id="cb448-5"><a href="moduły-w-aplikacjach-shiny.html#cb448-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(</span>
-<span id="cb448-6"><a href="moduły-w-aplikacjach-shiny.html#cb448-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Wykres&quot;</span>,</span>
-<span id="cb448-7"><a href="moduły-w-aplikacjach-shiny.html#cb448-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">numericInput</span>(<span class="at">inputId =</span> <span class="fu">ns</span>(<span class="st">&quot;n&quot;</span>),</span>
-<span id="cb448-8"><a href="moduły-w-aplikacjach-shiny.html#cb448-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">label =</span> <span class="st">&quot;Podaj wielkość próby&quot;</span>, </span>
-<span id="cb448-9"><a href="moduły-w-aplikacjach-shiny.html#cb448-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">value =</span> <span class="dv">1000</span>),</span>
-<span id="cb448-10"><a href="moduły-w-aplikacjach-shiny.html#cb448-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plotOutput</span>(<span class="fu">ns</span>(<span class="st">&quot;plot&quot;</span>))</span>
-<span id="cb448-11"><a href="moduły-w-aplikacjach-shiny.html#cb448-11" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb448-12"><a href="moduły-w-aplikacjach-shiny.html#cb448-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Dane&quot;</span>,</span>
-<span id="cb448-13"><a href="moduły-w-aplikacjach-shiny.html#cb448-13" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tableOutput</span>(<span class="at">outputId =</span> <span class="fu">ns</span>(<span class="st">&quot;data&quot;</span>))</span>
-<span id="cb448-14"><a href="moduły-w-aplikacjach-shiny.html#cb448-14" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb448-15"><a href="moduły-w-aplikacjach-shiny.html#cb448-15" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb448-16"><a href="moduły-w-aplikacjach-shiny.html#cb448-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb448-17"><a href="moduły-w-aplikacjach-shiny.html#cb448-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="moduły-w-aplikacjach-shiny.html#cb457-1" aria-hidden="true" tabindex="-1"></a>module_UI <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb457-2"><a href="moduły-w-aplikacjach-shiny.html#cb457-2" aria-hidden="true" tabindex="-1"></a>  ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(id)</span>
+<span id="cb457-3"><a href="moduły-w-aplikacjach-shiny.html#cb457-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tagList</span>(</span>
+<span id="cb457-4"><a href="moduły-w-aplikacjach-shiny.html#cb457-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabsetPanel</span>(</span>
+<span id="cb457-5"><a href="moduły-w-aplikacjach-shiny.html#cb457-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(</span>
+<span id="cb457-6"><a href="moduły-w-aplikacjach-shiny.html#cb457-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Wykres&quot;</span>,</span>
+<span id="cb457-7"><a href="moduły-w-aplikacjach-shiny.html#cb457-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">numericInput</span>(<span class="at">inputId =</span> <span class="fu">ns</span>(<span class="st">&quot;n&quot;</span>),</span>
+<span id="cb457-8"><a href="moduły-w-aplikacjach-shiny.html#cb457-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">label =</span> <span class="st">&quot;Podaj wielkość próby&quot;</span>, </span>
+<span id="cb457-9"><a href="moduły-w-aplikacjach-shiny.html#cb457-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">value =</span> <span class="dv">1000</span>),</span>
+<span id="cb457-10"><a href="moduły-w-aplikacjach-shiny.html#cb457-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plotOutput</span>(<span class="fu">ns</span>(<span class="st">&quot;plot&quot;</span>))</span>
+<span id="cb457-11"><a href="moduły-w-aplikacjach-shiny.html#cb457-11" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb457-12"><a href="moduły-w-aplikacjach-shiny.html#cb457-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Dane&quot;</span>,</span>
+<span id="cb457-13"><a href="moduły-w-aplikacjach-shiny.html#cb457-13" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tableOutput</span>(<span class="at">outputId =</span> <span class="fu">ns</span>(<span class="st">&quot;data&quot;</span>))</span>
+<span id="cb457-14"><a href="moduły-w-aplikacjach-shiny.html#cb457-14" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb457-15"><a href="moduły-w-aplikacjach-shiny.html#cb457-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb457-16"><a href="moduły-w-aplikacjach-shiny.html#cb457-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb457-17"><a href="moduły-w-aplikacjach-shiny.html#cb457-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Na szczególną uwagę w powyższym kodzie zasługuje linijka</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="moduły-w-aplikacjach-shiny.html#cb449-1" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(id)</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="moduły-w-aplikacjach-shiny.html#cb458-1" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(id)</span></code></pre></div>
 <p>Za pomocą funkcji <em>NS()</em> tworzymy osobną przestrzeń nazw ID.</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="moduły-w-aplikacjach-shiny.html#cb450-1" aria-hidden="true" tabindex="-1"></a>module_SERVER <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
-<span id="cb450-2"><a href="moduły-w-aplikacjach-shiny.html#cb450-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">moduleServer</span>(id, <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb450-3"><a href="moduły-w-aplikacjach-shiny.html#cb450-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy dane</span></span>
-<span id="cb450-4"><a href="moduły-w-aplikacjach-shiny.html#cb450-4" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
-<span id="cb450-5"><a href="moduły-w-aplikacjach-shiny.html#cb450-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">set.seed</span>(<span class="dv">17</span>)</span>
-<span id="cb450-6"><a href="moduły-w-aplikacjach-shiny.html#cb450-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>input[[<span class="st">&quot;n&quot;</span>]],</span>
-<span id="cb450-7"><a href="moduły-w-aplikacjach-shiny.html#cb450-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sample =</span> <span class="fu">rnorm</span>(input[[<span class="st">&quot;n&quot;</span>]]))</span>
-<span id="cb450-8"><a href="moduły-w-aplikacjach-shiny.html#cb450-8" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb450-9"><a href="moduły-w-aplikacjach-shiny.html#cb450-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy wykres</span></span>
-<span id="cb450-10"><a href="moduły-w-aplikacjach-shiny.html#cb450-10" aria-hidden="true" tabindex="-1"></a>    output[[<span class="st">&quot;plot&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb450-11"><a href="moduły-w-aplikacjach-shiny.html#cb450-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> sample)) <span class="sc">+</span></span>
-<span id="cb450-12"><a href="moduły-w-aplikacjach-shiny.html#cb450-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_density</span>()</span>
-<span id="cb450-13"><a href="moduły-w-aplikacjach-shiny.html#cb450-13" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb450-14"><a href="moduły-w-aplikacjach-shiny.html#cb450-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy tabelę</span></span>
-<span id="cb450-15"><a href="moduły-w-aplikacjach-shiny.html#cb450-15" aria-hidden="true" tabindex="-1"></a>    output[[<span class="st">&quot;data&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
-<span id="cb450-16"><a href="moduły-w-aplikacjach-shiny.html#cb450-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data</span>()</span>
-<span id="cb450-17"><a href="moduły-w-aplikacjach-shiny.html#cb450-17" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb450-18"><a href="moduły-w-aplikacjach-shiny.html#cb450-18" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb450-19"><a href="moduły-w-aplikacjach-shiny.html#cb450-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="moduły-w-aplikacjach-shiny.html#cb459-1" aria-hidden="true" tabindex="-1"></a>module_SERVER <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb459-2"><a href="moduły-w-aplikacjach-shiny.html#cb459-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">moduleServer</span>(id, <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb459-3"><a href="moduły-w-aplikacjach-shiny.html#cb459-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy dane</span></span>
+<span id="cb459-4"><a href="moduły-w-aplikacjach-shiny.html#cb459-4" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb459-5"><a href="moduły-w-aplikacjach-shiny.html#cb459-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">set.seed</span>(<span class="dv">17</span>)</span>
+<span id="cb459-6"><a href="moduły-w-aplikacjach-shiny.html#cb459-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>input[[<span class="st">&quot;n&quot;</span>]],</span>
+<span id="cb459-7"><a href="moduły-w-aplikacjach-shiny.html#cb459-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sample =</span> <span class="fu">rnorm</span>(input[[<span class="st">&quot;n&quot;</span>]]))</span>
+<span id="cb459-8"><a href="moduły-w-aplikacjach-shiny.html#cb459-8" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb459-9"><a href="moduły-w-aplikacjach-shiny.html#cb459-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy wykres</span></span>
+<span id="cb459-10"><a href="moduły-w-aplikacjach-shiny.html#cb459-10" aria-hidden="true" tabindex="-1"></a>    output[[<span class="st">&quot;plot&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb459-11"><a href="moduły-w-aplikacjach-shiny.html#cb459-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> sample)) <span class="sc">+</span></span>
+<span id="cb459-12"><a href="moduły-w-aplikacjach-shiny.html#cb459-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_density</span>()</span>
+<span id="cb459-13"><a href="moduły-w-aplikacjach-shiny.html#cb459-13" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb459-14"><a href="moduły-w-aplikacjach-shiny.html#cb459-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy tabelę</span></span>
+<span id="cb459-15"><a href="moduły-w-aplikacjach-shiny.html#cb459-15" aria-hidden="true" tabindex="-1"></a>    output[[<span class="st">&quot;data&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb459-16"><a href="moduły-w-aplikacjach-shiny.html#cb459-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data</span>()</span>
+<span id="cb459-17"><a href="moduły-w-aplikacjach-shiny.html#cb459-17" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb459-18"><a href="moduły-w-aplikacjach-shiny.html#cb459-18" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb459-19"><a href="moduły-w-aplikacjach-shiny.html#cb459-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Ostatecznie nasza aplikacja używająca pomocniczego modułu wygląda następująco</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="moduły-w-aplikacjach-shiny.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb451-2"><a href="moduły-w-aplikacjach-shiny.html#cb451-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb451-3"><a href="moduły-w-aplikacjach-shiny.html#cb451-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb451-4"><a href="moduły-w-aplikacjach-shiny.html#cb451-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Przykładowe ciągłe rozkłady prawdopodobieństwa&quot;</span>),</span>
-<span id="cb451-5"><a href="moduły-w-aplikacjach-shiny.html#cb451-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
-<span id="cb451-6"><a href="moduły-w-aplikacjach-shiny.html#cb451-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy panel dla rozkładu normalnego</span></span>
-<span id="cb451-7"><a href="moduły-w-aplikacjach-shiny.html#cb451-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Rozkład normalny&quot;</span>,</span>
-<span id="cb451-8"><a href="moduły-w-aplikacjach-shiny.html#cb451-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">module_UI</span>(<span class="st">&quot;norm&quot;</span>) </span>
-<span id="cb451-9"><a href="moduły-w-aplikacjach-shiny.html#cb451-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb451-10"><a href="moduły-w-aplikacjach-shiny.html#cb451-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy panel dla rozkładu wykładniczego</span></span>
-<span id="cb451-11"><a href="moduły-w-aplikacjach-shiny.html#cb451-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Rozkład wykładniczy&quot;</span>,</span>
-<span id="cb451-12"><a href="moduły-w-aplikacjach-shiny.html#cb451-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">module_UI</span>(<span class="st">&quot;exp&quot;</span>) </span>
-<span id="cb451-13"><a href="moduły-w-aplikacjach-shiny.html#cb451-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb451-14"><a href="moduły-w-aplikacjach-shiny.html#cb451-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb451-15"><a href="moduły-w-aplikacjach-shiny.html#cb451-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb451-16"><a href="moduły-w-aplikacjach-shiny.html#cb451-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb451-17"><a href="moduły-w-aplikacjach-shiny.html#cb451-17" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb451-18"><a href="moduły-w-aplikacjach-shiny.html#cb451-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">module_SERVER</span>(<span class="st">&quot;norm&quot;</span>)</span>
-<span id="cb451-19"><a href="moduły-w-aplikacjach-shiny.html#cb451-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">module_SERVER</span>(<span class="st">&quot;exp&quot;</span>)</span>
-<span id="cb451-20"><a href="moduły-w-aplikacjach-shiny.html#cb451-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb451-21"><a href="moduły-w-aplikacjach-shiny.html#cb451-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb451-22"><a href="moduły-w-aplikacjach-shiny.html#cb451-22" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="moduły-w-aplikacjach-shiny.html#cb460-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb460-2"><a href="moduły-w-aplikacjach-shiny.html#cb460-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb460-3"><a href="moduły-w-aplikacjach-shiny.html#cb460-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb460-4"><a href="moduły-w-aplikacjach-shiny.html#cb460-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Przykładowe ciągłe rozkłady prawdopodobieństwa&quot;</span>),</span>
+<span id="cb460-5"><a href="moduły-w-aplikacjach-shiny.html#cb460-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsetPanel</span>(</span>
+<span id="cb460-6"><a href="moduły-w-aplikacjach-shiny.html#cb460-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy panel dla rozkładu normalnego</span></span>
+<span id="cb460-7"><a href="moduły-w-aplikacjach-shiny.html#cb460-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Rozkład normalny&quot;</span>,</span>
+<span id="cb460-8"><a href="moduły-w-aplikacjach-shiny.html#cb460-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">module_UI</span>(<span class="st">&quot;norm&quot;</span>) </span>
+<span id="cb460-9"><a href="moduły-w-aplikacjach-shiny.html#cb460-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb460-10"><a href="moduły-w-aplikacjach-shiny.html#cb460-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#generujemy panel dla rozkładu wykładniczego</span></span>
+<span id="cb460-11"><a href="moduły-w-aplikacjach-shiny.html#cb460-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabPanel</span>(<span class="at">title =</span> <span class="st">&quot;Rozkład wykładniczy&quot;</span>,</span>
+<span id="cb460-12"><a href="moduły-w-aplikacjach-shiny.html#cb460-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">module_UI</span>(<span class="st">&quot;exp&quot;</span>) </span>
+<span id="cb460-13"><a href="moduły-w-aplikacjach-shiny.html#cb460-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb460-14"><a href="moduły-w-aplikacjach-shiny.html#cb460-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb460-15"><a href="moduły-w-aplikacjach-shiny.html#cb460-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb460-16"><a href="moduły-w-aplikacjach-shiny.html#cb460-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb460-17"><a href="moduły-w-aplikacjach-shiny.html#cb460-17" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb460-18"><a href="moduły-w-aplikacjach-shiny.html#cb460-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">module_SERVER</span>(<span class="st">&quot;norm&quot;</span>)</span>
+<span id="cb460-19"><a href="moduły-w-aplikacjach-shiny.html#cb460-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">module_SERVER</span>(<span class="st">&quot;exp&quot;</span>)</span>
+<span id="cb460-20"><a href="moduły-w-aplikacjach-shiny.html#cb460-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb460-21"><a href="moduły-w-aplikacjach-shiny.html#cb460-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb460-22"><a href="moduły-w-aplikacjach-shiny.html#cb460-22" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
 <p>Powyższy kod jest czytelniejszy, krótszy, a także rozwiązuje problem wielu zmiennych.</p>
 
 </div>

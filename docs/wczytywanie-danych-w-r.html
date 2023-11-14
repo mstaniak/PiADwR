@@ -23,7 +23,7 @@
 <meta name="author" content="Mateusz Staniak" />
 
 
-<meta name="date" content="2023-10-12" />
+<meta name="date" content="2023-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -425,15 +425,18 @@ Zarówno czas wczytania danych, jak i wykorzystanie pamięci najkorzystniejsze j
 <p>LC_NUMERIC - określa separator ułamkowy, separator tysięcy, grupowanie cyfr</p>
 <p>LC_TIME - odpowiada za system wyświetlania daty</p>
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="wczytywanie-danych-w-r.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.localeconv</span>()</span></code></pre></div>
-<pre><code>##     decimal_point     thousands_sep          grouping   int_curr_symbol   currency_symbol mon_decimal_point mon_thousands_sep      mon_grouping     positive_sign     negative_sign   int_frac_digits 
-##               &quot;.&quot;                &quot;&quot;                &quot;&quot;            &quot;PLN &quot;              &quot;zł&quot;               &quot;,&quot;               &quot; &quot;            &quot;\003&quot;                &quot;&quot;               &quot;-&quot;               &quot;2&quot; 
-##       frac_digits     p_cs_precedes    p_sep_by_space     n_cs_precedes    n_sep_by_space       p_sign_posn       n_sign_posn 
-##               &quot;2&quot;               &quot;0&quot;               &quot;1&quot;               &quot;0&quot;               &quot;1&quot;               &quot;1&quot;               &quot;1&quot;</code></pre>
+<pre><code>##     decimal_point     thousands_sep          grouping   int_curr_symbol   currency_symbol mon_decimal_point mon_thousands_sep 
+##               &quot;.&quot;                &quot;&quot;                &quot;&quot;            &quot;PLN &quot;              &quot;zł&quot;               &quot;,&quot;               &quot; &quot; 
+##      mon_grouping     positive_sign     negative_sign   int_frac_digits       frac_digits     p_cs_precedes    p_sep_by_space 
+##            &quot;\003&quot;                &quot;&quot;               &quot;-&quot;               &quot;2&quot;               &quot;2&quot;               &quot;0&quot;               &quot;1&quot; 
+##     n_cs_precedes    n_sep_by_space       p_sign_posn       n_sign_posn 
+##               &quot;0&quot;               &quot;1&quot;               &quot;1&quot;               &quot;1&quot;</code></pre>
 <p>Powyższa funkcja wyświetla szczegóły dotyczące systemu numerycznego i monetarnego.</p>
 <div id="ustawienie-locale-przez-użytkownika" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Ustawienie locale przez użytkownika<a href="wczytywanie-danych-w-r.html#ustawienie-locale-przez-użytkownika" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="wczytywanie-danych-w-r.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">category =</span> <span class="st">&quot;LC_ALL&quot;</span>, <span class="at">locale =</span> <span class="st">&quot;polish&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in Sys.setlocale(category = &quot;LC_ALL&quot;, locale = &quot;polish&quot;): Żądania raportów OS aby ustawić lokalizację na &quot;polish&quot; nie mogą zostać wykonane</code></pre>
+<pre><code>## Warning in Sys.setlocale(category = &quot;LC_ALL&quot;, locale = &quot;polish&quot;): Żądania raportów OS aby ustawić lokalizację na &quot;polish&quot; nie
+## mogą zostać wykonane</code></pre>
 <pre><code>## [1] &quot;&quot;</code></pre>
 <p>W celu ustawienia innego locale niż domyślne systemowe należy użyć powyższej funkcji, przyjmowane przez nią argumenty to <em>category</em> i <em>locale</em>.</p>
 <p>category - odpowiada za określenie, które zmienne środowiskowe chcemy zmienić, gdzie opcje: “LC_ALL”, “LC_COLLATE”, “LC_CTYPE”, “LC_MONETARY”, “LC_NUMERIC” oraz “LC_TIME” są wspierane na każdym systemie operacyjnym, niektóre systemy wspierają również: “LC_MESSAGES”, “LC_PAPER” i “LC_MEASUREMENT”</p>

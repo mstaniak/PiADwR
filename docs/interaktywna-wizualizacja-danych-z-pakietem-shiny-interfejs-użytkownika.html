@@ -23,7 +23,7 @@
 <meta name="author" content="Mateusz Staniak" />
 
 
-<meta name="date" content="2023-10-12" />
+<meta name="date" content="2023-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -323,16 +323,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Do uruchomienia aplikacji służy funkcja <code>shinyApp(ui, server)</code>. Stworzenie dobrej i czytelnej aplikacji może znacznie ułatwić analizowanie danych.</p>
 <p>W tej notatce zajmiemy się omówieniem elementów oraz podstawowych schematów budowy UI.</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb352-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinyWidgets)</span>
-<span id="cb352-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb352-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinydashboard)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb361-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinyWidgets)</span>
+<span id="cb361-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinydashboard)</span></code></pre></div>
 </div>
 <div id="tworzenie-ui" class="section level2 hasAnchor" number="9.2">
 <h2><span class="header-section-number">9.2</span> Tworzenie UI<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#tworzenie-ui" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Do budowania podstawowego interfejsu w shiny będziemy korzystać z funkcji <code>fluidPage</code>, w której tworzymy cały UI. Wszystkie informacje o rodzajach wprowadznych danych, strukturze wyświetlanych danych oraz szeroko rozumianej estetyce aplikacji będą zawarte wewnątrz tej funkcji.</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb353-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb353-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb353-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># coś</span></span>
-<span id="cb353-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb353-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb362-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># coś</span></span>
+<span id="cb362-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="układ-strony" class="section level2 hasAnchor" number="9.3">
 <h2><span class="header-section-number">9.3</span> Układ strony<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#układ-strony" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -355,52 +355,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>textInput</code> - funkcja tworząca pole, w którym użytkownik może wprowadzić dowolny tekst,</li>
 </ul>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb354-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb354-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb354-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Okienko do wpisywania tekstu</span></span>
-<span id="cb354-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb354-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">&quot;nazwa_inputu_1&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>)</span>
-<span id="cb354-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb354-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb363-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Okienko do wpisywania tekstu</span></span>
+<span id="cb363-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">&quot;nazwa_inputu_1&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>)</span>
+<span id="cb363-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li><code>numericInput</code> - funkcja tworząca pole, w którym użytkownik może wprowadzić wartość liczbową,</li>
 </ul>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb355-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Okienko do wpisywania liczb</span></span>
-<span id="cb355-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">numericInput</span>(<span class="st">&quot;nazwa_inputu_2&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
-<span id="cb355-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-4" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość domyślna</span></span>
-<span id="cb355-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">value =</span> <span class="dv">10</span>)</span>
-<span id="cb355-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb355-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb364-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb364-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb364-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Okienko do wpisywania liczb</span></span>
+<span id="cb364-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb364-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">numericInput</span>(<span class="st">&quot;nazwa_inputu_2&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
+<span id="cb364-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb364-4" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość domyślna</span></span>
+<span id="cb364-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb364-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">value =</span> <span class="dv">10</span>)</span>
+<span id="cb364-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb364-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li><code>selectInput</code> - funkcja tworząca listę, z której użytkownik może dokonać wyboru - domyślnie parametr <code>multiple</code> umożliwia wybór jednej pozycji z listy,</li>
 </ul>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb356-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Możliwość wybrania z listy</span></span>
-<span id="cb356-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">selectInput</span>(<span class="st">&quot;nazwa_inputu_3&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>, </span>
-<span id="cb356-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-4" aria-hidden="true" tabindex="-1"></a>               <span class="co"># Lista możliwości do wyboru</span></span>
-<span id="cb356-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">&quot;Wybór_1&quot;</span>, <span class="st">&quot;Wybór_2&quot;</span>))</span>
-<span id="cb356-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb356-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb365-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb365-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb365-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Możliwość wybrania z listy</span></span>
+<span id="cb365-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb365-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">selectInput</span>(<span class="st">&quot;nazwa_inputu_3&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>, </span>
+<span id="cb365-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb365-4" aria-hidden="true" tabindex="-1"></a>               <span class="co"># Lista możliwości do wyboru</span></span>
+<span id="cb365-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb365-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">&quot;Wybór_1&quot;</span>, <span class="st">&quot;Wybór_2&quot;</span>))</span>
+<span id="cb365-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb365-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li><code>sliderInput</code> - funkcja tworząca suwak umożliwiający użytkownikowi wybór zakresu interesujących go wartości,</li>
 </ul>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb357-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Suwak do wyboru wartości</span></span>
-<span id="cb357-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">&quot;nazwa_inputu_4&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
-<span id="cb357-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-4" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość domyślna</span></span>
-<span id="cb357-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">value =</span> <span class="dv">1</span>,</span>
-<span id="cb357-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-6" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość minimalna</span></span>
-<span id="cb357-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">min =</span> <span class="dv">0</span>,</span>
-<span id="cb357-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-8" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość maksymalna</span></span>
-<span id="cb357-9"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">max =</span> <span class="dv">10</span>)</span>
-<span id="cb357-10"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb357-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb366-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Suwak do wyboru wartości</span></span>
+<span id="cb366-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">&quot;nazwa_inputu_4&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
+<span id="cb366-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-4" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość domyślna</span></span>
+<span id="cb366-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">value =</span> <span class="dv">1</span>,</span>
+<span id="cb366-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-6" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość minimalna</span></span>
+<span id="cb366-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">min =</span> <span class="dv">0</span>,</span>
+<span id="cb366-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-8" aria-hidden="true" tabindex="-1"></a>              <span class="co"># Wartość maksymalna</span></span>
+<span id="cb366-9"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">max =</span> <span class="dv">10</span>)</span>
+<span id="cb366-10"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb366-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li><code>dateRangeInput</code> - funkcja tworząca pole wyboru zakresu interesujących dat.</li>
 </ul>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb358-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pole wyboru zakresu dat</span></span>
-<span id="cb358-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateRangeInput</span>(<span class="st">&quot;nazwa_inputu_5&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
-<span id="cb358-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-4" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># Data początkowa</span></span>
-<span id="cb358-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">start =</span> <span class="st">&quot;2001-01-01&quot;</span>,</span>
-<span id="cb358-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-6" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># Data końcowa</span></span>
-<span id="cb358-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">end   =</span> <span class="st">&quot;2010-12-31&quot;</span>)</span>
-<span id="cb358-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb358-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb367-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb367-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb367-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pole wyboru zakresu dat</span></span>
+<span id="cb367-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb367-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateRangeInput</span>(<span class="st">&quot;nazwa_inputu_5&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
+<span id="cb367-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb367-4" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># Data początkowa</span></span>
+<span id="cb367-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb367-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">start =</span> <span class="st">&quot;2001-01-01&quot;</span>,</span>
+<span id="cb367-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb367-6" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># Data końcowa</span></span>
+<span id="cb367-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb367-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">end   =</span> <span class="st">&quot;2010-12-31&quot;</span>)</span>
+<span id="cb367-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb367-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="przykładowe-elementy-wyjścia" class="section level4 hasAnchor" number="9.4.0.2">
 <h4><span class="header-section-number">9.4.0.2</span> Przykładowe elementy wyjścia<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#przykładowe-elementy-wyjścia" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -408,72 +408,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>textOutput</code> - funkcja wyświetlająca tekst,</li>
 </ul>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb359-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb359-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb359-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wyświetla tekst, który stworzyliśmy w serwerze pod daną nazwą</span></span>
-<span id="cb359-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb359-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="st">&quot;nazwa_outputu_1&quot;</span>)</span>
-<span id="cb359-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb359-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb368-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb368-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb368-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wyświetla tekst, który stworzyliśmy w serwerze pod daną nazwą</span></span>
+<span id="cb368-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb368-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="st">&quot;nazwa_outputu_1&quot;</span>)</span>
+<span id="cb368-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb368-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li><code>tableOutput</code> - podstawowa funkcja wyświetlająca tabelę,</li>
 </ul>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb360-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb360-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb360-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wyświetla tabelę stworzoną w serwerze pod daną nazwą</span></span>
-<span id="cb360-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb360-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tableOutput</span>(<span class="st">&quot;nazwa_outputu_2&quot;</span>)</span>
-<span id="cb360-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb360-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb369-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb369-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb369-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wyświetla tabelę stworzoną w serwerze pod daną nazwą</span></span>
+<span id="cb369-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb369-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tableOutput</span>(<span class="st">&quot;nazwa_outputu_2&quot;</span>)</span>
+<span id="cb369-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb369-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li><code>DTOutput</code> - funkcja wyświetlająca interaktywną ramkę danych z użyciem pakietu data.table,</li>
 </ul>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb361-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Interaktywna ramka danych z użyciem data.table</span></span>
-<span id="cb361-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-3" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">DTOutput</span>(<span class="st">&quot;nazwa_outputu_3&quot;</span>)</span>
-<span id="cb361-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb361-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb370-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb370-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb370-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Interaktywna ramka danych z użyciem data.table</span></span>
+<span id="cb370-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb370-3" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">DTOutput</span>(<span class="st">&quot;nazwa_outputu_3&quot;</span>)</span>
+<span id="cb370-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb370-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li><code>plotOutput</code> - funkcja wyświetlająca wykres.</li>
 </ul>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb362-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wyświetla wykres stworzony w serwerze</span></span>
-<span id="cb362-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">&quot;nazwa_outputu_4&quot;</span>,</span>
-<span id="cb362-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-4" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Szerokość wykresu</span></span>
-<span id="cb362-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, </span>
-<span id="cb362-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-6" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Wysokość wykresu</span></span>
-<span id="cb362-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">height =</span> <span class="st">&quot;400px&quot;</span>)</span>
-<span id="cb362-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb362-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb371-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb371-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb371-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Wyświetla wykres stworzony w serwerze</span></span>
+<span id="cb371-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb371-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">&quot;nazwa_outputu_4&quot;</span>,</span>
+<span id="cb371-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb371-4" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Szerokość wykresu</span></span>
+<span id="cb371-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb371-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, </span>
+<span id="cb371-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb371-6" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Wysokość wykresu</span></span>
+<span id="cb371-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb371-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">height =</span> <span class="st">&quot;400px&quot;</span>)</span>
+<span id="cb371-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb371-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
 <div id="przykład-użycia" class="section level2 hasAnchor" number="9.5">
 <h2><span class="header-section-number">9.5</span> Przykład użycia<a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#przykład-użycia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Oczywiście powyższe kody były jedynie fragmentami większej całości. Poniżej możemy zobaczyć przykładowy kod obrazujący strukturę budowy interfejsu. Rzeczą, o której należy pamiętać jest oddzielanie funkcji przecinkami.</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( </span>
-<span id="cb363-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Tytuł</span></span>
-<span id="cb363-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Tytuł&quot;</span>),</span>
-<span id="cb363-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb363-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To co będzie wyświetlone z boku interfejsu</span></span>
-<span id="cb363-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb363-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb363-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Panel boczny</span></span>
-<span id="cb363-9"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
-<span id="cb363-10"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-10" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb363-11"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-11" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pierwszy input - wybór</span></span>
-<span id="cb363-12"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">&quot;nazwa_inputu_1&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>, </span>
-<span id="cb363-13"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">&quot;Wybór_1&quot;</span>, <span class="st">&quot;Wybór_2&quot;</span>)),</span>
-<span id="cb363-14"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-14" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Drugi input - suwak</span></span>
-<span id="cb363-15"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sliderInput</span>(<span class="st">&quot;nazwa_inputu_2&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
-<span id="cb363-16"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">value =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">10</span>) </span>
-<span id="cb363-17"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb363-18"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb363-19"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Główny panel</span></span>
-<span id="cb363-20"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mainPanel</span>( </span>
-<span id="cb363-21"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb363-22"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tworzymy zakładki</span></span>
-<span id="cb363-23"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabsetPanel</span>( </span>
-<span id="cb363-24"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-24" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb363-25"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-25" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pierwsza zakładka - wykres</span></span>
-<span id="cb363-26"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(<span class="st">&quot;Tytuł wykresu&quot;</span>, <span class="fu">plotOutput</span>(<span class="st">&quot;nazwa_outputu_1&quot;</span>)),</span>
-<span id="cb363-27"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-27" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Druga zakładka - ramka danych</span></span>
-<span id="cb363-28"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(<span class="st">&quot;Tytuł ramki&quot;</span>, DT<span class="sc">::</span><span class="fu">DTOutput</span>(<span class="st">&quot;nazwa_outputu_2&quot;</span>))</span>
-<span id="cb363-29"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-29" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb363-30"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-30" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb363-31"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-31" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb363-32"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb363-32" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>( </span>
+<span id="cb372-2"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Tytuł</span></span>
+<span id="cb372-3"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">&quot;Tytuł&quot;</span>),</span>
+<span id="cb372-4"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb372-5"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To co będzie wyświetlone z boku interfejsu</span></span>
+<span id="cb372-6"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb372-7"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb372-8"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Panel boczny</span></span>
+<span id="cb372-9"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb372-10"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-10" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb372-11"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-11" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pierwszy input - wybór</span></span>
+<span id="cb372-12"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">&quot;nazwa_inputu_1&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>, </span>
+<span id="cb372-13"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">&quot;Wybór_1&quot;</span>, <span class="st">&quot;Wybór_2&quot;</span>)),</span>
+<span id="cb372-14"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-14" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Drugi input - suwak</span></span>
+<span id="cb372-15"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sliderInput</span>(<span class="st">&quot;nazwa_inputu_2&quot;</span>, <span class="st">&quot;Tekst wyświetlany w aplikacji&quot;</span>,</span>
+<span id="cb372-16"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">value =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">10</span>) </span>
+<span id="cb372-17"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb372-18"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb372-19"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Główny panel</span></span>
+<span id="cb372-20"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mainPanel</span>( </span>
+<span id="cb372-21"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb372-22"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tworzymy zakładki</span></span>
+<span id="cb372-23"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tabsetPanel</span>( </span>
+<span id="cb372-24"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-24" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb372-25"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-25" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pierwsza zakładka - wykres</span></span>
+<span id="cb372-26"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(<span class="st">&quot;Tytuł wykresu&quot;</span>, <span class="fu">plotOutput</span>(<span class="st">&quot;nazwa_outputu_1&quot;</span>)),</span>
+<span id="cb372-27"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-27" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Druga zakładka - ramka danych</span></span>
+<span id="cb372-28"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tabPanel</span>(<span class="st">&quot;Tytuł ramki&quot;</span>, DT<span class="sc">::</span><span class="fu">DTOutput</span>(<span class="st">&quot;nazwa_outputu_2&quot;</span>))</span>
+<span id="cb372-29"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-29" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb372-30"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb372-31"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb372-32"><a href="interaktywna-wizualizacja-danych-z-pakietem-shiny-interfejs-użytkownika.html#cb372-32" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Dodatkowo warto zdawać sobie sprawę, że po wprowadzeniu danych przez użytkownika outputy aktualizują się automatycznie, dlatego często przydatne jest programowanie reaktywne z funkcją <code>observeEvent</code> oraz użycie <code>actionButton</code>, który pozwala na wykonanie danego działania dopiero po kliknięciu odpowiedniego przycisku przez użytkownika.</p>
 </div>
 <div id="wygląd-aplikacji" class="section level2 hasAnchor" number="9.6">

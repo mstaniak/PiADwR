@@ -23,7 +23,7 @@
 <meta name="author" content="Mateusz Staniak" />
 
 
-<meta name="date" content="2023-10-12" />
+<meta name="date" content="2023-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1576,7 +1576,8 @@ Najprostszym sposobem na uzyskanie napisowej reprezentacji danego obiektu jest u
 </ol>
 <p>Przykład:</p>
 <div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="czyste-dane.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(<span class="fu">list</span>(1L, mean, <span class="cn">NULL</span>, pi, <span class="cn">FALSE</span>))</span></code></pre></div>
-<pre><code>## [1] &quot;1&quot;                                       &quot;function (x, ...) \nUseMethod(\&quot;mean\&quot;)&quot; &quot;NULL&quot;                                    &quot;3.14159265358979&quot;                       
+<pre><code>## [1] &quot;1&quot;                                       &quot;function (x, ...) \nUseMethod(\&quot;mean\&quot;)&quot;
+## [3] &quot;NULL&quot;                                    &quot;3.14159265358979&quot;                       
 ## [5] &quot;FALSE&quot;</code></pre>
 <div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="czyste-dane.html#cb313-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">a=</span><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>), <span class="at">b=</span><span class="fu">as.integer</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</span>
 <span id="cb313-2"><a href="czyste-dane.html#cb313-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(x)</span></code></pre></div>
@@ -1610,27 +1611,27 @@ Funkcja <strong>stri_sub()</strong> zwraca podnapis składający się ze znaków
 </ol>
 <p>Przykład:</p>
 <div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="czyste-dane.html#cb325-1" aria-hidden="true" tabindex="-1"></a>(data <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>())</span></code></pre></div>
-<pre><code>## [1] &quot;2023-10-12&quot;</code></pre>
+<pre><code>## [1] &quot;2023-11-14&quot;</code></pre>
 <div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="czyste-dane.html#cb327-1" aria-hidden="true" tabindex="-1"></a>(czas <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>())</span></code></pre></div>
-<pre><code>## [1] &quot;2023-10-12 16:27:08 CEST&quot;</code></pre>
+<pre><code>## [1] &quot;2023-11-14 13:44:20 CET&quot;</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Operacje arytmetyczne na datach – dodawanie, odejmowanie i porównywanie.</li>
 </ol>
 <p>Przykład:</p>
 <div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="czyste-dane.html#cb329-1" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
-<pre><code>## [1] &quot;2023-10-12&quot;</code></pre>
+<pre><code>## [1] &quot;2023-11-14&quot;</code></pre>
 <div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="czyste-dane.html#cb331-1" aria-hidden="true" tabindex="-1"></a>data<span class="dv">-365</span></span></code></pre></div>
-<pre><code>## [1] &quot;2022-10-12&quot;</code></pre>
+<pre><code>## [1] &quot;2022-11-14&quot;</code></pre>
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="czyste-dane.html#cb333-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">+</span><span class="dv">365</span></span></code></pre></div>
-<pre><code>## [1] &quot;2024-10-11&quot;</code></pre>
+<pre><code>## [1] &quot;2024-11-13&quot;</code></pre>
 <div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="czyste-dane.html#cb335-1" aria-hidden="true" tabindex="-1"></a>(d <span class="ot">&lt;-</span> data<span class="sc">-</span><span class="fu">as.Date</span>(<span class="st">&#39;2021-01-01&#39;</span>))</span></code></pre></div>
-<pre><code>## Time difference of 1014 days</code></pre>
+<pre><code>## Time difference of 1047 days</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Do konwersji do napisu może służyć przeciążona wersja metody <strong>format()</strong>, której wywołanie jest tożsame z wywołaniem funkcji <strong>strftime()</strong> (ang. string-format-time).</li>
 </ol>
 <p>Przykład:</p>
 <div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="czyste-dane.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strftime</span>(czas, <span class="st">&#39;%Y-%m-%d %H:%M:%S %Z&#39;</span>)  </span></code></pre></div>
-<pre><code>## [1] &quot;2023-10-12 16:27:08 CEST&quot;</code></pre>
+<pre><code>## [1] &quot;2023-11-14 13:44:20 CET&quot;</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Do znajdowania “najstarszej” i “najmłodszej” daty używamy funkcji <strong>max()</strong> oraz <strong>min()</strong>.</p></li>
 <li><p>Do pracy ze strefami czasowymi możemy używać poniższych funkcji:</p></li>

@@ -12,6 +12,9 @@ Powyżej wspomnieliśmy o gramatyce grafiki. Dla dokładniejszego uporządkowani
 
 Na początku, aby móc tworzyć wizualizacje, musimy załadować pakiet oraz bibilotekę *ggplot2*. Warto zwrócić uwagę, że *ggplot2* posiada również szereg wbudowanych zestawów danych. Aby pokazać możliwości jakie oferuje nam ggplot, przeprowadzimy symulację danych mpg dostępnych w R.
 
+```{r , include = F}
+knitr::opts_chunk$set(fig.path = 'main_files/')
+```
 
 ```{r start, include=TRUE}
 library(ggplot2)
@@ -34,7 +37,7 @@ Składnia wykresów w ggplot polega na warstwowym budowaniu wykresów.
 Do dodawania nowych warstw do wykresu używamy symbolu "+" .
 
 
-```{r first plot, fig.height = 2, fig.width = 2, fig.align = "center"}
+```{r  }
 # Budujemy podstawę wykresu, określając z jakich danych będziemy korzytsać
 ggplot(mpg)
 
@@ -82,10 +85,7 @@ Każda warstwa geom może mieć swoją własną specyfikację aes. Możemy zdecy
  
 
 
-```{r mapping plot, fig.height = 2.5, fig.width = 2.5, fig.align = "center"}
-
- 
-
+```{r }
 # Punkty na wykresie będą kwadratami
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(shape = 0)+
@@ -141,7 +141,7 @@ oraz wielu innych, które powstają m.in. przez zastosowanie funcji: *geom_area*
  
 
 Poniżej przedstawione są dwa przykładowe typy wykresów. Pierwszy narysowany przy użyciu funkcji *geom_smooth*, która służy do rysowania wygładzonych linii, np. dla prostych trendów. Drugi wykres powstał przy zastosowaniu funkcji *geom_histogram*.
-```{r geom plot, fig.height = 2.5, fig.width = 5, fig.align = "center", echo = FALSE, message = FALSE}
+```{r geomplot}
 
  
 
@@ -164,7 +164,7 @@ W pakiecie *ggplot2* bardzo prosto możemy łączyć ze sobą  różne geometrie
 
  
 
-```{r, two geoms on plot, fig.height = 2.5, fig.width = 5, fig.align = "center", message = FALSE}
+```{r }
 
  
 
@@ -209,7 +209,7 @@ Każda geometria w *ggplot2* ma ustawione domyślne położenie różnych elemen
 
  
 
-```{r dopasowanie położenia, fig.height = 2.5, fig.width = 5, fig.align = "center", echo = FALSE}
+```{r }
 ggplot(mpg, aes(x = class)) + 
   geom_bar()
 ```
@@ -218,7 +218,7 @@ ggplot(mpg, aes(x = class)) +
 
  Jeżeli teraz do mapowania dodamy opcję *fill = dvr*, to każdy prostokąt będzie reprezentował kombinację wartości class oraz dvr.
  
-```{r dopasowanie położenia2, fig.height = 2.5, fig.width = 5, fig.align = "center", echo = FALSE}
+```{r }
 ggplot(mpg, aes(x = class, fill = drv)) + 
   geom_bar()+
   theme(axis.text.x = element_text(angle = 90))+
@@ -231,7 +231,7 @@ Takie przedstawienie danych nie dla każdego może być czytelne, dlatego możem
 
  
 
-```{r dopasowanie położenia3, fig.height = 2.5, fig.width = 5, fig.align = "center", echo = FALSE}
+```{r }
 ggplot(mpg, aes(x = class, fill = drv)) + 
   geom_bar(position = "dodge")+
   ggtitle(" Plot for dodge position")+
@@ -267,7 +267,7 @@ W *ggplot2* z łatwością także dodamy etykiety tekstowe oraz adnotacje. Do wy
 
  
 
-```{r, zarządzanaie osiami współrzędnych, fig.height = 2.5, fig.width = 4, fig.align = "center"}
+```{r }
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point() +
   labs(title = "Fuel Efficiency by Engine Power",
@@ -305,7 +305,7 @@ Panele to sposoby grupowania wykresu danych w wiele różnych części ze wzglę
 
  
 
-```{r, panele, fig.height = 2.5, fig.width = 4, fig.align = "center"}
+```{r }
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() +
   facet_grid(~ class)

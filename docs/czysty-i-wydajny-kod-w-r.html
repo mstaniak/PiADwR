@@ -23,7 +23,7 @@
 <meta name="author" content="Mateusz Staniak" />
 
 
-<meta name="date" content="2023-10-12" />
+<meta name="date" content="2023-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -377,28 +377,28 @@ Funkcje powinny:
 <p>To znaczy, że nie jest wskazane, aby tworzyć jedną wielką funkcję, która np. wylicza kilkanaście rzeczy, aby na końcu wygenerować jeden wynik. Zamiast tego lepiej stworzyć kilka mniejszych funkcji, które będą się odwoływały do poprzednich. Dzięki temu nasz kod będzie bardziej przejrzysty oraz w prosty sposób będzie można sprawdzić, czy pojedyncze funkcje działają poprawnie.</p>
 <p>Co więcej, nie ma sensu tworzyć funkcji, która zwraca nam już oprawioną tabelę z wynikami. Lepiej, gdy zwraca surowe wyniki, a tworzeniem tabeli zajmuje się kolejna funkcja.</p>
 <p>Przykładowa, poprawnie napisana funkcja:</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="czysty-i-wydajny-kod-w-r.html#cb350-1" aria-hidden="true" tabindex="-1"></a>calculate_conf_interval <span class="ot">=</span> <span class="cf">function</span>(sample, alpha) {</span>
-<span id="cb350-2"><a href="czysty-i-wydajny-kod-w-r.html#cb350-2" aria-hidden="true" tabindex="-1"></a>  len <span class="ot">=</span> <span class="fu">length</span>(sample)</span>
-<span id="cb350-3"><a href="czysty-i-wydajny-kod-w-r.html#cb350-3" aria-hidden="true" tabindex="-1"></a>  successes <span class="ot">=</span> <span class="fu">length</span>(sample[sample <span class="sc">==</span> <span class="dv">1</span>])</span>
-<span id="cb350-4"><a href="czysty-i-wydajny-kod-w-r.html#cb350-4" aria-hidden="true" tabindex="-1"></a>  mi <span class="ot">=</span> successes <span class="sc">/</span> n</span>
-<span id="cb350-5"><a href="czysty-i-wydajny-kod-w-r.html#cb350-5" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">=</span> <span class="fu">sqrt</span>(mi <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> mi) <span class="sc">/</span> len)</span>
-<span id="cb350-6"><a href="czysty-i-wydajny-kod-w-r.html#cb350-6" aria-hidden="true" tabindex="-1"></a>  quantile <span class="ot">=</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>, len <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb350-7"><a href="czysty-i-wydajny-kod-w-r.html#cb350-7" aria-hidden="true" tabindex="-1"></a>  left <span class="ot">=</span> mi <span class="sc">-</span> quantile <span class="sc">*</span> se</span>
-<span id="cb350-8"><a href="czysty-i-wydajny-kod-w-r.html#cb350-8" aria-hidden="true" tabindex="-1"></a>  right <span class="ot">=</span> mi <span class="sc">+</span> quantile <span class="sc">*</span> se</span>
-<span id="cb350-9"><a href="czysty-i-wydajny-kod-w-r.html#cb350-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(left, right))</span>
-<span id="cb350-10"><a href="czysty-i-wydajny-kod-w-r.html#cb350-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="czysty-i-wydajny-kod-w-r.html#cb359-1" aria-hidden="true" tabindex="-1"></a>calculate_conf_interval <span class="ot">=</span> <span class="cf">function</span>(sample, alpha) {</span>
+<span id="cb359-2"><a href="czysty-i-wydajny-kod-w-r.html#cb359-2" aria-hidden="true" tabindex="-1"></a>  len <span class="ot">=</span> <span class="fu">length</span>(sample)</span>
+<span id="cb359-3"><a href="czysty-i-wydajny-kod-w-r.html#cb359-3" aria-hidden="true" tabindex="-1"></a>  successes <span class="ot">=</span> <span class="fu">length</span>(sample[sample <span class="sc">==</span> <span class="dv">1</span>])</span>
+<span id="cb359-4"><a href="czysty-i-wydajny-kod-w-r.html#cb359-4" aria-hidden="true" tabindex="-1"></a>  mi <span class="ot">=</span> successes <span class="sc">/</span> n</span>
+<span id="cb359-5"><a href="czysty-i-wydajny-kod-w-r.html#cb359-5" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">=</span> <span class="fu">sqrt</span>(mi <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> mi) <span class="sc">/</span> len)</span>
+<span id="cb359-6"><a href="czysty-i-wydajny-kod-w-r.html#cb359-6" aria-hidden="true" tabindex="-1"></a>  quantile <span class="ot">=</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>, len <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb359-7"><a href="czysty-i-wydajny-kod-w-r.html#cb359-7" aria-hidden="true" tabindex="-1"></a>  left <span class="ot">=</span> mi <span class="sc">-</span> quantile <span class="sc">*</span> se</span>
+<span id="cb359-8"><a href="czysty-i-wydajny-kod-w-r.html#cb359-8" aria-hidden="true" tabindex="-1"></a>  right <span class="ot">=</span> mi <span class="sc">+</span> quantile <span class="sc">*</span> se</span>
+<span id="cb359-9"><a href="czysty-i-wydajny-kod-w-r.html#cb359-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(left, right))</span>
+<span id="cb359-10"><a href="czysty-i-wydajny-kod-w-r.html#cb359-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Przykładowa funkcja, napisana w ,,nieładny’’ sposób:</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="czysty-i-wydajny-kod-w-r.html#cb351-1" aria-hidden="true" tabindex="-1"></a>func<span class="ot">=</span> <span class="cf">function</span>(x,y,temp1,temp2){</span>
-<span id="cb351-2"><a href="czysty-i-wydajny-kod-w-r.html#cb351-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span><span class="fu">length</span>(x)</span>
-<span id="cb351-3"><a href="czysty-i-wydajny-kod-w-r.html#cb351-3" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span><span class="fu">length</span>(x[x<span class="sc">==</span><span class="dv">1</span>])</span>
-<span id="cb351-4"><a href="czysty-i-wydajny-kod-w-r.html#cb351-4" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">=</span> s<span class="sc">/</span>n</span>
-<span id="cb351-5"><a href="czysty-i-wydajny-kod-w-r.html#cb351-5" aria-hidden="true" tabindex="-1"></a>  sgm <span class="ot">=</span> <span class="fu">sqrt</span>(mi <span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span> m)<span class="sc">/</span>n)</span>
-<span id="cb351-6"><a href="czysty-i-wydajny-kod-w-r.html#cb351-6" aria-hidden="true" tabindex="-1"></a>  q<span class="ot">&lt;-</span><span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> y <span class="sc">/</span><span class="dv">2</span>,len<span class="dv">-1</span>)</span>
-<span id="cb351-7"><a href="czysty-i-wydajny-kod-w-r.html#cb351-7" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">=</span> (s <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> q <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span>(n <span class="sc">+</span> q <span class="sc">^</span> <span class="dv">2</span>)</span>
-<span id="cb351-8"><a href="czysty-i-wydajny-kod-w-r.html#cb351-8" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">=</span> <span class="fu">sqrt</span>(tmp <span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> tmp)<span class="sc">/</span> (n<span class="sc">+</span> q<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb351-9"><a href="czysty-i-wydajny-kod-w-r.html#cb351-9" aria-hidden="true" tabindex="-1"></a>  l<span class="ot">&lt;-</span> tmp<span class="sc">-</span> q<span class="sc">*</span> se</span>
-<span id="cb351-10"><a href="czysty-i-wydajny-kod-w-r.html#cb351-10" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">=</span> tmp <span class="sc">+</span> q<span class="sc">*</span>se</span>
-<span id="cb351-11"><a href="czysty-i-wydajny-kod-w-r.html#cb351-11" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">c</span>(l,r))}</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="czysty-i-wydajny-kod-w-r.html#cb360-1" aria-hidden="true" tabindex="-1"></a>func<span class="ot">=</span> <span class="cf">function</span>(x,y,temp1,temp2){</span>
+<span id="cb360-2"><a href="czysty-i-wydajny-kod-w-r.html#cb360-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span><span class="fu">length</span>(x)</span>
+<span id="cb360-3"><a href="czysty-i-wydajny-kod-w-r.html#cb360-3" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span><span class="fu">length</span>(x[x<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb360-4"><a href="czysty-i-wydajny-kod-w-r.html#cb360-4" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">=</span> s<span class="sc">/</span>n</span>
+<span id="cb360-5"><a href="czysty-i-wydajny-kod-w-r.html#cb360-5" aria-hidden="true" tabindex="-1"></a>  sgm <span class="ot">=</span> <span class="fu">sqrt</span>(mi <span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span> m)<span class="sc">/</span>n)</span>
+<span id="cb360-6"><a href="czysty-i-wydajny-kod-w-r.html#cb360-6" aria-hidden="true" tabindex="-1"></a>  q<span class="ot">&lt;-</span><span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> y <span class="sc">/</span><span class="dv">2</span>,len<span class="dv">-1</span>)</span>
+<span id="cb360-7"><a href="czysty-i-wydajny-kod-w-r.html#cb360-7" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">=</span> (s <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> q <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span>(n <span class="sc">+</span> q <span class="sc">^</span> <span class="dv">2</span>)</span>
+<span id="cb360-8"><a href="czysty-i-wydajny-kod-w-r.html#cb360-8" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">=</span> <span class="fu">sqrt</span>(tmp <span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> tmp)<span class="sc">/</span> (n<span class="sc">+</span> q<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb360-9"><a href="czysty-i-wydajny-kod-w-r.html#cb360-9" aria-hidden="true" tabindex="-1"></a>  l<span class="ot">&lt;-</span> tmp<span class="sc">-</span> q<span class="sc">*</span> se</span>
+<span id="cb360-10"><a href="czysty-i-wydajny-kod-w-r.html#cb360-10" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">=</span> tmp <span class="sc">+</span> q<span class="sc">*</span>se</span>
+<span id="cb360-11"><a href="czysty-i-wydajny-kod-w-r.html#cb360-11" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">c</span>(l,r))}</span></code></pre></div>
 <p>Główne problemy:
 - czasem przypisanie jest za pomocą <code>=</code>, czasem <code>&lt;-</code>,<br />
 - brak spacji po przecinkach,<br />
