@@ -1,5 +1,0 @@
-pollution[,"new_date" := ymd_hms(paste(as.character(date), paste(sample(0:23, .N), sample(0:59, .N), sample(0:59, .N),sep = ":")), tz = "UTC")]
-pollution[,summary(MeasuredValue),floor_date(new_date, unit = "year")]
-pollution[,summary(MeasuredValue),floor_date(new_date, unit = "month")]
-pollution[,c("year_d, month_d, day_d, hour_d, minute_d, sec_d") := .(year(new_date), month(new_date), day(new_date), hour(new_date), minute(new_date), second(new_date))]
-pollution[,c("year_ch, month_ch, day_ch, hour_ch, minute_ch, sec_ch") := .(as.vector(str_match(as.character(new_date), "[0-9]{4}")), as.vector(str_match(as.character(new_date), "(?<=-)[0-9]{2}")), as.vector(str_match(as.character(new_date), "(?<=-[0-9]{2}-)[0-9]{2}")), as.vector(str_match(as.character(new_date), "(?<= )[0-9]{2}")), as.vector(str_match(as.character(new_date), "(?<=:)[0-9]{2}")), as.vector(str_match(as.character(new_date), "(?<=:[0-9]{2}:)[0-9]{2}")))]
